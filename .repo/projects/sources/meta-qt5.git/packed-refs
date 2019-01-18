@@ -1,0 +1,44 @@
+# pack-refs with: peeled fully-peeled 
+23405d3a66c308e0b2ea64308b834285850c5c9f refs/remotes/QT5/daisy
+adeca0db212d61a933d7952ad44ea1064cfca747 refs/remotes/QT5/dizzy
+5b5616b63bdf163ea3eb2ca8857c56a393435fe3 refs/remotes/QT5/dora
+9a48a2940192073771d99daced62ddd8187b1ee6 refs/remotes/QT5/dora-next
+84f6aee08c8be59afa062a07fdf450acd70984c5 refs/remotes/QT5/dylan
+90919b9d86988e7da01fa2c0a07246b5b5600a5d refs/remotes/QT5/fido
+2aa63cc542656f3db138ca161e375c33afd275db refs/remotes/QT5/fido-next
+f6f2d16260ae5b35828264a553c05f065aa9d7e2 refs/remotes/QT5/jansa/daisy
+adeca0db212d61a933d7952ad44ea1064cfca747 refs/remotes/QT5/jansa/dizzy
+a610beeee7dd973e544dc67e3598977f5f050b76 refs/remotes/QT5/jansa/fido
+89038bffd224a0d43aa8627472374503b3023f61 refs/remotes/QT5/jansa/jethro
+dcfcb581ec65ef1b96f4840a81ea9d9f2297b394 refs/remotes/QT5/jansa/krogoth
+82abc2bb38e6db10b469975c1f50be1bc1c078e8 refs/remotes/QT5/jansa/master
+51e07805e0cf8f53bc9609854d1afd5e51494151 refs/remotes/QT5/jansa/master-5.12
+953bd702720982cfd57262b4c715d57d186bfbee refs/remotes/QT5/jansa/morty
+540e38fae9f836f91b3365422fdfae0f035f6c8a refs/remotes/QT5/jansa/pyro
+f11e9420e995a2aeb4ea308a45ddab09cb644a59 refs/remotes/QT5/jansa/qt5-creator
+d8b531530fa42b59aa0a5b123d87a30d749cbcc4 refs/remotes/QT5/jansa/rocko
+d4e7f73d04e8448d326b6f89908701e304e37d65 refs/remotes/QT5/jansa/sumo
+736dd5b8ff8d2c66b9daae9b63b2d9499a67df23 refs/remotes/QT5/jansa/thud
+ea37a0bc987aa9484937ad68f762b4657c198617 refs/remotes/QT5/jethro
+a8d4dafdfde812e403315d53b2a981d12bd49f04 refs/remotes/QT5/jethro-next
+dcfcb581ec65ef1b96f4840a81ea9d9f2297b394 refs/remotes/QT5/krogoth
+dcfcb581ec65ef1b96f4840a81ea9d9f2297b394 refs/remotes/QT5/krogoth-next
+82abc2bb38e6db10b469975c1f50be1bc1c078e8 refs/remotes/QT5/master
+82abc2bb38e6db10b469975c1f50be1bc1c078e8 refs/remotes/QT5/master-next
+953bd702720982cfd57262b4c715d57d186bfbee refs/remotes/QT5/morty
+953bd702720982cfd57262b4c715d57d186bfbee refs/remotes/QT5/morty-next
+d02ea33262489f6892db857f9674d14a08f7ca54 refs/remotes/QT5/otavio/master
+540e38fae9f836f91b3365422fdfae0f035f6c8a refs/remotes/QT5/pyro
+540e38fae9f836f91b3365422fdfae0f035f6c8a refs/remotes/QT5/pyro-next
+d8b531530fa42b59aa0a5b123d87a30d749cbcc4 refs/remotes/QT5/rocko
+d8b531530fa42b59aa0a5b123d87a30d749cbcc4 refs/remotes/QT5/rocko-next
+d4e7f73d04e8448d326b6f89908701e304e37d65 refs/remotes/QT5/sumo
+d4e7f73d04e8448d326b6f89908701e304e37d65 refs/remotes/QT5/sumo-next
+201fcf27cf07d60b7d6ab89c7dcefe2190217745 refs/remotes/QT5/thud
+201fcf27cf07d60b7d6ab89c7dcefe2190217745 refs/remotes/QT5/thud-next
+5c3f22de900f16d35391320968605b10c68b164a refs/tags/5.2.1+origin/release
+^818cc2d11b02ceb02ac27401fedcaf1e1db91d36
+8342a23cc93322c111378f8c14fd2008498171d0 refs/tags/jansa/test-2013-10-08
+^ee4ef2a303ffb1f7da8e84f15b27ff72d609df59
+1bc1de6bbf887b716e5ccc2029f67024710772cb refs/tags/master-next-2014-02-19
+^22b040f0eacb1a9a42f313a5abb77e23507564f0

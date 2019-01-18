@@ -1,0 +1,12 @@
+# pack-refs with: peeled fully-peeled 
+4d00e1d094571597fcfb686112157577fe49fc17 refs/remotes/yocto/master
+9704df97f08cf5895e2f5bcfb33f1a53d10c7704 refs/remotes/yocto/master-next
+d55e16bc476982dfb9415bf696ed35e84068a433 refs/remotes/yocto/morty
+af5a8cf74d488ba45715ed0b0e0441e60b10c31d refs/remotes/yocto/pyro
+61ab34ac6d664a229847b796ec20fd9f7c8ecbf4 refs/remotes/yocto/rocko
+407c6cf408969445031a492e2d25e0e2749582ea refs/remotes/yocto/sumo
+9704df97f08cf5895e2f5bcfb33f1a53d10c7704 refs/remotes/yocto/thud
+bcd8d4680d3d3d1ec8d5dc69d9f2cbdb1559a844 refs/tags/2.1
+^fc6a3034364be673f52848a97f37ad0053db38be
+55b15ce2bbb69300488c5243d5a1d6f1172d31e0 refs/tags/2.2
+^56a1460777d1e24b1dfb426cad2b103740936a83

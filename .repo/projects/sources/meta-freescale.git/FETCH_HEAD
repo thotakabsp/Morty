@@ -1,0 +1,9 @@
+4d00e1d094571597fcfb686112157577fe49fc17		branch 'master' of https://git.yoctoproject.org/git/meta-freescale
+9704df97f08cf5895e2f5bcfb33f1a53d10c7704		branch 'master-next' of https://git.yoctoproject.org/git/meta-freescale
+d55e16bc476982dfb9415bf696ed35e84068a433		branch 'morty' of https://git.yoctoproject.org/git/meta-freescale
+af5a8cf74d488ba45715ed0b0e0441e60b10c31d		branch 'pyro' of https://git.yoctoproject.org/git/meta-freescale
+61ab34ac6d664a229847b796ec20fd9f7c8ecbf4		branch 'rocko' of https://git.yoctoproject.org/git/meta-freescale
+407c6cf408969445031a492e2d25e0e2749582ea		branch 'sumo' of https://git.yoctoproject.org/git/meta-freescale
+9704df97f08cf5895e2f5bcfb33f1a53d10c7704		branch 'thud' of https://git.yoctoproject.org/git/meta-freescale
+bcd8d4680d3d3d1ec8d5dc69d9f2cbdb1559a844	not-for-merge	tag '2.1' of https://git.yoctoproject.org/git/meta-freescale
+55b15ce2bbb69300488c5243d5a1d6f1172d31e0	not-for-merge	tag '2.2' of https://git.yoctoproject.org/git/meta-freescale

@@ -1,0 +1,36 @@
+67e3ac89e82e77fc60124164fa85e5640eaba588		branch 'master' of https://github.com/varigit/variscite-bsp-platform
+74906195741dd42af1556998c692d2f41ea60394		branch 'morty' of https://github.com/varigit/variscite-bsp-platform
+4caad754d7b128e226fa5ee3ddd9457fc6ecdfaf		branch 'pyro' of https://github.com/varigit/variscite-bsp-platform
+913a95abb6d23c6f7ff6135ddbd8f0ce51820ece		branch 'rocko' of https://github.com/varigit/variscite-bsp-platform
+84598226ba85ced95f710a4b3c344dd7167d31b4		branch 'sumo' of https://github.com/varigit/variscite-bsp-platform
+76746b179e1ce088bf3105abef4f783a1d316bd3	not-for-merge	tag 'morty-fslc-4.1.15-mx6-v1.0' of https://github.com/varigit/variscite-bsp-platform
+586e0665d80f8df791dd6463e19f8d8b91e2126a	not-for-merge	tag 'morty-fslc-4.1.15-mx6-v1.0-beta' of https://github.com/varigit/variscite-bsp-platform
+7991c173e76f06dd979350e1e5bdc9ec0d77a0d2	not-for-merge	tag 'morty-fslc-4.1.15-mx6-v1.1' of https://github.com/varigit/variscite-bsp-platform
+f0c950eabb4a8bc5e246d6cdf832bafaa967682c	not-for-merge	tag 'morty-fslc-4.1.15-mx6ul-v1.0' of https://github.com/varigit/variscite-bsp-platform
+1d1791c9dff38a17791f8a4ee68b8efe84139c61	not-for-merge	tag 'morty-fslc-4.1.15-mx6ul-v1.0-beta' of https://github.com/varigit/variscite-bsp-platform
+19160ca4f49b7756f1d1c77a46d2818f05f85570	not-for-merge	tag 'morty-fslc-4.1.15-mx7-v1.0' of https://github.com/varigit/variscite-bsp-platform
+aa6b145e5ed644949b386d3f84123a5bd455c144	not-for-merge	tag 'morty-fslc-4.1.15-mx7-v1.1' of https://github.com/varigit/variscite-bsp-platform
+bc1545d6d28c87ac93bf15bace5baab808597a14	not-for-merge	tag 'morty-fslc-4.1.15-mx7-v1.2' of https://github.com/varigit/variscite-bsp-platform
+62c488aa4f4a2a48009ce28034260bbbd5a949be	not-for-merge	tag 'pyro-fslc-4.1.15-mx6-v1.0' of https://github.com/varigit/variscite-bsp-platform
+15d8c1e0da6f3310b42cdac802d56775c3732b94	not-for-merge	tag 'pyro-fslc-4.1.15-mx6-v1.0-beta' of https://github.com/varigit/variscite-bsp-platform
+d57aefda52856908386385d965f5434fbe17e910	not-for-merge	tag 'pyro-fslc-4.1.15-mx6ul-v1.0' of https://github.com/varigit/variscite-bsp-platform
+8a4781872e80e15d1a9b78408623cf3c552a02b7	not-for-merge	tag 'pyro-fslc-4.1.15-mx6ul-v1.1' of https://github.com/varigit/variscite-bsp-platform
+6b7c6a73e9c3c908ec17c8836471b0c7646e2066	not-for-merge	tag 'pyro-fslc-4.1.15-mx6ul-v1.2' of https://github.com/varigit/variscite-bsp-platform
+b6b967c7921a8d7303a708ccb0e89a4e468ab43d	not-for-merge	tag 'pyro-fslc-4.1.15-mx7-v1.0' of https://github.com/varigit/variscite-bsp-platform
+d310f9c7503e56b743b92e325660129a493e5b63	not-for-merge	tag 'rocko-fslc-4.9.11-mx6-v1.0' of https://github.com/varigit/variscite-bsp-platform
+7e59a00a68e44f20ecc72b3024ee39a0f7f1dc45	not-for-merge	tag 'rocko-fslc-4.9.11-mx6-v1.0-beta' of https://github.com/varigit/variscite-bsp-platform
+7d20da0a1f4923fc16d9f86f4a7eb063687ae54b	not-for-merge	tag 'rocko-fslc-4.9.11-mx6-v1.1' of https://github.com/varigit/variscite-bsp-platform
+cee57c872f6430ee2e8aac398411cbfad53ea1db	not-for-merge	tag 'rocko-fslc-4.9.11-mx6-v1.2' of https://github.com/varigit/variscite-bsp-platform
+7563dd13f4d26d6cfa8c3f740234316b43a58b2c	not-for-merge	tag 'rocko-fslc-4.9.11-mx6ul-v1.0' of https://github.com/varigit/variscite-bsp-platform
+8938cabe387a893384b5e2cd3d799a3904ef21b8	not-for-merge	tag 'rocko-fslc-4.9.11-mx6ul-v1.0-beta' of https://github.com/varigit/variscite-bsp-platform
+c115ac1ab3fc480992175a1ba8a3bf5773b33b94	not-for-merge	tag 'rocko-fslc-4.9.11-mx6ul-v1.1' of https://github.com/varigit/variscite-bsp-platform
+ae0adcb42e6b75c0bfd4572edf5cda1053e3e294	not-for-merge	tag 'rocko-fslc-4.9.11-mx7-v1.0' of https://github.com/varigit/variscite-bsp-platform
+575b86293d60c5a7397b6d36479f2b9c1acea586	not-for-merge	tag 'rocko-fslc-4.9.11-mx7-v1.1' of https://github.com/varigit/variscite-bsp-platform
+54fb5cba463d7ddd487f97422b3b8062b8586c56	not-for-merge	tag 'rocko-fslc-4.9.11-mx7-v1.2' of https://github.com/varigit/variscite-bsp-platform
+975f4417bff359c1014a9acc856ef32d67937402	not-for-merge	tag 'sumo-fslc-4.9.88-mx6-v1.0' of https://github.com/varigit/variscite-bsp-platform
+f9032c2e8e79b049f4ffec5b6525aa22d4ac646a	not-for-merge	tag 'sumo-fslc-4.9.88-mx6-v1.1' of https://github.com/varigit/variscite-bsp-platform
+1c28243973d85de9ca85c784126348856991e041	not-for-merge	tag 'sumo-fslc-4.9.88-mx6-v1.2' of https://github.com/varigit/variscite-bsp-platform
+0944c26832be882c6fdc5dba86fc7bdc31124e37	not-for-merge	tag 'sumo-fslc-4.9.88-mx6ul-v1.0' of https://github.com/varigit/variscite-bsp-platform
+7c6fce683a3f56cf1d66d25242a1df1ec9b71ba9	not-for-merge	tag 'sumo-fslc-4.9.88-mx6ul-v1.1' of https://github.com/varigit/variscite-bsp-platform
+942fd176e07f703a1f46906aacfce2aa6206c4e5	not-for-merge	tag 'sumo-fslc-4.9.88-mx7-v1.0' of https://github.com/varigit/variscite-bsp-platform
+e521a1a9690e2f1ca9ed030202e83066aa322062	not-for-merge	tag 'sumo-fslc-4.9.88-mx7-v1.1' of https://github.com/varigit/variscite-bsp-platform

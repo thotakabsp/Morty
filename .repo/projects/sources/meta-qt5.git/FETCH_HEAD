@@ -1,0 +1,40 @@
+23405d3a66c308e0b2ea64308b834285850c5c9f		branch 'daisy' of git://github.com/meta-qt5/meta-qt5
+adeca0db212d61a933d7952ad44ea1064cfca747		branch 'dizzy' of git://github.com/meta-qt5/meta-qt5
+5b5616b63bdf163ea3eb2ca8857c56a393435fe3		branch 'dora' of git://github.com/meta-qt5/meta-qt5
+9a48a2940192073771d99daced62ddd8187b1ee6		branch 'dora-next' of git://github.com/meta-qt5/meta-qt5
+84f6aee08c8be59afa062a07fdf450acd70984c5		branch 'dylan' of git://github.com/meta-qt5/meta-qt5
+90919b9d86988e7da01fa2c0a07246b5b5600a5d		branch 'fido' of git://github.com/meta-qt5/meta-qt5
+2aa63cc542656f3db138ca161e375c33afd275db		branch 'fido-next' of git://github.com/meta-qt5/meta-qt5
+f6f2d16260ae5b35828264a553c05f065aa9d7e2		branch 'jansa/daisy' of git://github.com/meta-qt5/meta-qt5
+adeca0db212d61a933d7952ad44ea1064cfca747		branch 'jansa/dizzy' of git://github.com/meta-qt5/meta-qt5
+a610beeee7dd973e544dc67e3598977f5f050b76		branch 'jansa/fido' of git://github.com/meta-qt5/meta-qt5
+89038bffd224a0d43aa8627472374503b3023f61		branch 'jansa/jethro' of git://github.com/meta-qt5/meta-qt5
+dcfcb581ec65ef1b96f4840a81ea9d9f2297b394		branch 'jansa/krogoth' of git://github.com/meta-qt5/meta-qt5
+82abc2bb38e6db10b469975c1f50be1bc1c078e8		branch 'jansa/master' of git://github.com/meta-qt5/meta-qt5
+51e07805e0cf8f53bc9609854d1afd5e51494151		branch 'jansa/master-5.12' of git://github.com/meta-qt5/meta-qt5
+953bd702720982cfd57262b4c715d57d186bfbee		branch 'jansa/morty' of git://github.com/meta-qt5/meta-qt5
+540e38fae9f836f91b3365422fdfae0f035f6c8a		branch 'jansa/pyro' of git://github.com/meta-qt5/meta-qt5
+f11e9420e995a2aeb4ea308a45ddab09cb644a59		branch 'jansa/qt5-creator' of git://github.com/meta-qt5/meta-qt5
+d8b531530fa42b59aa0a5b123d87a30d749cbcc4		branch 'jansa/rocko' of git://github.com/meta-qt5/meta-qt5
+d4e7f73d04e8448d326b6f89908701e304e37d65		branch 'jansa/sumo' of git://github.com/meta-qt5/meta-qt5
+736dd5b8ff8d2c66b9daae9b63b2d9499a67df23		branch 'jansa/thud' of git://github.com/meta-qt5/meta-qt5
+ea37a0bc987aa9484937ad68f762b4657c198617		branch 'jethro' of git://github.com/meta-qt5/meta-qt5
+a8d4dafdfde812e403315d53b2a981d12bd49f04		branch 'jethro-next' of git://github.com/meta-qt5/meta-qt5
+dcfcb581ec65ef1b96f4840a81ea9d9f2297b394		branch 'krogoth' of git://github.com/meta-qt5/meta-qt5
+dcfcb581ec65ef1b96f4840a81ea9d9f2297b394		branch 'krogoth-next' of git://github.com/meta-qt5/meta-qt5
+82abc2bb38e6db10b469975c1f50be1bc1c078e8		branch 'master' of git://github.com/meta-qt5/meta-qt5
+82abc2bb38e6db10b469975c1f50be1bc1c078e8		branch 'master-next' of git://github.com/meta-qt5/meta-qt5
+953bd702720982cfd57262b4c715d57d186bfbee		branch 'morty' of git://github.com/meta-qt5/meta-qt5
+953bd702720982cfd57262b4c715d57d186bfbee		branch 'morty-next' of git://github.com/meta-qt5/meta-qt5
+d02ea33262489f6892db857f9674d14a08f7ca54		branch 'otavio/master' of git://github.com/meta-qt5/meta-qt5
+540e38fae9f836f91b3365422fdfae0f035f6c8a		branch 'pyro' of git://github.com/meta-qt5/meta-qt5
+540e38fae9f836f91b3365422fdfae0f035f6c8a		branch 'pyro-next' of git://github.com/meta-qt5/meta-qt5
+d8b531530fa42b59aa0a5b123d87a30d749cbcc4		branch 'rocko' of git://github.com/meta-qt5/meta-qt5
+d8b531530fa42b59aa0a5b123d87a30d749cbcc4		branch 'rocko-next' of git://github.com/meta-qt5/meta-qt5
+d4e7f73d04e8448d326b6f89908701e304e37d65		branch 'sumo' of git://github.com/meta-qt5/meta-qt5
+d4e7f73d04e8448d326b6f89908701e304e37d65		branch 'sumo-next' of git://github.com/meta-qt5/meta-qt5
+201fcf27cf07d60b7d6ab89c7dcefe2190217745		branch 'thud' of git://github.com/meta-qt5/meta-qt5
+201fcf27cf07d60b7d6ab89c7dcefe2190217745		branch 'thud-next' of git://github.com/meta-qt5/meta-qt5
+5c3f22de900f16d35391320968605b10c68b164a	not-for-merge	tag '5.2.1+origin/release' of git://github.com/meta-qt5/meta-qt5
+8342a23cc93322c111378f8c14fd2008498171d0	not-for-merge	tag 'jansa/test-2013-10-08' of git://github.com/meta-qt5/meta-qt5
+1bc1de6bbf887b716e5ccc2029f67024710772cb	not-for-merge	tag 'master-next-2014-02-19' of git://github.com/meta-qt5/meta-qt5

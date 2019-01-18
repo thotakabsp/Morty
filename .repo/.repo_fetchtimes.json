@@ -1,0 +1,11 @@
+{
+  "meta-freescale": 170.07113194465637, 
+  "meta-browser": 19.6662540435791, 
+  "meta-qt5": 4.007601976394653, 
+  "meta-freescale-distro": 13.01102590560913, 
+  "variscite-bsp-base": 4.823884010314941, 
+  "meta-freescale-3rdparty": 12.649548053741455, 
+  "poky": 771.9916498661041, 
+  "meta-variscite-fslc": 6.877669095993042, 
+  "meta-openembedded": 26.61777901649475
+}

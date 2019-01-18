@@ -1,0 +1,7 @@
+# pack-refs with: peeled fully-peeled 
+a6322295a39341fe56e25c6b23f5e01cabbd8173 refs/remotes/variscite/master
+f917b76268771efbda203552be9219eea0e16c3b refs/remotes/variscite/morty
+ab822996e8af1b93e6b3906ba69a7bc5ff880962 refs/remotes/variscite/pyro
+2b628d4f9cd0f8b628875f18fee0b2d4a78f5b2c refs/remotes/variscite/rocko
+2e7ab9da8b943165e11bfcb48789946d7396ff02 refs/remotes/variscite/sumo
+bbaa1636b78fbe97737079ee6d42a64117d2bd72 refs/remotes/variscite/thud

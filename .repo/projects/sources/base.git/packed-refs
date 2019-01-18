@@ -1,0 +1,4 @@
+# pack-refs with: peeled fully-peeled 
+eddee1c3b8e0f65c7d069f5cb17934673518d22b refs/remotes/variscite/master
+eddee1c3b8e0f65c7d069f5cb17934673518d22b refs/remotes/variscite/morty
+83c0234a2a79d4eacead3d42600ca7d4a9c5ef85 refs/remotes/variscite/pyro

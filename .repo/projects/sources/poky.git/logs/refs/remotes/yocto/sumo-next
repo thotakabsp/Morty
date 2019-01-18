@@ -1,0 +1,1 @@
+0000000000000000000000000000000000000000 fe0fda6d371967f1b28cd8e4d3b3aad997676af0 bspeng09 <bspeng09@thotakaa.com> 1547785686 +0530	fetch --progress yocto --tags +refs/heads/*:refs/remotes/yocto/* +refs/heads/morty:refs/remotes/yocto/morty: storing head

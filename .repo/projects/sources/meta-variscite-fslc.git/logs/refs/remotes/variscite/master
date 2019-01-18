@@ -1,0 +1,1 @@
+0000000000000000000000000000000000000000 a6322295a39341fe56e25c6b23f5e01cabbd8173 bspeng09 <bspeng09@thotakaa.com> 1547784910 +0530	fetch --progress variscite --tags +refs/heads/*:refs/remotes/variscite/* +refs/heads/morty:refs/remotes/variscite/morty: storing head

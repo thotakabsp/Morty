@@ -1,0 +1,60 @@
+# pack-refs with: peeled fully-peeled 
+67e3ac89e82e77fc60124164fa85e5640eaba588 refs/remotes/origin/master
+74906195741dd42af1556998c692d2f41ea60394 refs/remotes/origin/morty
+4caad754d7b128e226fa5ee3ddd9457fc6ecdfaf refs/remotes/origin/pyro
+913a95abb6d23c6f7ff6135ddbd8f0ce51820ece refs/remotes/origin/rocko
+84598226ba85ced95f710a4b3c344dd7167d31b4 refs/remotes/origin/sumo
+76746b179e1ce088bf3105abef4f783a1d316bd3 refs/tags/morty-fslc-4.1.15-mx6-v1.0
+^511789015493584cebe4210d6ea6f8af304d1554
+586e0665d80f8df791dd6463e19f8d8b91e2126a refs/tags/morty-fslc-4.1.15-mx6-v1.0-beta
+7991c173e76f06dd979350e1e5bdc9ec0d77a0d2 refs/tags/morty-fslc-4.1.15-mx6-v1.1
+f0c950eabb4a8bc5e246d6cdf832bafaa967682c refs/tags/morty-fslc-4.1.15-mx6ul-v1.0
+^6397e480f80a1dfdd4ee8cc9fc8dc60971c753d7
+1d1791c9dff38a17791f8a4ee68b8efe84139c61 refs/tags/morty-fslc-4.1.15-mx6ul-v1.0-beta
+^8079a6fbc4d0673433f6417e8a5edaa475329510
+19160ca4f49b7756f1d1c77a46d2818f05f85570 refs/tags/morty-fslc-4.1.15-mx7-v1.0
+^511789015493584cebe4210d6ea6f8af304d1554
+aa6b145e5ed644949b386d3f84123a5bd455c144 refs/tags/morty-fslc-4.1.15-mx7-v1.1
+bc1545d6d28c87ac93bf15bace5baab808597a14 refs/tags/morty-fslc-4.1.15-mx7-v1.2
+62c488aa4f4a2a48009ce28034260bbbd5a949be refs/tags/pyro-fslc-4.1.15-mx6-v1.0
+15d8c1e0da6f3310b42cdac802d56775c3732b94 refs/tags/pyro-fslc-4.1.15-mx6-v1.0-beta
+d57aefda52856908386385d965f5434fbe17e910 refs/tags/pyro-fslc-4.1.15-mx6ul-v1.0
+^b8af63344277cfc7baa99d56a91ce387e27e8a3e
+8a4781872e80e15d1a9b78408623cf3c552a02b7 refs/tags/pyro-fslc-4.1.15-mx6ul-v1.1
+^add9c30248c48423ec21ca378a8e66c568b5c978
+6b7c6a73e9c3c908ec17c8836471b0c7646e2066 refs/tags/pyro-fslc-4.1.15-mx6ul-v1.2
+b6b967c7921a8d7303a708ccb0e89a4e468ab43d refs/tags/pyro-fslc-4.1.15-mx7-v1.0
+^322f8f9bd1634c8154f123d6eb0beb661a1373ea
+d310f9c7503e56b743b92e325660129a493e5b63 refs/tags/rocko-fslc-4.9.11-mx6-v1.0
+^9262d43dccfb486641788bc9128215ead463ddc4
+7e59a00a68e44f20ecc72b3024ee39a0f7f1dc45 refs/tags/rocko-fslc-4.9.11-mx6-v1.0-beta
+^8d9f91702e4170e84000d4174202f51913d1af7e
+7d20da0a1f4923fc16d9f86f4a7eb063687ae54b refs/tags/rocko-fslc-4.9.11-mx6-v1.1
+^cf69d547c32aea0b8d21efd011f44de2589d4dbc
+cee57c872f6430ee2e8aac398411cbfad53ea1db refs/tags/rocko-fslc-4.9.11-mx6-v1.2
+^83fbecfb524657701d3132c8d2d07534ac1f7132
+7563dd13f4d26d6cfa8c3f740234316b43a58b2c refs/tags/rocko-fslc-4.9.11-mx6ul-v1.0
+^9262d43dccfb486641788bc9128215ead463ddc4
+8938cabe387a893384b5e2cd3d799a3904ef21b8 refs/tags/rocko-fslc-4.9.11-mx6ul-v1.0-beta
+^8d9f91702e4170e84000d4174202f51913d1af7e
+c115ac1ab3fc480992175a1ba8a3bf5773b33b94 refs/tags/rocko-fslc-4.9.11-mx6ul-v1.1
+^83fbecfb524657701d3132c8d2d07534ac1f7132
+ae0adcb42e6b75c0bfd4572edf5cda1053e3e294 refs/tags/rocko-fslc-4.9.11-mx7-v1.0
+^4a533d65e33cc0e4697bef8abaa3df00eef3823a
+575b86293d60c5a7397b6d36479f2b9c1acea586 refs/tags/rocko-fslc-4.9.11-mx7-v1.1
+54fb5cba463d7ddd487f97422b3b8062b8586c56 refs/tags/rocko-fslc-4.9.11-mx7-v1.2
+^83fbecfb524657701d3132c8d2d07534ac1f7132
+975f4417bff359c1014a9acc856ef32d67937402 refs/tags/sumo-fslc-4.9.88-mx6-v1.0
+^4a29c594593a29e2869289b6aa470a2e3c26ba8f
+f9032c2e8e79b049f4ffec5b6525aa22d4ac646a refs/tags/sumo-fslc-4.9.88-mx6-v1.1
+^c8954c0248304a40e45d0ad3f61be640ab66381b
+1c28243973d85de9ca85c784126348856991e041 refs/tags/sumo-fslc-4.9.88-mx6-v1.2
+^195c044424475f9cef42cb679331f53cd665adfc
+0944c26832be882c6fdc5dba86fc7bdc31124e37 refs/tags/sumo-fslc-4.9.88-mx6ul-v1.0
+^9a2e93ecacc5c0361deca11a3989dbdd87555c7d
+7c6fce683a3f56cf1d66d25242a1df1ec9b71ba9 refs/tags/sumo-fslc-4.9.88-mx6ul-v1.1
+^195c044424475f9cef42cb679331f53cd665adfc
+942fd176e07f703a1f46906aacfce2aa6206c4e5 refs/tags/sumo-fslc-4.9.88-mx7-v1.0
+^9a2e93ecacc5c0361deca11a3989dbdd87555c7d
+e521a1a9690e2f1ca9ed030202e83066aa322062 refs/tags/sumo-fslc-4.9.88-mx7-v1.1
+^6af9be68bc186c738119422968c51c8eea7be1ab

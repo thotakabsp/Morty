@@ -1,0 +1,9 @@
+sources/base
+sources/meta-browser
+sources/meta-freescale
+sources/meta-freescale-3rdparty
+sources/meta-freescale-distro
+sources/meta-openembedded
+sources/meta-qt5
+sources/meta-variscite-fslc
+sources/poky

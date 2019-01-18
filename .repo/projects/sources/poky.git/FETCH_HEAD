@@ -1,0 +1,313 @@
+b4a215bd94cf1508782e49b1a3f8c6b1f7effbb9		branch '1.1_M1' of https://git.yoctoproject.org/git/poky
+a62982ffb6b35acc70bb30a429fc854cf9a8873f		branch '1.1_M2' of https://git.yoctoproject.org/git/poky
+abdec68876ac7ce1a6d5c223d1757b7e8a14b85f		branch '1.1_M3' of https://git.yoctoproject.org/git/poky
+6462c158fc482e495c1171ffc7747e2ad650a292		branch '1.1_M4' of https://git.yoctoproject.org/git/poky
+b806f726b1db2cb605869c1022ef727c1110255b		branch '1.2_M1' of https://git.yoctoproject.org/git/poky
+0f4d99d207b224bb9ce23de00a48f795ae20b3a0		branch '1.2_M2' of https://git.yoctoproject.org/git/poky
+320558f494c618f53e0c773db3ea0109476e8359		branch '1.2_M3' of https://git.yoctoproject.org/git/poky
+fae1c7a5fdcea199338b5f91efaafd7c72aec5dd		branch '1.2_M4' of https://git.yoctoproject.org/git/poky
+7f017cab0b3e4d5a4fc356eccd8eb8429b0531d0		branch '1.3_M1' of https://git.yoctoproject.org/git/poky
+20dc7d276682defc29b3a64ccf9fb87b4cf4fb79		branch '1.3_M2' of https://git.yoctoproject.org/git/poky
+8b8748c8f963900b83dc0fdd7757556f917fe4fd		branch '1.3_M3' of https://git.yoctoproject.org/git/poky
+e5c3513ca8abb21eb5e9b8c19d1b9199b14ae07c		branch '1.3_M4' of https://git.yoctoproject.org/git/poky
+718eb85806e080d0b165344b272e531ef19421eb		branch '1.3_M5' of https://git.yoctoproject.org/git/poky
+4de667fcc3fe4f4185001956ba2efa0117c6f19f		branch '1.3_beta' of https://git.yoctoproject.org/git/poky
+247b6a3754c2c50318e2a73d79981ba0e9cb560b		branch '1.4_M1' of https://git.yoctoproject.org/git/poky
+3ae1a4ba972cfc17ff3f2fda632da8ecc3414885		branch '1.4_M3' of https://git.yoctoproject.org/git/poky
+7d22ef28e64de06b6238d0ef9b664c0bee6efa46		branch '1.4_M4' of https://git.yoctoproject.org/git/poky
+860e758b7b7f27fbb47c645770593206c7453c1b		branch '1.4_M5' of https://git.yoctoproject.org/git/poky
+295656cfdaf17bcbbeac8599fc8ebb2d5aa435d2		branch '1.6_M5' of https://git.yoctoproject.org/git/poky
+c0060446113f4418e2b5bf9c23143b5fe9bc95c0		branch 'bernard' of https://git.yoctoproject.org/git/poky
+1fc111d16bff63b1c4cd1fc8ab6ec5a7c8e0bddf		branch 'blinky' of https://git.yoctoproject.org/git/poky
+b9065372f433ae8fcfaafe3c46fb0e01d172ed03		branch 'clyde' of https://git.yoctoproject.org/git/poky
+6717d19848cf6211e7d791078bb18a87dd39d191		branch 'daisy' of https://git.yoctoproject.org/git/poky
+70ca9ff6422a03c26cfa78e76f6334bcf3fe47ec		branch 'danny' of https://git.yoctoproject.org/git/poky
+e89f812a0af56beda951c1dce6113a61d6db8cda		branch 'danny-next' of https://git.yoctoproject.org/git/poky
+6caa7d1d6c122d084ed01d1f5e1dae0bf259f854		branch 'denzil' of https://git.yoctoproject.org/git/poky
+58863ad092c9a279e305c841dbb4353de2ecfae8		branch 'dizzy' of https://git.yoctoproject.org/git/poky
+8e9e7e8def9b0b728937d34115f7165677c31bed		branch 'dora' of https://git.yoctoproject.org/git/poky
+1182665de0da9a6e5fc77107f32a7fc1515029d0		branch 'dora-toaster' of https://git.yoctoproject.org/git/poky
+0fcfdc4d54dbe617777a9cf76b72213f908f8a6e		branch 'dylan' of https://git.yoctoproject.org/git/poky
+8886aee5b9741c05886994967d9ecf420331c600		branch 'edison' of https://git.yoctoproject.org/git/poky
+a340e3c7dc1c82e4f06f41180ed2ece814f1926f		branch 'elroy' of https://git.yoctoproject.org/git/poky
+87631919819b6f85f23f57689cd1065c64d7fb03		branch 'fido' of https://git.yoctoproject.org/git/poky
+afd0958d27b42adce22922d650010cf53e746aea		branch 'green' of https://git.yoctoproject.org/git/poky
+7e613928fe327b0233b0c488d6fb6bdade45e9d2		branch 'jethro' of https://git.yoctoproject.org/git/poky
+73cc31c11a9d75a2f4204a9a8c6832c6e505a86a		branch 'krogoth' of https://git.yoctoproject.org/git/poky
+1083d90888589b9f0d50a1d480f7c774d8b4bda3		branch 'krogoth-next' of https://git.yoctoproject.org/git/poky
+0d3591db9c93cf0a863b202b3a4bb417db21b6cc		branch 'laverne' of https://git.yoctoproject.org/git/poky
+4211a7497886561e9607f18dd4d81d0d41eaadfa		branch 'master' of https://git.yoctoproject.org/git/poky
+2b2bb337bfc3d61cbfad15f4cf5eb75885f1541f		branch 'master-next' of https://git.yoctoproject.org/git/poky
+178567024c1d50740f41935fff3db2de0d4fe159		branch 'master-next2' of https://git.yoctoproject.org/git/poky
+e56be3cee517c5262486136dbd6d649b68c3a8b7		branch 'morty' of https://git.yoctoproject.org/git/poky
+3ffb69b489da5416dbabb0a45c6e2e7d63ab1ed0		branch 'morty-next' of https://git.yoctoproject.org/git/poky
+0a6bec9469edfd861626443e7f7076f4d953cfb1		branch 'pinky' of https://git.yoctoproject.org/git/poky
+b29bd836ada7d83c1e7d23c3ab5852ecb15dcf2a		branch 'purple' of https://git.yoctoproject.org/git/poky
+773e56f0e55760bea9cb79390441145f7953d1a7		branch 'pyro' of https://git.yoctoproject.org/git/poky
+0dd299ef57b4cb73fc7eb62d1fb75ef8e3f14555		branch 'pyro-next' of https://git.yoctoproject.org/git/poky
+c3dd2826dd1cd940203609133ecea58ef450d813		branch 'rocko' of https://git.yoctoproject.org/git/poky
+182e8eec6dd24e0f8e256bfbac704924c7c94a67		branch 'rocko-next' of https://git.yoctoproject.org/git/poky
+58e82c451071d0e257da6088cf643e636282084c		branch 'sumo' of https://git.yoctoproject.org/git/poky
+fe0fda6d371967f1b28cd8e4d3b3aad997676af0		branch 'sumo-next' of https://git.yoctoproject.org/git/poky
+7022689b109a7e2bb52c76a46d76fd3760658ad0		branch 'thud' of https://git.yoctoproject.org/git/poky
+8c77c39a2a40bdf73116927c85dc61d071cabfc2		branch 'thud-next' of https://git.yoctoproject.org/git/poky
+664c69cc8a8ed24370ea31508f42b8ec0ca101a3	not-for-merge	tag '1.1_M1.final' of https://git.yoctoproject.org/git/poky
+147c43728716a98aff7f7e6dd1aa2856a9193549	not-for-merge	tag '1.1_M1.rc1' of https://git.yoctoproject.org/git/poky
+4e7d4ddfcfd45518c1a6bb841fa7f6bac7c0c07c	not-for-merge	tag '1.1_M1.rc2' of https://git.yoctoproject.org/git/poky
+73fa5a062900a56ffa558cbb01293849882428e5	not-for-merge	tag '1.1_M2.final' of https://git.yoctoproject.org/git/poky
+d1897cbaf08091bc959b2de81e8e4586394dda2b	not-for-merge	tag '1.1_M2.rc1' of https://git.yoctoproject.org/git/poky
+01a96852f3e9e413b82cfdd676331ab155da3578	not-for-merge	tag '1.1_M2.rc2' of https://git.yoctoproject.org/git/poky
+d01f84a09179663d1ae9fce0fabdd92a7247790e	not-for-merge	tag '1.1_M2.rc3' of https://git.yoctoproject.org/git/poky
+e30c0e758c15ee079c2e48088578a9d8961b5c90	not-for-merge	tag '1.1_M3.final' of https://git.yoctoproject.org/git/poky
+5290d74ef9be8a3d76edbea5c9c8704e246e9302	not-for-merge	tag '1.1_M3.rc2' of https://git.yoctoproject.org/git/poky
+3b8eada6cc2e4d03c1424d9e686226eb67493a9f	not-for-merge	tag '1.1_M3.rc3' of https://git.yoctoproject.org/git/poky
+42c19d37ff88f8a401d1f2f76ad400ce84270591	not-for-merge	tag '1.1_M4.rc2+' of https://git.yoctoproject.org/git/poky
+9f2df2ff9335c37456a82fb5b2d7666496fbf040	not-for-merge	tag '1.1_M4.rc3' of https://git.yoctoproject.org/git/poky
+63978af91e3fa94636655933f82d01e5ebff5d65	not-for-merge	tag '1.1_M4.rc4' of https://git.yoctoproject.org/git/poky
+e5bb9e35d1ecd5390ee9a616b15e01d084088b21	not-for-merge	tag '1.2_M1.final' of https://git.yoctoproject.org/git/poky
+e36437a6becf0ac7095dc868b50cfe72526ad848	not-for-merge	tag '1.2_M1.rc1' of https://git.yoctoproject.org/git/poky
+d9424dbe347389a7de5c9bb231bdbd4455048424	not-for-merge	tag '1.2_M1.rc2' of https://git.yoctoproject.org/git/poky
+8789f8c8c107305a488c4762e0fb4b7ebd5ed091	not-for-merge	tag '1.2_M2.final' of https://git.yoctoproject.org/git/poky
+0b18f30cf9a1f63e6f6b38843a8988e0357d246e	not-for-merge	tag '1.2_M2.rc1' of https://git.yoctoproject.org/git/poky
+f07a436bb961c106092c8c5790548c4b1143f1a3	not-for-merge	tag '1.2_M3.final' of https://git.yoctoproject.org/git/poky
+35f0079c5a297c4d87d00140929afcf690f0b8b9	not-for-merge	tag '1.2_M3.rc1' of https://git.yoctoproject.org/git/poky
+1a977764308fcc0e3f481e838368a3748f69b1bd	not-for-merge	tag '1.2_M4.rc1' of https://git.yoctoproject.org/git/poky
+2acae2067e29b9340aa3458fb6f1430e64a4c708	not-for-merge	tag '1.2_M4.rc2' of https://git.yoctoproject.org/git/poky
+695b5feac6eb44d85d3013a4c3b1ba7ef5054c98	not-for-merge	tag '1.2_M4.rc3' of https://git.yoctoproject.org/git/poky
+4e997c6a42a14869364acf1386341a6835d90416	not-for-merge	tag '1.2_M4.rc3.1' of https://git.yoctoproject.org/git/poky
+b0dabd2fef824f3399f8d44329826cd85861c76e	not-for-merge	tag '1.2_M4.rc3.2' of https://git.yoctoproject.org/git/poky
+da4d2b56650744eac33e3f0c86ad7b098a611520	not-for-merge	tag '1.2_M4.rc4' of https://git.yoctoproject.org/git/poky
+c092d12fe1420659262b4a895b3a8a46d1ef5599	not-for-merge	tag '1.2_M4.rc4.0' of https://git.yoctoproject.org/git/poky
+57154f33552873a57f5513024c80ae3b1d38231c	not-for-merge	tag '1.3' of https://git.yoctoproject.org/git/poky
+4298dcf794aae951b1ae66c73a6a5d6ee421496e	not-for-merge	tag '1.3.1' of https://git.yoctoproject.org/git/poky
+19cd8343e001a4aa477eb4f70650558362311914	not-for-merge	tag '1.3.2' of https://git.yoctoproject.org/git/poky
+70999ea8db534f27d38eeff918fade9552e95bd0	not-for-merge	tag '1.3.2.final' of https://git.yoctoproject.org/git/poky
+3f2c7d02d2a9ba01203254adc2c2448790291957	not-for-merge	tag '1.3_M1.final' of https://git.yoctoproject.org/git/poky
+220a60a5a1fe223de102809c34e080ae1cea4b94	not-for-merge	tag '1.3_M1.rc1' of https://git.yoctoproject.org/git/poky
+a0a11848420f228b49e73aff3f3d872906b2c7c1	not-for-merge	tag '1.3_M2.final' of https://git.yoctoproject.org/git/poky
+87fce5ef7f33da6ba16614361ac646eaa7bb0a09	not-for-merge	tag '1.3_M2.rc1' of https://git.yoctoproject.org/git/poky
+781252a0814734d933a09c54428a759a4a36811b	not-for-merge	tag '1.3_M3.final' of https://git.yoctoproject.org/git/poky
+f6f67b96c6ba6b3d2d4749a043fc03e2e8bb653a	not-for-merge	tag '1.3_M3.rc2' of https://git.yoctoproject.org/git/poky
+3bce174b08882c1a055580d7ae28937b828bc43d	not-for-merge	tag '1.3_M4.final' of https://git.yoctoproject.org/git/poky
+edd8d8a088c9b3093fa211adc6a6e6ffc65f199e	not-for-merge	tag '1.3_M4.rc1' of https://git.yoctoproject.org/git/poky
+955e74650041c9f8ab59f11ce55d8d19df78148f	not-for-merge	tag '1.3_M5.rc1' of https://git.yoctoproject.org/git/poky
+d8c511ddd2077f34efe8102c492905be53897339	not-for-merge	tag '1.3_M5.rc2' of https://git.yoctoproject.org/git/poky
+6d260c5de90fecc342a45e40a01efb977836abda	not-for-merge	tag '1.3_M5.rc3' of https://git.yoctoproject.org/git/poky
+f53d7fc5bdfc3591243929f851a21d056728e57a	not-for-merge	tag '1.3_M5.rc4' of https://git.yoctoproject.org/git/poky
+d0f45d3ae3f8aa86378aff45d75657bf30c3a3ac	not-for-merge	tag '1.4.1.rc1' of https://git.yoctoproject.org/git/poky
+fcd9f853d1e9ac77333f2a44c0476ad647f62d4c	not-for-merge	tag '1.4_M1.final' of https://git.yoctoproject.org/git/poky
+1df8ad227eae374f0d447d9b96458b56ffa2bb9b	not-for-merge	tag '1.4_M1.rc1' of https://git.yoctoproject.org/git/poky
+780e44b0fc92d43b19b28599e269baee8f9f1b1e	not-for-merge	tag '1.4_M3.final' of https://git.yoctoproject.org/git/poky
+281bbb8226f8080a56f614aa924d5ae82d4c84c6	not-for-merge	tag '1.4_M3.rc1' of https://git.yoctoproject.org/git/poky
+21399140087abf61853ef36f8c9233b894738a77	not-for-merge	tag '1.4_M3.rc2' of https://git.yoctoproject.org/git/poky
+1ea0813f279652711d8b404a1a461022ad449c02	not-for-merge	tag '1.4_M4.final' of https://git.yoctoproject.org/git/poky
+df3e83a07e6af72c431e28e161048da4d5df9247	not-for-merge	tag '1.4_M4.rc1' of https://git.yoctoproject.org/git/poky
+f41c8639bd11d0df986dfb0275a82986f0c417ba	not-for-merge	tag '1.4_M5.final' of https://git.yoctoproject.org/git/poky
+93f1995e88942b9e13af97e750361b947a10f2a7	not-for-merge	tag '1.4_M5.rc1' of https://git.yoctoproject.org/git/poky
+852d84d062634166eb5dd759c177d74161064e8e	not-for-merge	tag '1.4_M5.rc2' of https://git.yoctoproject.org/git/poky
+0f97d46b44a570fc5ca0e60a64e00b23bfe770d1	not-for-merge	tag '1.4_M5.rc3' of https://git.yoctoproject.org/git/poky
+95bd0c0583f7ff2d5f941144fc938b3ff616ff39	not-for-merge	tag '1.4_M6.rc1' of https://git.yoctoproject.org/git/poky
+9971047d124f5a5bcfd68d36dbfcd5943eac3217	not-for-merge	tag '1.5_M1.final' of https://git.yoctoproject.org/git/poky
+889adbae8f45e5009e2218973e9f7a97334cba78	not-for-merge	tag '1.5_M1.rc1' of https://git.yoctoproject.org/git/poky
+eaa5df34af42b6a37f6506847d0f3ef6ba0d298a	not-for-merge	tag '1.5_M2.rc1' of https://git.yoctoproject.org/git/poky
+488dcfe2b589034ab3ce02cc7eb0d00d16dc4505	not-for-merge	tag '1.5_M3' of https://git.yoctoproject.org/git/poky
+cfc3c4a0c418bf209780b59bf9bcd0c4c2a8486f	not-for-merge	tag '1.5_M3.final' of https://git.yoctoproject.org/git/poky
+104452f9bc18f798010e3e0f01a28fdcd3c02494	not-for-merge	tag '1.5_M3.rc1' of https://git.yoctoproject.org/git/poky
+63a5d00bc01b2ec475dc3bcfe5720e76436fdac3	not-for-merge	tag '1.5_M4' of https://git.yoctoproject.org/git/poky
+5aa891d0e63051ec31cdd765ac4d4a4977fe35d8	not-for-merge	tag '1.5_M4.final' of https://git.yoctoproject.org/git/poky
+b200a9dd8ffd6c462f5e0e57638a1812fb09aa2e	not-for-merge	tag '1.5_M4.rc1' of https://git.yoctoproject.org/git/poky
+f04ce755d9d60f8efcdce9510599497e901e5738	not-for-merge	tag '1.5_M4.rc2' of https://git.yoctoproject.org/git/poky
+31f7dc8357b5654d3bbecf638a066c83269a30ed	not-for-merge	tag '1.5_M4.rc3' of https://git.yoctoproject.org/git/poky
+d7bb03ec9fb18e5e0da017949840882c0065765f	not-for-merge	tag '1.5_M5.rc1' of https://git.yoctoproject.org/git/poky
+30cf9b5e07adada28b6b36afdebba663d78e467f	not-for-merge	tag '1.5_M5.rc2' of https://git.yoctoproject.org/git/poky
+ba18dbfa9a4d7895ac67fef07daa6504031679ba	not-for-merge	tag '1.5_M5.rc3' of https://git.yoctoproject.org/git/poky
+76bd102186ad4293827014a8cdca179dc8be09a9	not-for-merge	tag '1.5_M5.rc4' of https://git.yoctoproject.org/git/poky
+d36c899330318f13713c71c884e247803baa3a2d	not-for-merge	tag '1.5_M5.rc5' of https://git.yoctoproject.org/git/poky
+0197e5cb4253d6137b0d166cfcd699d404d2cab3	not-for-merge	tag '1.5_M5.rc6' of https://git.yoctoproject.org/git/poky
+4bd121f2d7e28fd85eb7c1fbff918f482ae03e12	not-for-merge	tag '1.5_M5.rc7' of https://git.yoctoproject.org/git/poky
+cb2836fee444bf5f7bd74d0612a4cd8f1b5d2e89	not-for-merge	tag '1.5_M5.rc8' of https://git.yoctoproject.org/git/poky
+a4648470cb7dffa037ff51adf3a6afd85f1d0db3	not-for-merge	tag '1.6_M1' of https://git.yoctoproject.org/git/poky
+b14161d1f5b35454b19b07710395e3dbf5b11e2b	not-for-merge	tag '1.6_M1.final' of https://git.yoctoproject.org/git/poky
+574966237cf156c9b76631aabbc1a0e2846221f8	not-for-merge	tag '1.6_M1.rc1' of https://git.yoctoproject.org/git/poky
+89dbcb3e4491b4896b5f73734268f700d0baf540	not-for-merge	tag '1.6_M2' of https://git.yoctoproject.org/git/poky
+6a62a59470cfc22fdc35854ea13fffac20c0997f	not-for-merge	tag '1.6_M3' of https://git.yoctoproject.org/git/poky
+07d69da7b988d8f884c1881ce1b45491a9e93251	not-for-merge	tag '1.6_M3.final' of https://git.yoctoproject.org/git/poky
+e5a26b5f06251ca672f90762c34a6a07e4017355	not-for-merge	tag '1.6_M4' of https://git.yoctoproject.org/git/poky
+10b98854e19ffffaf7aabb3e67b9a61fb53d2330	not-for-merge	tag '1.7_M1' of https://git.yoctoproject.org/git/poky
+04e22ee640e94721dae721fb0dcdf6cfaafceb92	not-for-merge	tag '1.7_M2' of https://git.yoctoproject.org/git/poky
+f80f474a6abdb80049a88e9ac97030f2e72aa8ee	not-for-merge	tag '1.7_M3' of https://git.yoctoproject.org/git/poky
+474031ad5619f25589ef4e08987abe8c7192d16a	not-for-merge	tag '1.8_M1' of https://git.yoctoproject.org/git/poky
+9fd38c839f26e16e83afb82310ba539fe6694211	not-for-merge	tag '1.8_M2' of https://git.yoctoproject.org/git/poky
+28464b9594a52775706dcddf760027d098417372	not-for-merge	tag '1.8_M3' of https://git.yoctoproject.org/git/poky
+6f8508bc08a35894b740c31b9f0f92efb21a517c	not-for-merge	tag '1.9_M2' of https://git.yoctoproject.org/git/poky
+0ff190d84aaa9d0f2ec9e71e3e2576dc83436ee2	not-for-merge	tag '2.1_M1' of https://git.yoctoproject.org/git/poky
+c9fa15ce5dc5c6692271028aa27a1d216cab5109	not-for-merge	tag '2.2_M1' of https://git.yoctoproject.org/git/poky
+5d0c6591b21b3be9c6a931700523796f339b1e74	not-for-merge	tag '2.2_M2' of https://git.yoctoproject.org/git/poky
+bd699161be7f6a2d02bdfecbdae33ee666527dab	not-for-merge	tag '2.2_M3' of https://git.yoctoproject.org/git/poky
+33691cc7201dbc991b680a98ac6b20fb2687c67c	not-for-merge	tag '2.3_M1' of https://git.yoctoproject.org/git/poky
+dd977c0b99fe4e4706468777beb9f69802adc4c7	not-for-merge	tag '2.3_M2' of https://git.yoctoproject.org/git/poky
+89ae638a6e9a26b3b7487ab2365de5a78cd0e168	not-for-merge	tag '2.3_M3' of https://git.yoctoproject.org/git/poky
+b352894d4fead2a4edb7d5d19191859dac87f38d	not-for-merge	tag '2.4_M1' of https://git.yoctoproject.org/git/poky
+31717f9d78f1a1ed2d9387e3d551a510e4282b8d	not-for-merge	tag '2.4_M2' of https://git.yoctoproject.org/git/poky
+0e1b6744aa8f5d125edd382f255bd038d84b6dd9	not-for-merge	tag '2.4_M3' of https://git.yoctoproject.org/git/poky
+656e9139513cef460a096cb753f2cde394598577	not-for-merge	tag '2.5_M1' of https://git.yoctoproject.org/git/poky
+c9194e85c96d3359a7755f922c4fd12b4a070f8c	not-for-merge	tag '2.5_M2' of https://git.yoctoproject.org/git/poky
+8295aebb020917845eeb37e3fa2feed3f377c14b	not-for-merge	tag '2.5_M3' of https://git.yoctoproject.org/git/poky
+c56e2a6ab67ee222a73dfe48d7392c63445c532c	not-for-merge	tag '2.6_M1' of https://git.yoctoproject.org/git/poky
+279bb1397697eab27356ddd8d953a1281014cff1	not-for-merge	tag '2.6_M2' of https://git.yoctoproject.org/git/poky
+f54ce141984e67595fa3dbefd5bbc95640b81f89	not-for-merge	tag '2.6_M3' of https://git.yoctoproject.org/git/poky
+3eec791009052280254affa1ce20ee11dff8363a	not-for-merge	tag '2.7_M1' of https://git.yoctoproject.org/git/poky
+e08dc5aaaeba61e332caab4a3df5750df6b49ac1	not-for-merge	tag 'bernard-1.0rc1' of https://git.yoctoproject.org/git/poky
+8b6416db1e04af83ecdf57522240ac859d5d8031	not-for-merge	tag 'bernard-5.0' of https://git.yoctoproject.org/git/poky
+0f6efe994836c653916f706ce8cf17dbfbdb424e	not-for-merge	tag 'bernard-5.0-alpha' of https://git.yoctoproject.org/git/poky
+00850fb62eeef5c33c11c67fe05f68f65824e943	not-for-merge	tag 'bernard-5.0.1' of https://git.yoctoproject.org/git/poky
+d0645a368aa2298b4ccb75b00237f45aeb59d8f0	not-for-merge	tag 'bernard-5.0.2' of https://git.yoctoproject.org/git/poky
+fb48a364eba0a109342199a0991bb67ef5ab75fb	not-for-merge	tag 'bernard-5.0.2+docs' of https://git.yoctoproject.org/git/poky
+e08dc5aaaeba61e332caab4a3df5750df6b49ac1	not-for-merge	tag 'bernard-5.0rc1' of https://git.yoctoproject.org/git/poky
+f432f1b01069c2083d420a2accde169f2dafdfab	not-for-merge	tag 'bernard-5.0rc2' of https://git.yoctoproject.org/git/poky
+74af5ee6a84310b9029f50daa4d1cd4a7e493b0e	not-for-merge	tag 'blinky-3.0' of https://git.yoctoproject.org/git/poky
+d6f366f358d98c314ad5af8ae4d580f5363223d4	not-for-merge	tag 'clyde-2.0' of https://git.yoctoproject.org/git/poky
+3c66ad23bec2e69c2a69c8a66c20277c0a0deeb0	not-for-merge	tag 'daisy-11.0.0' of https://git.yoctoproject.org/git/poky
+05124ef27a09ac7d675ab16958ee9fe777947bff	not-for-merge	tag 'daisy-11.0.1' of https://git.yoctoproject.org/git/poky
+02fc7b83cd61e75d1920d70f9d0611d9d4433fb7	not-for-merge	tag 'daisy-11.0.2' of https://git.yoctoproject.org/git/poky
+a7f88a298de70f4f6e92c5add4d443f79386a343	not-for-merge	tag 'daisy-11.0.3' of https://git.yoctoproject.org/git/poky
+f0650418dd99a39769c3d02440859c89493e2f95	not-for-merge	tag 'danny-8.0' of https://git.yoctoproject.org/git/poky
+fb5f99f08e82ee8641636afcd0f2b4756c9e6bcf	not-for-merge	tag 'danny-8.0.1' of https://git.yoctoproject.org/git/poky
+6c56c822586cf2e571478165b9791da2391dc5c8	not-for-merge	tag 'danny-8.0.2' of https://git.yoctoproject.org/git/poky
+2d50575688083ea3c46301e1145b205d262b00b6	not-for-merge	tag 'denzil-7.0' of https://git.yoctoproject.org/git/poky
+d96f0493ab82a78c5eb1451ab750277d62d5baa5	not-for-merge	tag 'denzil-7.0.0' of https://git.yoctoproject.org/git/poky
+bdcbe6f54fb3b05727c1c4d4d7c210a19f33695a	not-for-merge	tag 'denzil-7.0.1' of https://git.yoctoproject.org/git/poky
+8732464fbd4f2c7b8e1995c32095ecde6266fbb7	not-for-merge	tag 'denzil-7.0.1_rc2' of https://git.yoctoproject.org/git/poky
+088763758898e980a93c905fefbaff147434b2e0	not-for-merge	tag 'denzil-7.0.2' of https://git.yoctoproject.org/git/poky
+dc49b43004f933b10e9b532a54818adaf38c5128	not-for-merge	tag 'dizzy-12.0.0' of https://git.yoctoproject.org/git/poky
+01076e9a8269883186d37e807e03492066cca4b4	not-for-merge	tag 'dizzy-12.0.1' of https://git.yoctoproject.org/git/poky
+edba2deec946ca5d3db108062721b1bd08ceef00	not-for-merge	tag 'dizzy-12.0.2' of https://git.yoctoproject.org/git/poky
+d580e5eaef97d5c9f682b18e2a944683636d13af	not-for-merge	tag 'dizzy-12.0.3' of https://git.yoctoproject.org/git/poky
+319e24a8b1e100e950b07bbcad5fc81c42396845	not-for-merge	tag 'dora-10.0.0' of https://git.yoctoproject.org/git/poky
+969fb7bb264363625e2adc731f3f115d1a93da75	not-for-merge	tag 'dora-10.0.0.final' of https://git.yoctoproject.org/git/poky
+b39a020fc6c75ddd529f31c6338812a30ad5177f	not-for-merge	tag 'dora-10.0.1' of https://git.yoctoproject.org/git/poky
+1c1b087ab35508b21814424ab3ab285976abdb8c	not-for-merge	tag 'dora-10.0.1.final' of https://git.yoctoproject.org/git/poky
+3c325d66c408ef14a6b13e0314f542d9b379d6aa	not-for-merge	tag 'dora-10.0.2' of https://git.yoctoproject.org/git/poky
+506239e680b5e14ddf36d6fd0817d10c86d6c612	not-for-merge	tag 'dora-10.0.3' of https://git.yoctoproject.org/git/poky
+b0d657cd120bbe56742a46f765e3fd2b63ac4f63	not-for-merge	tag 'dora-10.0.4' of https://git.yoctoproject.org/git/poky
+87ed895a831212c6b2531694be172772952027e3	not-for-merge	tag 'dylan-9.0.0' of https://git.yoctoproject.org/git/poky
+4fcd75c12c13273b83a36df6950c9c0d34a7aa0c	not-for-merge	tag 'dylan-9.0.1' of https://git.yoctoproject.org/git/poky
+d58294d91ec80bb18628fa8cee7d96df152b8d61	not-for-merge	tag 'dylan-9.0.1.rc1' of https://git.yoctoproject.org/git/poky
+6703307a1018f131061eb569494bdea723d6175b	not-for-merge	tag 'dylan-9.0.2' of https://git.yoctoproject.org/git/poky
+081ea86c78c23c49e3b68bef9d0aef54ee505de3	not-for-merge	tag 'dylan-9.0.2.rc1' of https://git.yoctoproject.org/git/poky
+e27e9f6ab0d2fa98318b810efe3ab61c02dd2f66	not-for-merge	tag 'dylan-9.0.3' of https://git.yoctoproject.org/git/poky
+66ca7e315807574e82930b6f2416e6c9b272ffbd	not-for-merge	tag 'dylan-9.0.4' of https://git.yoctoproject.org/git/poky
+b51c719c2526a73ef33b17af960f7146ec9f5553	not-for-merge	tag 'edison-6.0' of https://git.yoctoproject.org/git/poky
+ab097cc377a0808e620a24843a777fe98477ca7a	not-for-merge	tag 'edison-6.0.1' of https://git.yoctoproject.org/git/poky
+d7d86b91efba61fbac09bcb53934f4cb77477fd3	not-for-merge	tag 'edison-6.0.1.final' of https://git.yoctoproject.org/git/poky
+5537cebb221ad6822934d30065483ecc2e717787	not-for-merge	tag 'edison-6.0.1.release' of https://git.yoctoproject.org/git/poky
+97c6520aa1905d61dda49f6dd245d3ca4e49ec53	not-for-merge	tag 'edison-6.0.2' of https://git.yoctoproject.org/git/poky
+227470417cbfea0a256ca0edea8de347fc6d087d	not-for-merge	tag 'edison-6.0.2_rc1' of https://git.yoctoproject.org/git/poky
+e4cf20fd7bf4ba044f4156a450ae570aa34aa04f	not-for-merge	tag 'fido-13.0.0' of https://git.yoctoproject.org/git/poky
+cf3dd69f1205494b292d3a267324acfbd1ea09d5	not-for-merge	tag 'fido-13.0.1' of https://git.yoctoproject.org/git/poky
+8b801bfa5d0ad52a308f04b97cc618d15c6db2b6	not-for-merge	tag 'fido-13.0.2' of https://git.yoctoproject.org/git/poky
+c3e5b2a2b526968d6f171e17655e30d58ac95049	not-for-merge	tag 'green-3.3' of https://git.yoctoproject.org/git/poky
+ce728417000b5c2e5c1432d42d0e3b4275f2ade6	not-for-merge	tag 'green-3.3.1' of https://git.yoctoproject.org/git/poky
+3421e87895c71c82b5860a6b6910a5349b75f5f7	not-for-merge	tag 'inky-1.0' of https://git.yoctoproject.org/git/poky
+3d29bb6f5c963889af096e4e8ab304a848c44ca2	not-for-merge	tag 'jethro-14.0.0' of https://git.yoctoproject.org/git/poky
+5f5675a8b271dd1991561850958897b179e27085	not-for-merge	tag 'jethro-14.0.1' of https://git.yoctoproject.org/git/poky
+0e7f2657d6dea59aa3d9bbf9f4e13728afde51c0	not-for-merge	tag 'jethro-14.0.2' of https://git.yoctoproject.org/git/poky
+fc553ad2cab2d70020b3ffa870d7db999d8a6786	not-for-merge	tag 'jethro-14.0.3' of https://git.yoctoproject.org/git/poky
+02251a18bcf735ec2c18b594cbed033a9069f05c	not-for-merge	tag 'krogoth-15.0.0' of https://git.yoctoproject.org/git/poky
+41b431c64137eb874eb2c2794f24019b3599b24c	not-for-merge	tag 'krogoth-15.0.1' of https://git.yoctoproject.org/git/poky
+65f686b657534644d089261af48767ca346c1d1e	not-for-merge	tag 'krogoth-15.0.2' of https://git.yoctoproject.org/git/poky
+2f97f49e0a3b88c0d147ca546e3110e115b35afc	not-for-merge	tag 'krogoth-15.0.3' of https://git.yoctoproject.org/git/poky
+78c0a047a07de2727468c55637050eb7039acbd2	not-for-merge	tag 'laverne-4.0' of https://git.yoctoproject.org/git/poky
+45526f5ecfd7fec22ce8022b46c311e77ee0fa9f	not-for-merge	tag 'laverne-4.0.1' of https://git.yoctoproject.org/git/poky
+19ce10c5b64e9bc00a114032fdf316c062e2afb8	not-for-merge	tag 'morty-16.0.0' of https://git.yoctoproject.org/git/poky
+e63479b82fe8aaee88c37d14459b651a54748200	not-for-merge	tag 'morty-16.0.1' of https://git.yoctoproject.org/git/poky
+30151eec98af485cd2a5285e9276bf69e6d0dbe8	not-for-merge	tag 'morty-16.0.2' of https://git.yoctoproject.org/git/poky
+105c99ad14f1ee5114432d3fe0f2bd9f7ce5d5ab	not-for-merge	tag 'morty-16.0.3' of https://git.yoctoproject.org/git/poky
+a0f288634eac5f6c508eb2997480473273d77d49	not-for-merge	tag 'morty-16.0.4' of https://git.yoctoproject.org/git/poky
+336c1dc80f21bd35fe3a5a57d397e2f4afcb56ea	not-for-merge	tag 'pinky-3.1' of https://git.yoctoproject.org/git/poky
+007a16456671e4aaed378ad2477e210fd1ddd0c6	not-for-merge	tag 'pinky-3.1.1' of https://git.yoctoproject.org/git/poky
+112357a76cf8dff70e0925047a311ecfeb018727	not-for-merge	tag 'pinky-3.1.2' of https://git.yoctoproject.org/git/poky
+297e11e7f83f910c073674ca098d67133b8dbc15	not-for-merge	tag 'poky-10.0.0.final' of https://git.yoctoproject.org/git/poky
+ec8a6b79162351cc6afcbe727f049aecac0a0279	not-for-merge	tag 'purple-3.2' of https://git.yoctoproject.org/git/poky
+4a8a982168f688a932cf20d4e86f62f9415f707e	not-for-merge	tag 'purple-3.2.1' of https://git.yoctoproject.org/git/poky
+0661e882c20bd33d865bbe7843039ba1928efaa3	not-for-merge	tag 'pyro-17.0.0' of https://git.yoctoproject.org/git/poky
+1cf5a38ffaf2ded06a83e0c5f80507a5bc9fef5f	not-for-merge	tag 'pyro-17.0.1' of https://git.yoctoproject.org/git/poky
+629f7daa5376551b018dbfb91f6b77108b7a30fe	not-for-merge	tag 'pyro-17.0.2' of https://git.yoctoproject.org/git/poky
+78ae93dcdbdde2ddae0a29fd17849952bb9bf946	not-for-merge	tag 'pyro-17.0.3' of https://git.yoctoproject.org/git/poky
+0b89ea3573aa3660d2d39c482d676eb379c92ee7	not-for-merge	tag 'pyro-17.0.4' of https://git.yoctoproject.org/git/poky
+81fc9c6e7bfa6e5a9da50f0325ac0e51fe3a4938	not-for-merge	tag 'rocko-18.0.0' of https://git.yoctoproject.org/git/poky
+4a9d4991d081907dc971bcd737740fafb24ad904	not-for-merge	tag 'rocko-18.0.1' of https://git.yoctoproject.org/git/poky
+c96604fe0ffd9d6848122d3065303ddd8f2ecedf	not-for-merge	tag 'rocko-18.0.2' of https://git.yoctoproject.org/git/poky
+9b8ddad665b45fc7ff743e5a1c5e5028b454663d	not-for-merge	tag 'rocko-18.0.3' of https://git.yoctoproject.org/git/poky
+4c9b5ca34912999f5e75c03ba743e709a5edd7ff	not-for-merge	tag 'rocko-18.0.4' of https://git.yoctoproject.org/git/poky
+d2be4aec97db5b9f6aabb162c8052a0ae0a603e5	not-for-merge	tag 'sumo-19.0.0' of https://git.yoctoproject.org/git/poky
+10109d2de437163965b20c33bbb8cd6eb61b6525	not-for-merge	tag 'sumo-19.0.1' of https://git.yoctoproject.org/git/poky
+f56f407bc8ad78a5a0d2689adfc557dd7433aec8	not-for-merge	tag 'sumo-19.0.2' of https://git.yoctoproject.org/git/poky
+9cc43042858e3f9b4a02d4f18f770405447d15ca	not-for-merge	tag 'thud-20.0.0' of https://git.yoctoproject.org/git/poky
+ee3c2fdf5192e228ca739619a2038da9912d11c8	not-for-merge	tag 'toaster-dora-10.0.0' of https://git.yoctoproject.org/git/poky
+65421fd94d26d8a9ec4f39e36430ed1797b3c4d4	not-for-merge	tag 'uninative-1.0' of https://git.yoctoproject.org/git/poky
+7512596fa3daf391f7188fa298a375db23685eb8	not-for-merge	tag 'uninative-1.3' of https://git.yoctoproject.org/git/poky
+a7d2b680f170b7d43af3e5d7a9956f298e16eeca	not-for-merge	tag 'uninative-1.4' of https://git.yoctoproject.org/git/poky
+ec06b5b4d7c09a22f58a59d21ddc907ee74bd63a	not-for-merge	tag 'uninative-1.5' of https://git.yoctoproject.org/git/poky
+19b5bec53c4c2da1cdf1a4cbdf6949520c194bfb	not-for-merge	tag 'uninative-1.6' of https://git.yoctoproject.org/git/poky
+18adfafc4f8ead037ff3e4713ffd3ecfb10bc534	not-for-merge	tag 'uninative-1.7' of https://git.yoctoproject.org/git/poky
+4d011f6b70393d2034d7559895cc731a92dab2d3	not-for-merge	tag 'uninative-1.8' of https://git.yoctoproject.org/git/poky
+7e6dc4c36c531c39a64d83395da77549920145f0	not-for-merge	tag 'uninative-1.9' of https://git.yoctoproject.org/git/poky
+3eddaaa65992c50c15babe5b5898c35031461d68	not-for-merge	tag 'uninative-2.0' of https://git.yoctoproject.org/git/poky
+878d804b5d63b50e0f2ee0c2cf1ec3e4544223c0	not-for-merge	tag 'uninative-2.1' of https://git.yoctoproject.org/git/poky
+ea06546413fa4624838cc398671f353eaf3c083f	not-for-merge	tag 'uninative-2.2' of https://git.yoctoproject.org/git/poky
+8e42eae2959a7adbfa56e7b93fae5099322ee055	not-for-merge	tag 'uninative-2.3' of https://git.yoctoproject.org/git/poky
+e82d011e55c5993df57d06ca8235f9419858f237	not-for-merge	tag 'yocot-1.4.2' of https://git.yoctoproject.org/git/poky
+7949cd8df5e585dea36b801cc8c8e3d9b1c006fa	not-for-merge	tag 'yocto-1.4.1' of https://git.yoctoproject.org/git/poky
+c1f096f5b17ad7a01f760b7be841a0b315495c3e	not-for-merge	tag 'yocto-1.4.2' of https://git.yoctoproject.org/git/poky
+17d990b9444c32fd5663d2dc7a089a9c69ada73d	not-for-merge	tag 'yocto-1.4.2.rc1' of https://git.yoctoproject.org/git/poky
+71a26578cc5726a0f28ee04b3b8310e5e6a96489	not-for-merge	tag 'yocto-1.4.3' of https://git.yoctoproject.org/git/poky
+e2dc21c60d85bb50e04e38b68c484dead81f189c	not-for-merge	tag 'yocto-1.4.4' of https://git.yoctoproject.org/git/poky
+91ec526b63cb618f3375317f4f80b2d091400a23	not-for-merge	tag 'yocto-1.5' of https://git.yoctoproject.org/git/poky
+cad547f10070b28e353f2a861db47ea5c73a3bd6	not-for-merge	tag 'yocto-1.5.1' of https://git.yoctoproject.org/git/poky
+11e2fa4fb759b321709ac8df2df37b269434cfd6	not-for-merge	tag 'yocto-1.5.1.final' of https://git.yoctoproject.org/git/poky
+1e8b54b3a705b2a50ee0db9c50e826863a9135ff	not-for-merge	tag 'yocto-1.5.2' of https://git.yoctoproject.org/git/poky
+dc9942911bb1490a026a7c332f3816deaef8aba4	not-for-merge	tag 'yocto-1.5.3' of https://git.yoctoproject.org/git/poky
+de3a5f5b3a4d86cc8c1e5361c165ce93705f3e23	not-for-merge	tag 'yocto-1.5.4' of https://git.yoctoproject.org/git/poky
+f5ca9562a43e768997b95f9e91adb3dd3d9cdfb1	not-for-merge	tag 'yocto-1.5.final' of https://git.yoctoproject.org/git/poky
+de5719cafc8e4c86a810adfdbe28ce20a373faed	not-for-merge	tag 'yocto-1.5_M5.rc2' of https://git.yoctoproject.org/git/poky
+2d7b4c73a10a7e82fd43301ec4c87af52e6fbc10	not-for-merge	tag 'yocto-1.6' of https://git.yoctoproject.org/git/poky
+39d2ca4e34e9c7a67e4df56cfb49dcc106bf397e	not-for-merge	tag 'yocto-1.6.1' of https://git.yoctoproject.org/git/poky
+cc76a0d94245e554d6ae5be3cfbd1d0b40b8fdbe	not-for-merge	tag 'yocto-1.6.2' of https://git.yoctoproject.org/git/poky
+3e3c69d61ef6f57799a4017c72f68d05558338c2	not-for-merge	tag 'yocto-1.6.3' of https://git.yoctoproject.org/git/poky
+cff162d64070d9ca4c1c03ab87ba9b1013b9659c	not-for-merge	tag 'yocto-1.7' of https://git.yoctoproject.org/git/poky
+012572d886fd3b64e690bfbecd63af84df2523ab	not-for-merge	tag 'yocto-1.7.1' of https://git.yoctoproject.org/git/poky
+3d505ee98f4d45a20a5ce49169e160f358c5ac7e	not-for-merge	tag 'yocto-1.7.2' of https://git.yoctoproject.org/git/poky
+fab9fa3d5c91fa2e77845c2cfa65a8a9fa985b13	not-for-merge	tag 'yocto-1.7.3' of https://git.yoctoproject.org/git/poky
+cf32d138e7b6dc66898cf6012d1b1070694ab045	not-for-merge	tag 'yocto-1.8' of https://git.yoctoproject.org/git/poky
+db2eae4767fd28899dec852dff3626319f3c05d9	not-for-merge	tag 'yocto-1.8.1' of https://git.yoctoproject.org/git/poky
+c00a6b72a0445962d39ea1cccf445c337fe8e2b3	not-for-merge	tag 'yocto-1.8.2' of https://git.yoctoproject.org/git/poky
+abb0df163a6998c55e5686148a91ec414c45529c	not-for-merge	tag 'yocto-1.9_M1' of https://git.yoctoproject.org/git/poky
+11d8953f1a77a8d0c0ef07d0c14de8529ba642c2	not-for-merge	tag 'yocto-2.0' of https://git.yoctoproject.org/git/poky
+c8a4ed9a63de6124c8a3cceb80c7db48f12f7aea	not-for-merge	tag 'yocto-2.0.1' of https://git.yoctoproject.org/git/poky
+4124b5b88cdb4c4ab26304b2e9c279be36b08746	not-for-merge	tag 'yocto-2.0.2' of https://git.yoctoproject.org/git/poky
+8250aad760bac6b49da40352b48e979dab93b3af	not-for-merge	tag 'yocto-2.0.3' of https://git.yoctoproject.org/git/poky
+8358e543ab95a1d2b1d19c1e944275daa17378c1	not-for-merge	tag 'yocto-2.1' of https://git.yoctoproject.org/git/poky
+d8143b6d31e125bd548453cf945760e0a27ec9e5	not-for-merge	tag 'yocto-2.1.1' of https://git.yoctoproject.org/git/poky
+f6dec6993c4141345d99cf200106ee60a1d1bc9a	not-for-merge	tag 'yocto-2.1.2' of https://git.yoctoproject.org/git/poky
+95cc561647c7e2653e0b6c93133b440543a2afb8	not-for-merge	tag 'yocto-2.1.3' of https://git.yoctoproject.org/git/poky
+876b0ccf06b40a98f8ff1b08ad74e695c4f8b64a	not-for-merge	tag 'yocto-2.2' of https://git.yoctoproject.org/git/poky
+e17924ce8323f77888ff5fcb134df60c5c49b945	not-for-merge	tag 'yocto-2.2.1' of https://git.yoctoproject.org/git/poky
+67491b0c104101bb9f366d697edd23c895be4302	not-for-merge	tag 'yocto-2.2.2' of https://git.yoctoproject.org/git/poky
+6b34ec90c0d141619aa755edea64ac68156d7478	not-for-merge	tag 'yocto-2.2.3' of https://git.yoctoproject.org/git/poky
+4c89a00fca125bd68e8db5cbd448827a23596866	not-for-merge	tag 'yocto-2.2.4' of https://git.yoctoproject.org/git/poky
+67f4b98fb3077b9c27cd70942f6b99a10578c877	not-for-merge	tag 'yocto-2.3' of https://git.yoctoproject.org/git/poky
+992824e6c14edf6d8a738ea484de91b96dcbb687	not-for-merge	tag 'yocto-2.3.1' of https://git.yoctoproject.org/git/poky
+6066dddf4f2f1752dcc7ebd8040ff667debc0c32	not-for-merge	tag 'yocto-2.3.2' of https://git.yoctoproject.org/git/poky
+ed356facdc15776440567478667ed3e300f9dd3d	not-for-merge	tag 'yocto-2.3.3' of https://git.yoctoproject.org/git/poky
+2c4a5abf9ef6d9e7eed7a126d896124457e8d902	not-for-merge	tag 'yocto-2.3.4' of https://git.yoctoproject.org/git/poky
+314a62f523c2b3a8438ccdaf823f4e8a70e99327	not-for-merge	tag 'yocto-2.4' of https://git.yoctoproject.org/git/poky
+ac75752d78292708008c7aad93e83f061b963cec	not-for-merge	tag 'yocto-2.4.1' of https://git.yoctoproject.org/git/poky
+a57eabca57f6fc236283f0ea39f66f09aa82275a	not-for-merge	tag 'yocto-2.4.2' of https://git.yoctoproject.org/git/poky
+8f47600537aba96a140ec01bb8cc095ca75f7b12	not-for-merge	tag 'yocto-2.4.3' of https://git.yoctoproject.org/git/poky
+18497e4edf0711b4992913e5f81c7f6e33f6281d	not-for-merge	tag 'yocto-2.4.4' of https://git.yoctoproject.org/git/poky
+c721b19a2a4b14232b72f1f7f034108cd806c90d	not-for-merge	tag 'yocto-2.5' of https://git.yoctoproject.org/git/poky
+27a3745558ec95fd69ff352613f0971e4e3e2374	not-for-merge	tag 'yocto-2.5.1' of https://git.yoctoproject.org/git/poky
+e63cb0f3d28d818d461483477ceaf7258933c289	not-for-merge	tag 'yocto-2.5.2' of https://git.yoctoproject.org/git/poky
+01b405fb70a7ba51197a5cc99b0260206e269508	not-for-merge	tag 'yocto-2.6' of https://git.yoctoproject.org/git/poky
+6f80ebb43d65c408182cb674e12411cfc2a3689b	not-for-merge	tag 'yocto_1.5_M5.rc8' of https://git.yoctoproject.org/git/poky
