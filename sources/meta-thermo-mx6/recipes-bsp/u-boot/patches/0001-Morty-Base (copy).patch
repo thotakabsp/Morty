@@ -1,0 +1,605 @@
+From b70dd7a0c12d52d83ed4d9eefc4a18de69e6d994 Mon Sep 17 00:00:00 2001
+From: techm <techm@techmahindra.com>
+Date: Thu, 13 Jul 2017 18:50:11 +0530
+Subject: [PATCH] Morty Base
+
+---
+ Makefile                                |  2 +-
+ arch/arm/imx-common/i2c-mxv7.c          |  2 +
+ board/variscite/mx6var_som/mx6var_som.c | 46 +++++++++++++++++------
+ common/autoboot.c                       | 24 ++++++++++--
+ common/cmd_nvedit.c                     |  3 +-
+ common/main.c                           |  4 ++
+ common/spl/spl.c                        |  2 +-
+ common/spl/spl_nand.c                   | 27 ++++++++++++--
+ drivers/i2c/mxc_i2c.c                   |  2 +
+ drivers/mtd/nand/nand_util.c            |  8 +++-
+ drivers/serial/serial_mxc.c             |  8 ++++
+ drivers/watchdog/imx_watchdog.c         |  2 +-
+ include/configs/mx6var_som.h            | 66 +++++++++++++++++++++++++--------
+ include/version.h                       |  4 +-
+ lib/time.c                              |  2 +
+ 15 files changed, 160 insertions(+), 42 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b3a5ffb..99c4687 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1226,7 +1226,7 @@ prepare: prepare0
+ 
+ define filechk_version.h
+ 	(echo \#define PLAIN_VERSION \"$(UBOOTRELEASE)\"; \
+-	echo \#define U_BOOT_VERSION \"U-Boot \" PLAIN_VERSION; \
++	echo \#define U_BOOT_VERSION \"U-Boot \" ; \
+ 	echo \#define CC_VERSION_STRING \"$$($(CC) --version | head -n 1)\"; \
+ 	echo \#define LD_VERSION_STRING \"$$($(LD) --version | head -n 1)\"; )
+ endef
+diff --git a/arch/arm/imx-common/i2c-mxv7.c b/arch/arm/imx-common/i2c-mxv7.c
+index ca586ae..09cc86c 100644
+--- a/arch/arm/imx-common/i2c-mxv7.c
++++ b/arch/arm/imx-common/i2c-mxv7.c
+@@ -69,7 +69,9 @@ static int force_idle_bus(void *priv)
+ 		scl = gpio_get_value(p->scl.gp);
+ 		if ((sda & scl) == 1)
+ 			break;
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#endif
+ 		elapsed = get_timer(start_time);
+ 		if (elapsed > (CONFIG_SYS_HZ / 5)) {	/* .2 seconds */
+ 			ret = -EBUSY;
+diff --git a/board/variscite/mx6var_som/mx6var_som.c b/board/variscite/mx6var_som/mx6var_som.c
+index cf0b7dd..04bff8e 100644
+--- a/board/variscite/mx6var_som/mx6var_som.c
++++ b/board/variscite/mx6var_som/mx6var_som.c
+@@ -75,9 +75,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ 	PAD_CTL_DSE_80ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
+ 
+ 
+-#define VAR_SOM_BACKLIGHT_EN	IMX_GPIO_NR(4, 30)
++#define VAR_SOM_BACKLIGHT_EN	IMX_GPIO_NR(1, 9)
++#define VAR_SOM_LCD_EN	IMX_GPIO_NR(6, 1)
+ 
+-bool lvds_enabled=false;
++bool lvds_enabled=true;
+ 
+ /*
+  * OCOTP_CFG3[17:16] (see Fusemap Description Table offset 0x440)
+@@ -343,8 +344,8 @@ int splash_screen_prepare(void)
+ 	}
+ 
+ 	/* Turn on backlight */
+-	if (lvds_enabled)
+ 		gpio_set_value(VAR_SOM_BACKLIGHT_EN, 1);
++		gpio_set_value(VAR_SOM_LCD_EN, 1);
+ 
+ 	return ret;
+ }
+@@ -414,6 +415,11 @@ static iomux_v3_cfg_t const uart1_pads[] = {
+ 	IOMUX_PADS(PAD_CSI0_DAT11__UART1_RX_DATA | MUX_PAD_CTRL(UART_PAD_CTRL)),
+ };
+ 
++static iomux_v3_cfg_t const uart3_pads[] = {
++	IOMUX_PADS(PAD_EIM_D24__UART3_TX_DATA | MUX_PAD_CTRL(UART_PAD_CTRL)),
++	IOMUX_PADS(PAD_EIM_D25__UART3_RX_DATA | MUX_PAD_CTRL(UART_PAD_CTRL)),
++};
++
+ static iomux_v3_cfg_t const enet_pads1[] = {
+ 	IOMUX_PADS(PAD_ENET_MDIO__ENET_MDIO	| MUX_PAD_CTRL(ENET_PAD_CTRL)),
+ 	IOMUX_PADS(PAD_ENET_MDC__ENET_MDC	| MUX_PAD_CTRL(ENET_PAD_CTRL)),
+@@ -542,7 +548,7 @@ void setup_local_i2c(void) {
+ 
+ static void setup_iomux_uart(void)
+ {
+-	SETUP_IOMUX_PADS(uart1_pads);
++	SETUP_IOMUX_PADS(uart3_pads);
+ }
+ 
+ #ifdef CONFIG_FSL_ESDHC
+@@ -824,10 +830,7 @@ static void do_enable_hdmi(struct display_info_t const *dev)
+ 
+ static void lvds_enable_disable(struct display_info_t const *dev)
+ {
+-	if (getenv("splashimage") != NULL)
+ 		lvds_enabled=true;
+-	else
+-		disable_lvds(dev);
+ }
+ 
+ static int detect_dart_vsc_display(struct display_info_t const *dev)
+@@ -856,7 +859,9 @@ static int detect_mx6cb_rdisplay(struct display_info_t const *dev)
+ 
+ #define MHZ2PS(f)	(1000000/(f))
+ 
+-struct display_info_t const displays[] = {{
++struct display_info_t const displays[] = {
++#if 0
++{
+ 	.bus	= -1,
+ 	.addr	= 0,
+ 	.pixfmt	= IPU_PIX_FMT_RGB24,
+@@ -916,7 +921,9 @@ struct display_info_t const displays[] = {{
+ 		.vsync_len      = 2,
+ 		.sync           = FB_SYNC_EXT,
+ 		.vmode          = FB_VMODE_NONINTERLACED
+-} }, {
++} },
++#endif
++ {
+ 	.bus	= -1,
+ 	.addr	= 0,
+ 	.pixfmt	= IPU_PIX_FMT_RGB24,
+@@ -924,7 +931,8 @@ struct display_info_t const displays[] = {{
+ 	.enable	= lvds_enable_disable,
+ 	.mode	= {
+ 		.name           = "VAR-WVGA MX6CB-R",
+-		.refresh        = 60,  /* optional */
++#if 0
++		.refresh        = 60, /* optional */
+ 		.xres           = 800,
+ 		.yres           = 480,
+ 		.pixclock       = MHZ2PS(50),
+@@ -934,6 +942,18 @@ struct display_info_t const displays[] = {{
+ 		.lower_margin   = 13,
+ 		.hsync_len      = 48,
+ 		.vsync_len      = 3,
++#else
++                .refresh        = 57,
++                .xres           = 1024,
++                .yres           = 600,
++                .pixclock       = 10000,
++                .left_margin    = 160,
++                .right_margin   = 160,
++                .upper_margin   = 23,
++                .lower_margin   = 12,
++                .hsync_len      = 12,
++                .vsync_len      = 23,
++#endif
+ 		.sync           = FB_SYNC_EXT,
+ 		.vmode          = FB_VMODE_NONINTERLACED
+ } } };
+@@ -948,9 +968,11 @@ static void setup_display(void)
+ 
+ 	/* Setup backlight */
+ 	SETUP_IOMUX_PAD(PAD_DISP0_DAT9__GPIO4_IO30 | MUX_PAD_CTRL(NO_PAD_CTRL));
++	SETUP_IOMUX_PAD(PAD_CSI0_DAT15__GPIO6_IO01 | MUX_PAD_CTRL(NO_PAD_CTRL));
+ 
+ 	/* Turn off backlight until display is ready */
+-	gpio_direction_output(VAR_SOM_BACKLIGHT_EN , 0);
++	gpio_direction_output(VAR_SOM_BACKLIGHT_EN , 1);
++	gpio_direction_output(VAR_SOM_LCD_EN , 1);
+ 
+ 	enable_ipu_clock();
+ 	imx_setup_hdmi();
+@@ -984,7 +1006,7 @@ static void setup_display(void)
+ 	     | IOMUXC_GPR2_DI1_VS_POLARITY_ACTIVE_LOW
+ 	     | IOMUXC_GPR2_DI0_VS_POLARITY_ACTIVE_LOW
+ 	     | IOMUXC_GPR2_BIT_MAPPING_CH1_SPWG
+-	     | IOMUXC_GPR2_DATA_WIDTH_CH1_18BIT
++	     | IOMUXC_GPR2_DATA_WIDTH_CH1_24BIT
+ 	     | IOMUXC_GPR2_BIT_MAPPING_CH0_SPWG
+ 	     | IOMUXC_GPR2_DATA_WIDTH_CH0_24BIT
+ 	     | IOMUXC_GPR2_LVDS_CH0_MODE_ENABLED_DI0
+diff --git a/common/autoboot.c b/common/autoboot.c
+index 1c08c08..24a95dd 100644
+--- a/common/autoboot.c
++++ b/common/autoboot.c
+@@ -234,16 +234,34 @@ const char *bootdelay_process(void)
+ {
+ 	char *s;
+ 	int bootdelay;
++	unsigned long updateneeded = 0;
+ #ifdef CONFIG_BOOTCOUNT_LIMIT
+ 	unsigned long bootcount = 0;
+ 	unsigned long bootlimit = 0;
+ #endif /* CONFIG_BOOTCOUNT_LIMIT */
+ 
++
++/* Need to check for update needed for u-boot, kernel, DTB & UBI FS */
++#if 1
++	s = getenv("updateneeded");
++	updateneeded = s ? (int)simple_strtol(s, NULL, 10) : 0;
++	if(updateneeded)
++	{
++		/* updating the Files */
++		printf(" <<<<<<< Update is needed >>>>>>>>>>>>>\n");
++		s = getenv("altbootcmd");
++		return s;
++	}
++#endif
++
+ #ifdef CONFIG_BOOTCOUNT_LIMIT
+-	bootcount = bootcount_load();
+-	bootcount++;
+-	bootcount_store(bootcount);
++	bootcount = getenv_ulong("bootcount", 10, 0);
++//	bootcount++;
++//	bootcount_store(bootcount);
+ 	setenv_ulong("bootcount", bootcount);
++#ifdef CONFIG_ENV_IS_IN_NAND
++//	saveenv();
++#endif
+ 	bootlimit = getenv_ulong("bootlimit", 10, 0);
+ #endif /* CONFIG_BOOTCOUNT_LIMIT */
+ 
+diff --git a/common/cmd_nvedit.c b/common/cmd_nvedit.c
+index 6ff041b..ddf62eb 100644
+--- a/common/cmd_nvedit.c
++++ b/common/cmd_nvedit.c
+@@ -615,8 +615,9 @@ char *getenv(const char *name)
+ 	if (gd->flags & GD_FLG_ENV_READY) { /* after import into hashtable */
+ 		ENTRY e, *ep;
+ 
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
+-
++#endif
+ 		e.key	= name;
+ 		e.data	= NULL;
+ 		e.callback = NULL;
+diff --git a/common/main.c b/common/main.c
+index 62ab1ac..0139f39 100644
+--- a/common/main.c
++++ b/common/main.c
+@@ -72,6 +72,10 @@ void main_loop(void)
+ 	modem_init();
+ #ifdef CONFIG_VERSION_VARIABLE
+ 	setenv("ver", version_string);  /* set version variable */
++	setenv("tfsver", U_BOOT_CUSTOM_VERSION);
++#ifdef CONFIG_ENV_IS_IN_NAND
++        saveenv();
++#endif
+ #endif /* CONFIG_VERSION_VARIABLE */
+ 
+ 	cli_init();
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 8e1fb40..ab1cfc2 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -287,7 +287,7 @@ void preloader_console_init(void)
+ 
+ 	gd->have_console = 1;
+ 
+-	puts("\nU-Boot SPL " PLAIN_VERSION " (" U_BOOT_DATE " - " \
++	puts("\nU-Boot SPL (" U_BOOT_DATE " - " \
+ 			U_BOOT_TIME ")\n");
+ #ifdef CONFIG_SPL_DISPLAY_PRINT
+ 	spl_display_print();
+diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
+index b7801cb..80427c0 100644
+--- a/common/spl/spl_nand.c
++++ b/common/spl/spl_nand.c
+@@ -87,11 +87,32 @@ void spl_nand_load_image(void)
+ #endif
+ #endif
+ 	/* Load u-boot */
++	puts("\n<TFS> Loading Normal u-boot\n");
+ 	nand_spl_load_image(CONFIG_SYS_NAND_U_BOOT_OFFS,
+ 		sizeof(*header), (void *)header);
+ 	spl_parse_image_header(header);
+-	nand_spl_load_image(CONFIG_SYS_NAND_U_BOOT_OFFS,
+-		spl_image.size, (void *)spl_image.load_addr);
+-	nand_deselect();
++	if (image_get_magic(header) != IH_MAGIC)
++		/* Load Golden u-boot */
++	{
++		puts(" Failed ..\n<TFS> Loading Golden u-boot\n");
++		nand_spl_load_image(CONFIG_SYS_NAND_GU_BOOT_OFFS,
++				sizeof(*header), (void *)header);
++		spl_parse_image_header(header);
++		if (image_get_magic(header) != IH_MAGIC)
++		{
++			puts(" Failed ..\n Please Reset the Device with proper Bootloder <Hang>\n");
++			return -1;
++		}
++		nand_spl_load_image(CONFIG_SYS_NAND_GU_BOOT_OFFS,
++				spl_image.size, (void *)spl_image.load_addr);
++		puts(" Success ..\n");
++		nand_deselect();
++	}
++	else{
++		nand_spl_load_image(CONFIG_SYS_NAND_U_BOOT_OFFS,
++				spl_image.size, (void *)spl_image.load_addr);
++		nand_deselect();
++		puts(" Success ..\n");
++	}
+ }
+ #endif
+diff --git a/drivers/i2c/mxc_i2c.c b/drivers/i2c/mxc_i2c.c
+index 3fb89d1..416e5e2 100644
+--- a/drivers/i2c/mxc_i2c.c
++++ b/drivers/i2c/mxc_i2c.c
+@@ -207,7 +207,9 @@ static int wait_for_sr_state(struct mxc_i2c_regs *i2c_regs, unsigned state)
+ 		}
+ 		if ((sr & (state >> 8)) == (unsigned char)state)
+ 			return sr;
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#endif
+ 		elapsed = get_timer(start_time);
+ 		if (elapsed > (CONFIG_SYS_HZ / 10))	/* .1 seconds */
+ 			break;
+diff --git a/drivers/mtd/nand/nand_util.c b/drivers/mtd/nand/nand_util.c
+index 12dd26a..e71ceb4 100644
+--- a/drivers/mtd/nand/nand_util.c
++++ b/drivers/mtd/nand/nand_util.c
+@@ -97,9 +97,9 @@ int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts)
+ 	for (erased_length = 0;
+ 	     erased_length < erase_length;
+ 	     erase.addr += meminfo->erasesize) {
+-
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
+-
++#endif
+ 		if (opts->lim && (erase.addr >= (opts->offset + opts->lim))) {
+ 			puts("Size of erase exceeds limit\n");
+ 			return -EFBIG;
+@@ -635,7 +635,9 @@ int nand_write_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
+ 		size_t block_offset = offset & (nand->erasesize - 1);
+ 		size_t write_size, truncated_write_size;
+ 
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#endif
+ 
+ 		if (nand_block_isbad(nand, offset & ~(nand->erasesize - 1))) {
+ 			printf("Skip bad block 0x%08llx\n",
+@@ -751,7 +753,9 @@ int nand_read_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
+ 		size_t block_offset = offset & (nand->erasesize - 1);
+ 		size_t read_length;
+ 
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#endif
+ 
+ 		if (nand_block_isbad(nand, offset & ~(nand->erasesize - 1))) {
+ 			printf("Skipping bad block 0x%08llx\n",
+diff --git a/drivers/serial/serial_mxc.c b/drivers/serial/serial_mxc.c
+index d6cf1d8..89ff883 100644
+--- a/drivers/serial/serial_mxc.c
++++ b/drivers/serial/serial_mxc.c
+@@ -151,7 +151,11 @@ static void mxc_serial_setbrg(void)
+ static int mxc_serial_getc(void)
+ {
+ 	while (__REG(UART_PHYS + UTS) & UTS_RXEMPTY)
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#else
++		;
++#endif
+ 	return (__REG(UART_PHYS + URXD) & URXD_RX_DATA); /* mask out status from upper word */
+ }
+ 
+@@ -161,7 +165,11 @@ static void mxc_serial_putc(const char c)
+ 
+ 	/* wait for transmitter to be ready */
+ 	while (!(__REG(UART_PHYS + UTS) & UTS_TXEMPTY))
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#else
++		;
++#endif
+ 
+ 	/* If \n, also do \r */
+ 	if (c == '\n')
+diff --git a/drivers/watchdog/imx_watchdog.c b/drivers/watchdog/imx_watchdog.c
+index 591e5e8..9c65975 100644
+--- a/drivers/watchdog/imx_watchdog.c
++++ b/drivers/watchdog/imx_watchdog.c
+@@ -30,7 +30,7 @@ void hw_watchdog_init(void)
+ 	 * in configuration file, sets 128 Seconds
+ 	 */
+ #ifndef CONFIG_WATCHDOG_TIMEOUT_MSECS
+-#define CONFIG_WATCHDOG_TIMEOUT_MSECS 128000
++#define CONFIG_WATCHDOG_TIMEOUT_MSECS 30000
+ #endif
+ 	timeout = (CONFIG_WATCHDOG_TIMEOUT_MSECS / 500) - 1;
+ 	writew(WCR_WDZST | WCR_WDBG | WCR_WDE | WCR_WDT | WCR_SRS |
+diff --git a/include/configs/mx6var_som.h b/include/configs/mx6var_som.h
+index 1fbffdf..f1fb0a9 100644
+--- a/include/configs/mx6var_som.h
++++ b/include/configs/mx6var_som.h
+@@ -51,9 +51,9 @@
+ #define CONFIG_MACH_VAR_SOM_MX6		4419
+ #define CONFIG_MACH_TYPE		CONFIG_MACH_VAR_SOM_MX6
+ 
+-#define CONFIG_MXC_UART_BASE		UART1_BASE
+-#define CONFIG_CONSOLE_DEV		"ttymxc0"
+-#define CONFIG_MMCROOT			"/dev/mmcblk0p2"
++#define CONFIG_MXC_UART_BASE		UART3_BASE
++#define CONFIG_CONSOLE_DEV		"ttymxc2"
++#define CONFIG_MMCROOT			"/dev/mmcblk1p2"
+ 
+ /* Size of malloc() pool */
+ #define CONFIG_SYS_MALLOC_LEN		(16 * SZ_1M)
+@@ -124,6 +124,7 @@
+ #define CONFIG_CMD_SETEXPR
+ #undef CONFIG_CMD_IMLS
+ #define CONFIG_CMD_TIME
++#define CONFIG_VERSION_VARIABLE
+ 
+ #define CONFIG_BOOTDELAY		1
+ 
+@@ -161,7 +162,7 @@
+ 	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
+ 	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+-	"mmcargs=setenv bootargs console=${console},${baudrate} root=${mmcroot}; " \
++	"mmcargs=setenv bootargs console=${console},${baudrate} no_console_suspend vt.global_cursor_default=0 root=${mmcroot}; " \
+ 		"run videoargs\0" \
+ 	"loadbootenv=" \
+ 		"fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootenv};\0" \
+@@ -193,7 +194,7 @@
+ 
+ 
+ #define NAND_BOOT_ENV_SETTINGS \
+-	"bootargs_nand=setenv bootargs console=${console},${baudrate} ubi.mtd=3 " \
++	"bootargs_nand=setenv bootargs console=${console},${baudrate} no_console_suspend vt.global_cursor_default=0 ubi.mtd=7 " \
+ 		"root=ubi0:rootfs rootfstype=ubifs\0" \
+ 	"bootargs_emmc=setenv bootargs console=${console},${baudrate} " \
+ 		"root=/dev/mmcblk0p1 rootwait rw\0" \
+@@ -206,9 +207,15 @@
+ 		"fi; " \
+ 		"run videoargs; " \
+ 		"run optargs; " \
+-		"nand read ${loadaddr} 0x400000 0x800000; " \
+-		"nand read ${fdt_addr} 0x3e0000 0x20000; " \
++		"nand read ${loadaddr} 0x800000 0x800000; " \
++		"nand read ${fdt_addr} 0x700000 0x100000; " \
+ 		"bootm ${loadaddr} - ${fdt_addr}\0" \
++	"altbootcmd=" \
++		"setenv bootargs console=${console},${baudrate} no_console_suspend vt.global_cursor_default=0;" \
++		"nand read ${loadaddr} 0x800000 0x800000;" \
++		"nand read ${fdt_addr} 0x700000 0x100000;" \
++		"nand read ${minirfs_addr} 0x1000000 0x2000000;" \
++		"bootm ${loadaddr} ${minirfs_addr} ${fdt_addr}\0" \
+ 	"mtdids=" MTDIDS_DEFAULT "\0" \
+ 	"mtdparts=" MTDPARTS_DEFAULT "\0"
+ 
+@@ -258,6 +265,14 @@
+ 	OPT_ENV_SETTINGS \
+ 	"fdt_file=undefined\0" \
+ 	"fdt_addr=0x18000000\0" \
++	"minirfs_addr=0x18100000\0" \
++        "bootlimit=" CONFIG_SYS_BOOTLIMIT "\0"  \
++        "bootcount=" CONFIG_SYS_BOOTCOUNT "\0"  \
++        "unit_id=" UNIT_ID "\0" \
++        "family_id=" FAMILY_ID "\0"     \
++        "build_id=" BUILD_ID "\0"       \
++	"appupdateneeded=0\0"	\
++	"updateneeded=0\0"	\
+ 	"fdt_high=0xffffffff\0" \
+ 	"splashsourceauto=yes\0" \
+ 	"splashfile=/boot/splash.bmp\0" \
+@@ -309,7 +324,7 @@
+ 			"fi; " \
+ 			"if test $board_name = MX6CUSTOM && test $board_rev = MX6Q; then " \
+ 				"i2c dev 2; " \
+-				"if i2c probe 0x38; then " \
++				"if i2c probe 0x4a; then " \
+ 					"setenv fdt_file imx6q-var-som-cap.dtb; " \
+ 				"else " \
+ 					"setenv fdt_file imx6q-var-som-res.dtb; " \
+@@ -317,7 +332,7 @@
+ 			"fi; " \
+ 			"if test $board_name = MX6CUSTOM && test $board_rev = MX6DL && test $board_som = SOM-SOLO; then " \
+ 				"i2c dev 2; " \
+-				"if i2c probe 0x38; then " \
++				"if i2c probe 0x4a; then " \
+ 					"setenv fdt_file imx6dl-var-som-solo-cap.dtb; " \
+ 				"else " \
+ 					"setenv fdt_file imx6dl-var-som-solo-res.dtb; " \
+@@ -325,7 +340,7 @@
+ 			"fi; " \
+ 			"if test $board_name = MX6CUSTOM && test $board_rev = MX6DL && test $board_som = SOM-MX6; then " \
+ 				"i2c dev 2; " \
+-				"if i2c probe 0x38; then " \
++				"if i2c probe 0x4a; then " \
+ 					"setenv fdt_file imx6dl-var-som-cap.dtb; " \
+ 				"else " \
+ 					"setenv fdt_file imx6dl-var-som-res.dtb; " \
+@@ -384,7 +399,8 @@
+ #define CONFIG_ENV_IS_IN_NAND
+ /* NAND boot config */
+ #define CONFIG_SYS_NAND_U_BOOT_START	CONFIG_SYS_TEXT_BASE
+-#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x200000
++#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x500000		//u-boot
++#define CONFIG_SYS_NAND_GU_BOOT_OFFS	0x200000		//Golden u-boot
+ #else
+ #define CONFIG_ENV_IS_IN_MMC
+ #endif
+@@ -409,15 +425,23 @@
+ /*
+  * Partitions layout for NAND is:
+  *     mtd0: 2M       (spl) First boot loader
+- *     mtd1: 2M       (u-boot, dtb)
+- *     mtd2: 8M       (kernel)
+- *     mtd3: left     (rootfs)
++ *     mtd1: 2M       (Golden u-boot)
++ *     mtd2: 1M	      (u-boot Env)
++ *     mtd3: 2M	      (u-boot)
++ *     mtd4: 1M	      (dtb)
++ *     mtd5: 8M       (kernel)
++ *     mtd6: 32M      (miniRfs)
++ *     mtd7: left     (rootfs)
+  */
+ /* Default mtd partition table */
+ #define MTDPARTS_DEFAULT	"mtdparts=nandflash-0:"\
+ 					"2m(spl),"\
++					"2m(Gu-boot),"\
++					"1m(Env),"\
+ 					"2m(u-boot),"\
++					"1m(dtb),"\
+ 					"8m(kernel),"\
++					"32m(miniRfs),"\
+ 					"-(rootfs)"	/* ubifs */
+ 
+ /* NAND stuff */
+@@ -437,7 +461,7 @@
+ #define CONFIG_ENV_OFFSET		(0x3E0000)
+ #elif defined(CONFIG_ENV_IS_IN_NAND)
+ #undef CONFIG_ENV_SIZE
+-#define CONFIG_ENV_OFFSET		(0x180000)
++#define CONFIG_ENV_OFFSET		(0x400000)
+ #define CONFIG_ENV_SECT_SIZE		(128 << 10)
+ #define CONFIG_ENV_SIZE			CONFIG_ENV_SECT_SIZE
+ #endif
+@@ -449,7 +473,7 @@
+ #endif
+ 
+ /* Framebuffer */
+-#define CONFIG_VIDEO
++/* #define CONFIG_VIDEO */
+ #ifdef CONFIG_VIDEO
+ #define CONFIG_VIDEO_IPUV3
+ #define CONFIG_CFB_CONSOLE
+@@ -542,6 +566,16 @@
+ #endif
+ #endif /* CONFIG_CMD_USB */
+ 
++#define CONFIG_IMX_WATCHDOG
++#define CONFIG_HW_WATCHDOG
++
++#define CONFIG_BOOTCOUNT_LIMIT
++#define CONFIG_SYS_BOOTLIMIT            "3" 
++#define CONFIG_SYS_BOOTCOUNT            "0" 
++#define UNIT_ID                         "0"             /* 16 bit unsigned value */
++#define FAMILY_ID                       "0"             /* 8 bit unsigned value */
++#define BUILD_ID                        "00.00"             /* 16 bit unsigned value */
++
+ #if defined(CONFIG_ANDROID_SUPPORT)
+ #include "mx6var_som_android.h"
+ #endif
+diff --git a/include/version.h b/include/version.h
+index d6c7cf2..26c6bf8 100644
+--- a/include/version.h
++++ b/include/version.h
+@@ -18,8 +18,8 @@
+ #define CONFIG_IDENT_STRING ""
+ #endif
+ 
+-#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
+-	U_BOOT_TIME ")" CONFIG_IDENT_STRING
++#define U_BOOT_VERSION_STRING U_BOOT_VERSION
++#define U_BOOT_CUSTOM_VERSION	"1.6.1"
+ 
+ #ifndef __ASSEMBLY__
+ extern const char version_string[];
+diff --git a/lib/time.c b/lib/time.c
+index 477440d..3188ad0 100644
+--- a/lib/time.c
++++ b/lib/time.c
+@@ -99,7 +99,9 @@ void udelay(unsigned long usec)
+ 	ulong kv;
+ 
+ 	do {
++#ifndef CONFIG_SPL_BUILD
+ 		WATCHDOG_RESET();
++#endif
+ 		kv = usec > CONFIG_WD_PERIOD ? CONFIG_WD_PERIOD : usec;
+ 		__udelay (kv);
+ 		usec -= kv;
+-- 
+2.7.4
+

@@ -1,0 +1,66 @@
+From ab01aac7e306663588d0be80847f748b7fbb5bbe Mon Sep 17 00:00:00 2001
+From: vasu <vasu1188@gmail.com>
+Date: Thu, 8 Mar 2018 20:35:07 +0530
+Subject: [PATCH] wifi driver config enabled
+
+---
+ arch/arm/configs/imx_v7_var_defconfig | 27 ++++++++++++++++++++++-----
+ 1 file changed, 22 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/configs/imx_v7_var_defconfig b/arch/arm/configs/imx_v7_var_defconfig
+index dded775..6f314bc 100644
+--- a/arch/arm/configs/imx_v7_var_defconfig
++++ b/arch/arm/configs/imx_v7_var_defconfig
+@@ -932,15 +932,17 @@ CONFIG_NET_FLOW_LIMIT=y
+ # CONFIG_BT is not set
+ # CONFIG_AF_RXRPC is not set
+ CONFIG_WIRELESS=y
++CONFIG_WEXT_CORE=y
++CONFIG_WEXT_PROC=y
+ CONFIG_CFG80211=m
+ CONFIG_NL80211_TESTMODE=y
+ # CONFIG_CFG80211_DEVELOPER_WARNINGS is not set
+ # CONFIG_CFG80211_REG_DEBUG is not set
+ # CONFIG_CFG80211_CERTIFICATION_ONUS is not set
+-CONFIG_CFG80211_DEFAULT_PS=y
++# CONFIG_CFG80211_DEFAULT_PS is not set
+ # CONFIG_CFG80211_DEBUGFS is not set
+ # CONFIG_CFG80211_INTERNAL_REGDB is not set
+-# CONFIG_CFG80211_WEXT is not set
++CONFIG_CFG80211_WEXT=y
+ # CONFIG_LIB80211 is not set
+ CONFIG_MAC80211=m
+ CONFIG_MAC80211_HAS_RC=y
+@@ -949,11 +951,26 @@ CONFIG_MAC80211_RC_MINSTREL_HT=y
+ # CONFIG_MAC80211_RC_MINSTREL_VHT is not set
+ CONFIG_MAC80211_RC_DEFAULT_MINSTREL=y
+ CONFIG_MAC80211_RC_DEFAULT="minstrel_ht"
+-# CONFIG_MAC80211_MESH is not set
++CONFIG_MAC80211_MESH=y
+ # CONFIG_MAC80211_LEDS is not set
+ # CONFIG_MAC80211_DEBUGFS is not set
+-# CONFIG_MAC80211_MESSAGE_TRACING is not set
+-# CONFIG_MAC80211_DEBUG_MENU is not set
++CONFIG_MAC80211_MESSAGE_TRACING=y
++CONFIG_MAC80211_DEBUG_MENU=y
++CONFIG_MAC80211_NOINLINE=y
++# CONFIG_MAC80211_VERBOSE_DEBUG is not set
++# CONFIG_MAC80211_MLME_DEBUG is not set
++# CONFIG_MAC80211_STA_DEBUG is not set
++# CONFIG_MAC80211_HT_DEBUG is not set
++# CONFIG_MAC80211_OCB_DEBUG is not set
++# CONFIG_MAC80211_IBSS_DEBUG is not set
++# CONFIG_MAC80211_PS_DEBUG is not set
++# CONFIG_MAC80211_MPL_DEBUG is not set
++# CONFIG_MAC80211_MPATH_DEBUG is not set
++# CONFIG_MAC80211_MHWMP_DEBUG is not set
++# CONFIG_MAC80211_MESH_SYNC_DEBUG is not set
++# CONFIG_MAC80211_MESH_CSA_DEBUG is not set
++# CONFIG_MAC80211_MESH_PS_DEBUG is not set
++# CONFIG_MAC80211_TDLS_DEBUG is not set
+ # CONFIG_WIMAX is not set
+ # CONFIG_RFKILL is not set
+ # CONFIG_RFKILL_REGULATOR is not set
+-- 
+1.9.1
+

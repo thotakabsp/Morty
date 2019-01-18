@@ -1,0 +1,64 @@
+#!/bin/sh
+echo "<<<<<<<<<<<<<<<< RFS update Script START >>>>>>>>>>> "
+export TMPDIR=/mnt/.psplash
+if [ ! -d ${TMPDIR} ];
+then 
+	mkdir -p /mnt/.psplash
+fi
+mount tmpfs -t tmpfs $TMPDIR -o,size=40k
+/usr/bin/psplash &
+file="/run/media/mmcblk0p1/rootfs"
+if [ -f "$file" ]
+then
+        echo "$file found."
+	echo "MSG Firmware image Found. Preparing for Install" > /mnt/.psplash/psplash_fifo
+	sleep 1
+        flash_erase /dev/mtd7 0 0 & 
+	i=1                  
+	while [ $i -lt 10 ];                                                           
+	do                                                     
+        	echo "PROGRESS $i" > /mnt/.psplash/psplash_fifo
+        	i=$((i+1))             
+        	j=1                    
+        	while [ $j -lt 5000 ]; 
+        	do                
+               		j=$((j+1))
+        	done                            
+	done    
+	pid=`pidof flash_erase`
+	while [ $pid > 0 ];
+	do 
+		pid=`pidof flash_erase`
+	done	
+        ubiformat /dev/mtd7 -f $file -s 2048 -O 2048 &
+	echo "MSG Install in Progress. Do not Restart the Device." > /mnt/.psplash/psplash_fifo
+	i=10                  
+	while [ $i -lt 99 ];                                                           
+	do                                                     
+        	echo "PROGRESS $i" > /mnt/.psplash/psplash_fifo
+        	i=$((i+1))             
+        	j=1                    
+        	while [ $j -lt 5000 ]; 
+        	do                
+               		j=$((j+1))
+        	done                            
+	done                                    
+        pid=`pidof ubiformat`
+        while [ $pid > 0 ];
+        do      
+                pid=`pidof ubiformat`
+        done
+        echo "PROGRESS 100" > /mnt/.psplash/psplash_fifo
+	echo "MSG Install Completed. Preparing for Restart" > /mnt/.psplash/psplash_fifo
+else                           
+        echo "$file not found."                           
+	echo "MSG Firmware image Not Found, Preparing for restart." > /mnt/.psplash/psplash_fifo
+fi                                                        
+fw_setenv bootcount 0
+fw_setenv needupdate 0
+sync
+sleep 2
+echo "QUIT" > /mnt/.psplash/psplash_fifo
+reboot 
+echo "<<<<<<<<<<<<<<<< RFS update Script END >>>>>>>>>>> "
+

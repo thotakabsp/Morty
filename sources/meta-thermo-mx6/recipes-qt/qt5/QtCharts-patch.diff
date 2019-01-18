@@ -1,0 +1,74 @@
+From ec9fb4c0aa0f026e7f1fdf1f39b1688ad61a4b84 Mon Sep 17 00:00:00 2001
+From: Jake Petroules <jake.petroules@qt.io>
+Date: Fri, 22 Jul 2016 16:25:56 -0700
+Subject: [PATCH] Allow null values on the Y axis in QLineSeries
+
+This allows gaps to be created in line charts, which is important for
+some users.
+
+Change-Id: I5312aacff78f65569b38f3e6a062ac9d63d90394
+---
+ src/charts/xychart/qxyseries.cpp | 14 +++++++++++---
+ src/charts/xychart/qxyseries_p.h |  1 +
+ 2 files changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/src/charts/xychart/qxyseries.cpp b/src/charts/xychart/qxyseries.cpp
+index f3a253c..9cd03dc 100644
+--- a/src/charts/xychart/qxyseries.cpp
++++ b/src/charts/xychart/qxyseries.cpp
+@@ -490,7 +490,7 @@ void QXYSeries::append(const QPointF &point)
+ {
+     Q_D(QXYSeries);
+ 
+-    if (isValidValue(point)) {
++    if (d->isValidValue(point)) {
+         d->m_points << point;
+         emit pointAdded(d->m_points.count() - 1);
+     }
+@@ -544,7 +544,7 @@ void QXYSeries::replace(int index, qreal newX, qreal newY)
+ void QXYSeries::replace(int index, const QPointF &newPoint)
+ {
+     Q_D(QXYSeries);
+-    if (isValidValue(newPoint)) {
++    if (d->isValidValue(newPoint)) {
+         d->m_points[index] = newPoint;
+         emit pointReplaced(index);
+     }
+@@ -632,7 +632,7 @@ void QXYSeries::removePoints(int index, int count)
+ void QXYSeries::insert(int index, const QPointF &point)
+ {
+     Q_D(QXYSeries);
+-    if (isValidValue(point)) {
++    if (d->isValidValue(point)) {
+         index = qMax(0, qMin(index, d->m_points.size()));
+         d->m_points.insert(index, point);
+         emit pointAdded(index);
+@@ -985,6 +985,14 @@ void QXYSeriesPrivate::drawSeriesPointLabels(QPainter *painter, const QVector<QP
+     }
+ }
+ 
++bool QXYSeriesPrivate::isValidValue(const QPointF &point) const
++{
++    Q_Q(const QXYSeries);
++    if (q->type() == QAbstractSeries::SeriesTypeLine)
++        return ::isValidValue(point.x());
++    return ::isValidValue(point);
++}
++
+ #include "moc_qxyseries.cpp"
+ #include "moc_qxyseries_p.cpp"
+ 
+diff --git a/src/charts/xychart/qxyseries_p.h b/src/charts/xychart/qxyseries_p.h
+index 2579d92..de5726f 100644
+--- a/src/charts/xychart/qxyseries_p.h
++++ b/src/charts/xychart/qxyseries_p.h
+@@ -65,6 +65,7 @@ public:
+ 
+     void drawSeriesPointLabels(QPainter *painter, const QVector<QPointF> &points,
+                                const int offset = 0);
++    bool isValidValue(const QPointF &point) const;
+ 
+ Q_SIGNALS:
+     void updated();
+-- 
+2.8.1

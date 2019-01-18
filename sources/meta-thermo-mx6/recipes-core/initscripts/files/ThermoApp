@@ -1,0 +1,423 @@
+#!/bin/sh -x
+#
+# /etc/init.d/ThermoApp
+# description: ThermoApp application
+#
+# processname: Variscite
+export TERM=linux
+setterm -blank 0 > /dev/tty0
+
+setprogenv(){
+
+for pin in 144 146 161 164
+do
+if [ ! -d "/sys/class/gpio/gpio$pin" ];
+then
+echo $pin > /sys/class/gpio/export
+fi
+done
+#echo out > /sys/class/gpio/gpio43/direction
+echo out > /sys/class/gpio/gpio144/direction
+echo out > /sys/class/gpio/gpio161/direction
+echo out > /sys/class/gpio/gpio164/direction
+echo 1 > /sys/class/gpio/gpio161/value
+
+#Set 3G module role as host                                 
+if [ -d "/sys/kernel/debug/ci_hdrc.0" ];
+then
+echo host > /sys/kernel/debug/ci_hdrc.0/role                
+fi
+                                                            
+# Reset the gsm pin to detect the 3G module                 
+echo 1 > /sys/class/leds/gsminit/brightness   
+     
+
+                                                            
+# export the input config             
+export TSLIB_TSDEVICE=/dev/input/event1
+export QT_QPA_EVDEV_TOUCHSCREEN_PARAMETERS=/dev/input/event1
+if [ ! -f "/dev/input/event1" ];                            
+then                                                        
+export TSLIB_TSDEVICE=/dev/input/event0                     
+export QT_QPA_EVDEV_TOUCHSCREEN_PARAMETERS=/dev/input/event0
+fi                                       
+
+echo -e '\033[9;0]' > /dev/tty1
+echo 0 > /sys/class/graphics/fbcon/cursor_blink
+echo 0 > /sys/class/graphics/fb0/blank
+export TSLIB_CALIBFILE=/etc/pointercal
+export TSLIB_CONFFILE=/etc/ts.conf
+export QT_QPA_PLATFORM=linuxfb:fb=/dev/fb0:size=1024x600:mmSize=1024x600
+export QT_QPA_EGLFS_WIDTH=1024
+export QT_QPA_EGLFS_HEIGHT=600
+export TSLIB_TSEVENTTYPE='INPUT'
+
+}
+
+checkFirstBoot(){
+
+fsboot=`fw_printenv -n firstboot`                                       
+if [ $fsboot -eq 1 ];                       
+then                                                                    
+        if [ -d "/run/media/mmcblk0p1" ];                               
+        then        
+		systemctl stop systemd-udev-trigger.service                                              
+                umount -f /run/media/mmcblk0p1                          
+        fi                                                              
+	clear > /dev/tty0
+        #echo "********** Preparing the DATA partition for first time use ******************"  > /dev/tty0 
+        dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=32               
+fdisk /dev/mmcblk0 <<EOF
+n
+p
+1
+
+
+w
+EOF
+        sleep 2                                                      
+        mkfs.ext4 /dev/mmcblk0p1                                     
+        sleep 2                                                      
+#        /etc/init.d/udev restart   
+
+systemctl restart systemd-udev-trigger.service
+sleep 2                            
+echo done > /run/media/mmcblk0p1/.formatted
+sync
+	clear > /dev/tty0
+	fw_setenv firstboot 0 
+fi
+	
+}
+
+dispMesg()
+{
+clear > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "		      << Updating $1 >>" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+echo "                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" > /dev/tty0
+}
+
+checkRfs()
+{
+	#	Check rootfs is from minirfs
+	if [ -f /etc/.minirfs ];
+	then
+		/usr/bin/wd_keepalive &
+	fi
+
+	#	Check rootfs is from recovery
+	if [ -f /etc/.recovery ];
+	then
+		/usr/bin/wd_keepalive &
+	fi
+}
+
+checkFwupdate()
+{
+rebootNeeded=0
+need=`fw_printenv -n updateneeded`
+if [ $need -eq 1 ];
+then
+	fbv -f /home/root/UI_Recovery_03.png
+	sleep 1
+	fbv -f /home/root/UI_Recovery_03.png
+	echo "<<<< Checking for RFS updates >>>>"
+        file=`ls /run/media/mmcblk0p1/TFS_FW/ | grep RFS`
+	if [ "$file" ]; then
+        if [ -f /run/media/mmcblk0p1/TFS_FW/$file ];
+        then
+	#	dispMesg " Root File System "
+		flash_erase /dev/mtd7 0 0
+		ubiformat /dev/mtd7 -f /run/media/mmcblk0p1/TFS_FW/$file  
+		rebootNeeded=1
+		sleep 1
+	fi
+	fi
+	echo "<<<< Checking for KERNEL updates >>>>"
+        file=`ls /run/media/mmcblk0p1/TFS_FW/ | grep KERNEL`
+	if [ "$file" ]; then
+        if [ -f /run/media/mmcblk0p1/TFS_FW/$file ];
+        then
+	#	dispMesg " Linux Kernel "
+		flash_erase /dev/mtd5 0 0
+		nandwrite -p /dev/mtd5 /run/media/mmcblk0p1/TFS_FW/$file
+		rebootNeeded=1
+		sleep 1
+	fi
+	fi
+	echo "<<<< Checking for DTB updates >>>>"
+        file=`ls /run/media/mmcblk0p1/TFS_FW/ | grep DTB`
+	if [ "$file" ]; then
+        if [ -f /run/media/mmcblk0p1/TFS_FW/$file ];
+        then
+	#	dispMesg " Linux Kernel dtb "
+		flash_erase /dev/mtd4 0 0
+		nandwrite -p /dev/mtd4 /run/media/mmcblk0p1/TFS_FW/$file
+		rebootNeeded=1
+		sleep 1
+	fi
+	fi
+	echo "<<<< Checking for bootloader updates >>>>"
+        file=`ls /run/media/mmcblk0p1/TFS_FW/ | grep UBFW`
+	if [ "$file" ]; then
+        if [ -f /run/media/mmcblk0p1/TFS_FW/$file ];
+        then
+	#	dispMesg " u-boot "
+		flash_erase /dev/mtd3 0 0
+		nandwrite -p /dev/mtd3 /run/media/mmcblk0p1/TFS_FW/$file
+		rebootNeeded=1
+		sleep 1
+	fi
+	fi
+
+	sync
+	sync
+	if [ $rebootNeeded -eq 1 ];
+	then
+		fw_setenv updateneeded 0
+		sync
+		reboot
+	fi
+fi
+}
+
+checkUpdate(){
+echo "<<<<<<<<<<<<<<checking for application update >>>>>>>>>>>"	
+if [ -d "/run/media/mmcblk0p1/TFS_FW" ];
+then
+	file=`ls /run/media/mmcblk0p1/TFS_FW/ | grep APP`
+	if [ "$file" ];
+	then 
+	if [ -f /run/media/mmcblk0p1/TFS_FW/$file ];
+	then
+		rm -rf /home/root/QML
+		rm -rf /home/root/Variscite
+		tar -xvf /run/media/mmcblk0p1/TFS_FW/$file -C /home/root
+		chmod +x /home/root/Variscite 
+		sync
+	fi
+	fi
+fi
+}
+do_umount()
+{
+	umount -f /run/media/mmcblk0p1
+	if [ "$?" -eq "1" ]; 
+	then
+		retval=1
+	else
+		retval=0
+	fi
+	
+	return "$retval"
+}
+do_dd()
+{
+	dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=32
+	if [ "$?" -eq "1" ]; 
+	then
+		retval=1
+	else
+		retval=0
+	fi
+	
+	return "$retval"		
+}
+checkForRecovery()
+{
+if [ ! -f /home/root/Variscite ]
+then
+	if [ ! -d /home/root/QML ]
+	then
+		if [ -d "/run/media/mmcblk0p1" ]
+        	then
+			systemctl stop systemd-udev-trigger.service 
+			sleep 1
+			do_umount
+			retval=$?
+			if [ "$retval" -eq "0" ]
+			then
+			        clear > /dev/tty0
+				fbv -f /home/root/recovery/UI_Recovery_01.png
+				sleep 1
+			        do_dd
+				retval=$?
+				if [ "$retval" -eq "0" ]
+				then
+					echo "1=>SUCCESS: Erasing partition table in flash"
+fdisk /dev/mmcblk0 <<EOF
+d
+n
+p
+1
+
+
+w
+EOF
+				else
+					echo "1=>FAILED: Erasing partition table in flash"
+					reboot
+				fi
+			else
+  				sleep 1
+				do_umount
+				retval=$?
+				if [ "$retval" -eq"0" ]
+				then
+				        clear > /dev/tty0
+					fbv -f /home/root/recovery/UI_Recovery_01.png
+					sleep 1
+			        	do_dd
+					retval=$?
+					if [ "$retval" -eq "0" ]
+					then
+						echo "2=>SUCCESS: Erasing partition table in flash"
+fdisk /dev/mmcblk0 <<EOF
+d
+n
+p
+1
+
+
+w
+EOF
+					else
+						echo "2=>FAILED: Erasing partition table in flash"
+						reboot
+					fi
+				else
+					echo "2.1=>FAILED: Unable to unmount the paritition"
+					reboot	
+				fi
+			fi
+        	else
+fdisk /dev/mmcblk0 <<EOF
+n
+p
+1
+
+
+w
+EOF
+		fi
+        sleep 2
+        mkfs.ext4 /dev/mmcblk0p1
+        sleep 2
+#        /etc/init.d/udev restart
+systemctl restart systemd-udev-trigger.service
+sleep 2 
+echo done > /run/media/mmcblk0p1/.formatted
+sync
+echo "******** Erasing  NAND  *****************"
+        clear > /dev/tty0
+#echo "******** Erasing  NAND  *****************" > /dev/tty0
+fbv -f /home/root/recovery/UI_Recovery_02.png
+flash_erase /dev/mtd0 0 0
+flash_erase /dev/mtd1 0 0
+flash_erase /dev/mtd2 0 0
+flash_erase /dev/mtd3 0 0
+flash_erase /dev/mtd4 0 0
+flash_erase /dev/mtd5 0 0
+flash_erase /dev/mtd6 0 0
+flash_erase /dev/mtd7 0 0
+sleep 1
+sync
+sync
+cores=`grep -c ^processor /proc/cpuinfo`
+echo "******** Writing the Software to NAND *****************"
+        clear > /dev/tty0
+#echo "******** Writing the Software to NAND *****************" > /dev/tty0
+fbv -f /home/root/recovery/UI_Recovery_03.png
+
+kobs-ng init -x /home/root/recovery/SPL  --search_exponent=1 -v
+nandwrite -p /dev/mtd1 /home/root/recovery/u-boot_gb.img
+nandwrite -p /dev/mtd3 /home/root/recovery/u-boot.img
+if [ $cores -eq 2 ];
+then
+nandwrite -p /dev/mtd4 /home/root/recovery/uImage-imx6dl-var-som-cap.dtb
+else
+nandwrite -p /dev/mtd4 /home/root/recovery/uImage-imx6q-var-som-cap.dtb
+fi
+nandwrite -p /dev/mtd5 /home/root/recovery/uImage
+nandwrite -p /dev/mtd6 /home/root/recovery/tfs-image-minirfs-var-som-mx6.cpio.gz.u-boot
+ubiformat /dev/mtd7 -f /home/root/recovery/tfs-image-rootfs-var-som-mx6.ubi 
+sync
+
+clear > /dev/tty0
+#echo " ******** Please remove Boot Jumper and reset to Boot from NAND ***********" > /dev/tty0
+fbv -f /home/root/recovery/UI_Recovery_04.png
+
+sync
+exit 0
+	fi
+fi
+
+}
+
+RETVAL=0        
+prog="Variscite"                  
+                                    
+start() {                         
+	checkRfs
+	checkFwupdate
+	checkForRecovery
+        echo -n $"Starting $prog:"      
+        cd /home/root                   
+	setprogenv
+	#checkFirstBoot
+	checkUpdate
+        export PATH=$PATH:./                             
+        $prog -platform eglfs &                 
+        RETVAL=$?                                        
+        [ "$RETVAL" = 0 ] && touch /var/lock/subsys/$prog
+        echo                           
+	fw_setenv bootcount 0
+}                                     
+                                  
+stop() {                                                                
+        echo -n $"Stopping $prog:"                       
+        killall -TERM $prog                              
+        RETVAL=$?                                        
+        [ "$RETVAL" = 0 ] && rm -f /var/lock/subsys/$prog   
+        echo
+}            
+
+case "$1" in                                                            
+        start)                                                          
+                start                          
+		sleep 5
+                ;;                                                      
+        stop)                                                           
+                stop                                                    
+                ;;                                          
+        restart)                                                        
+                stop                                                    
+                sleep 3                                                 
+                start                                                   
+                ;;                                                      
+        status)                                                         
+                status $prog                                            
+                RETVAL=$?                                               
+                ;;                                                      
+        *)                                                              
+                echo $"Usage: $0 {start|stop|restart|status}"           
+                RETVAL=1                                     
+esac                                                         
+
+cp /home/root/Scripts/asound.state /var/lib/alsa/asound.state
+cp /home/root/Scripts/asound.conf /etc/asound.conf
+echo 32768 > /proc/sys/vm/min_free_kbytes
+echo 1 > /proc/sys/vm/drop_caches
+sync
+exit $RETVAL                 

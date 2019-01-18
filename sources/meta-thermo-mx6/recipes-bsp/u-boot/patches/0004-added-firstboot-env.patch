@@ -1,0 +1,24 @@
+From 648f23e0172beca4e7222279cf14294f46911224 Mon Sep 17 00:00:00 2001
+From: vasu <vasu1188@gmail.com>
+Date: Mon, 7 May 2018 16:24:53 +0530
+Subject: [PATCH] added firstboot env
+
+---
+ include/configs/mx6var_som.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/configs/mx6var_som.h b/include/configs/mx6var_som.h
+index 254be7f..fc3ff23 100644
+--- a/include/configs/mx6var_som.h
++++ b/include/configs/mx6var_som.h
+@@ -158,6 +158,7 @@
+ 	"uimage=uImage\0" \
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
++	"firstboot=1\0" \
+ 	"mmcdev=0\0" \
+ 	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
+ 	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
+-- 
+1.9.1
+

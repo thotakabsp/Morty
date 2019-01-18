@@ -1,0 +1,9 @@
+[Unit]
+Description = first services 
+Before = avahi-daemon.service
+
+[Service]
+ExecStart = /home/root/Scripts/firstservice.sh
+
+[Install]
+WantedBy = multi-user.target

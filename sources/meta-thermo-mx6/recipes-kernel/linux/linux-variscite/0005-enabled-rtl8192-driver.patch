@@ -1,0 +1,47 @@
+From 07c09041f7f4dbe470bafa5b9489bef74d1ab86d Mon Sep 17 00:00:00 2001
+From: vasu <vasu1188@gmail.com>
+Date: Wed, 7 Mar 2018 21:49:06 +0530
+Subject: [PATCH] enabled rtl8192 driver
+
+---
+ arch/arm/configs/imx_v7_var_defconfig | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/configs/imx_v7_var_defconfig b/arch/arm/configs/imx_v7_var_defconfig
+index 8b57434..dded775 100644
+--- a/arch/arm/configs/imx_v7_var_defconfig
++++ b/arch/arm/configs/imx_v7_var_defconfig
+@@ -933,7 +933,7 @@ CONFIG_NET_FLOW_LIMIT=y
+ # CONFIG_AF_RXRPC is not set
+ CONFIG_WIRELESS=y
+ CONFIG_CFG80211=m
+-# CONFIG_NL80211_TESTMODE is not set
++CONFIG_NL80211_TESTMODE=y
+ # CONFIG_CFG80211_DEVELOPER_WARNINGS is not set
+ # CONFIG_CFG80211_REG_DEBUG is not set
+ # CONFIG_CFG80211_CERTIFICATION_ONUS is not set
+@@ -1494,7 +1494,20 @@ CONFIG_RT2X00_LIB_FIRMWARE=y
+ CONFIG_RT2X00_LIB_CRYPTO=y
+ CONFIG_RT2X00_LIB_LEDS=y
+ # CONFIG_RT2X00_DEBUG is not set
+-# CONFIG_RTL_CARDS is not set
++CONFIG_RTL_CARDS=m
++# CONFIG_RTL8192CE is not set
++# CONFIG_RTL8192SE is not set
++# CONFIG_RTL8192DE is not set
++# CONFIG_RTL8723AE is not set
++# CONFIG_RTL8723BE is not set
++# CONFIG_RTL8188EE is not set
++# CONFIG_RTL8192EE is not set
++# CONFIG_RTL8821AE is not set
++CONFIG_RTL8192CU=m
++CONFIG_RTLWIFI=m
++CONFIG_RTLWIFI_USB=m
++CONFIG_RTLWIFI_DEBUG=y
++CONFIG_RTL8192C_COMMON=m
+ # CONFIG_WL_TI is not set
+ # CONFIG_ZD1211RW is not set
+ # CONFIG_MWIFIEX is not set
+-- 
+1.9.1
+

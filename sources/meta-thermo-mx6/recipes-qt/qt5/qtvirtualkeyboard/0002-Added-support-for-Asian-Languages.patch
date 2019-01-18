@@ -1,0 +1,2194 @@
+From 59284a750faef408444c1c12b51ef92438be60c3 Mon Sep 17 00:00:00 2001
+From: techm <techm@techmahindra.com>
+Date: Wed, 26 Jul 2017 15:09:26 +0530
+Subject: [PATCH 2/2] Added support for Asian Languages
+
+---
+ src/virtualkeyboard/content/layouts/ja_JP/main.qml |  52 ++--
+ .../content/layouts/ja_JP/symbols.qml              | 293 ++++++--------------
+ src/virtualkeyboard/content/layouts/ko_KR/main.qml | 114 ++++----
+ .../content/layouts/ko_KR/symbols.qml              | 291 ++++----------------
+ src/virtualkeyboard/content/layouts/zh_CN/main.qml |  77 +++---
+ .../content/layouts/zh_CN/symbols.qml              | 296 ++++++---------------
+ src/virtualkeyboard/content/layouts/zh_TW/main.qml |  65 +++--
+ .../content/layouts/zh_TW/symbols.qml              | 294 ++++++--------------
+ .../content/styles/default/style.qml               |  50 +---
+ 9 files changed, 456 insertions(+), 1076 deletions(-)
+
+diff --git a/src/virtualkeyboard/content/layouts/ja_JP/main.qml b/src/virtualkeyboard/content/layouts/ja_JP/main.qml
+index 84baba9..63381cf 100644
+--- a/src/virtualkeyboard/content/layouts/ja_JP/main.qml
++++ b/src/virtualkeyboard/content/layouts/ja_JP/main.qml
+@@ -1,38 +1,30 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; JapaneseInputMethod {}', parent, "japaneseInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; JapaneseInputMethod {}', parent, "japaneseInputMethod")
+     }
+     sharedLayouts: ['symbols']
+     sourceComponent: InputContext.inputEngine.inputMode === InputEngine.FullwidthLatin ? page2 : page1
+@@ -209,9 +201,9 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-                ChangeLanguageKey {
+-                    weight: 174
+-                }
++//                ChangeLanguageKey {
++//                    weight: 174
++//                }
+                 Key {
+                     key: Qt.Key_Left
+                     displayText: "\u2190"
+@@ -247,8 +239,9 @@ KeyboardLayoutLoader {
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
++//                    text: ":-)"
++//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+@@ -403,9 +396,9 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-                ChangeLanguageKey {
+-                    weight: 174
+-                }
++//                ChangeLanguageKey {
++//                    weight: 174
++//                }
+                 Key {
+                     key: Qt.Key_Left
+                     displayText: "\u2190"
+@@ -441,8 +434,9 @@ KeyboardLayoutLoader {
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
++//                    text: ":-)"
++//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+diff --git a/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml b/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml
+index bec30ad..fd83286 100644
+--- a/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml
+@@ -1,65 +1,60 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; JapaneseInputMethod {}', parent, "japaneseInputMethod")
++            return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; JapaneseInputMethod {}', parent, "japaneseInputMethod")
+     }
+-    sharedLayouts: ['main']
+-    property int page
+-    readonly property int numPages: 3
++//    sharedLayouts: ['main']
++//    property int page
++//    readonly property int numPages: 3
++    property bool secondPage
++    onVisibleChanged: if (!visible) secondPage = false
+     property var keysPage1: [
+         "1234567890",
+-        "@#$%^&*()",
+-        "“”、=：；！？～"
+-    ]
+-    property var keysPage2: [
+-        "-+/\\|[]{}·",
+-        "<>,.:;!?~",
+-        "／\"'_§￥€£¢"
+-    ]
+-    property var keysPage3: [
+-        "（）〔〕〈〉《》【】",
+-        "→←↑↓↔■□●○",
+-        "＼『』「」★☆◆◇"
++        "!@#$%^&*?",
++        ":;<>{}/\\,.|"
+     ]
+-    sourceComponent: {
+-        switch (page) {
+-        case 2: return page3
+-        case 1: return page2
+-        default: return page1
+-        }
+-    }
++//    property var keysPage2: [
++//        "-+/\\|[]{}·",
++//        "<>,.:;!?~",
++//        "／\"'_§￥€£¢"
++//    ]
++//    property var keysPage3: [
++//        "（）〔〕〈〉《》【】",
++//        "→←↑↓↔■□●○",
++//        "＼『』「」★☆◆◇"
++//    ]
++//    sourceComponent: {
++//        switch (page) {
++//        case 2: return page3
++//        case 1: return page2
++//        default: return page1
++//        }
++//    }
++    sourceComponent: page1
+     Component {
+         id: page1
+         KeyboardLayout {
+@@ -76,7 +71,7 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 FillerKey {
+-                    weight: 56
++                    weight: 50
+                 }
+                 Repeater {
+                     model: keysPage1[1].length
+@@ -86,16 +81,14 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                 EnterKey {
+-                    weight: 283
++                    weight: 217//283
++                }
++                FillerKey {
++                    weight: 50
+                 }
+             }
+             KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
++                keyWeight: 160
+                 Repeater {
+                     model: keysPage1[2].length
+                     Key {
+@@ -103,187 +96,49 @@ KeyboardLayoutLoader {
+                         text: keysPage1[2][index]
+                     }
+                 }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
++               }
++//                Key {
++//                    displayText: (page + 1) + "/" + numPages
++//                    functionKey: true
++//                    onClicked: page = (page + 1) % numPages
++//                }
++//                Repeater {
++//                    model: keysPage1[2].length
++//                    Key {
++//                        key: keysPage1[2][index].charCodeAt(0)
++//                        text: keysPage1[2][index]
++//                    }
++//                }
++//                Key {
++//                    weight: 204
++//                    displayText: (page + 1) + "/" + numPages
++//                    functionKey: true
++//                    onClicked: page = (page + 1) % numPages
++//                }
++//            }
+             KeyboardRow {
+-                keyWeight: 154
++                keyWeight: 120
+                 SymbolModeKey {
+-                    weight: 217
++                    weight: 180
+                     displayText: "ABC"
+                 }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
++                //        TODO: Remove after verification
+                 SpaceKey {
+-                    weight: 864
+-                }
++                    weight:  1000
++                }
++//                ChangeLanguageKey {
++//                    weight: 154
++//                }
++//                SpaceKey {
++//                    weight: 864
++//                }
+                 Key {
+                     key: 0x2014
+                     text: "—"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page2
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Repeater {
+-                    model: keysPage2[0].length
+-                    Key {
+-                        key: keysPage2[0][index].charCodeAt(0)
+-                        text: keysPage2[0][index]
+-                    }
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Repeater {
+-                    model: keysPage2[1].length
+-                    Key {
+-                        key: keysPage2[1][index].charCodeAt(0)
+-                        text: keysPage2[1][index]
+-                    }
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-                Repeater {
+-                    model: keysPage2[2].length
+-                    Key {
+-                        key: keysPage2[2][index].charCodeAt(0)
+-                        text: keysPage2[2][index]
+-                    }
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "ABC"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x3002
+-                    text: "。"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page3
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Repeater {
+-                    model: keysPage3[0].length
+-                    Key {
+-                        key: keysPage3[0][index].charCodeAt(0)
+-                        text: keysPage3[0][index]
+-                    }
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Repeater {
+-                    model: keysPage3[1].length
+-                    Key {
+-                        key: keysPage3[1][index].charCodeAt(0)
+-                        text: keysPage3[1][index]
+-                    }
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-                Repeater {
+-                    model: keysPage3[2].length
+-                    Key {
+-                        key: keysPage3[2][index].charCodeAt(0)
+-                        text: keysPage3[2][index]
+-                    }
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "ABC"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x2026
+-                    text: "…"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+diff --git a/src/virtualkeyboard/content/layouts/ko_KR/main.qml b/src/virtualkeyboard/content/layouts/ko_KR/main.qml
+index 8c9e6fc..76d25a7 100644
+--- a/src/virtualkeyboard/content/layouts/ko_KR/main.qml
++++ b/src/virtualkeyboard/content/layouts/ko_KR/main.qml
+@@ -1,38 +1,30 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; HangulInputMethod {}', parent, "hangulInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; HangulInputMethod {}', parent, "hangulInputMethod")
+     }
+     sourceComponent: InputContext.shift ? page2 : page1
+     sharedLayouts: ['symbols']
+@@ -75,7 +67,7 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 FillerKey {
+-                    weight: 56
++                    weight: 50
+                 }
+                 Key {
+                     text: "\u3141"
+@@ -105,11 +97,19 @@ KeyboardLayoutLoader {
+                     text: "\u3163"
+                 }
+                 EnterKey {
+-                    weight: 283
++                    weight: 217//283
++//                    text: "Next"
++//                    uppercased: false
+                 }
++                FillerKey {
++                    weight: 50
++                }
++//                EnterKey {
++//                    weight: 283
++//                }
+             }
+             KeyboardRow {
+-                keyWeight: 156
++                keyWeight: 160
+                 ShiftKey {}
+                 Key {
+                     text: "\u314B"
+@@ -141,31 +141,35 @@ KeyboardLayoutLoader {
+                     text: "."
+                 }
+                 ShiftKey {
+-                    weight: 204
++                    weight: 264
+                 }
+             }
+             KeyboardRow {
+-                keyWeight: 154
++                keyWeight: 120
+                 SymbolModeKey {
+-                    weight: 217
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
++                    weight: 180
+                 }
++        //        TODO: Remove after verification
++//                ChangeLanguageKey {
++//                    weight: 180
++//                }
+                 SpaceKey {
+-                    weight: 864
++                    weight:  1000
+                 }
++        //        TODO: uncomment after verification
++        //        SpaceKey {
++        //            weight:  1250
++        //        }
+                 Key {
+-                    key: Qt.Key_Apostrophe
+-                    text: "'"
++                    key: Qt.Key_hyphen
++                    text: "-"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
++
+                 }
+                 HideKeyboardKey {
+-                    weight: 204
+                 }
+             }
+         }
+@@ -209,7 +213,7 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 FillerKey {
+-                    weight: 56
++                    weight: 50
+                 }
+                 Key {
+                     text: "\u3141"
+@@ -239,11 +243,19 @@ KeyboardLayoutLoader {
+                     text: "\u3163"
+                 }
+                 EnterKey {
+-                    weight: 283
++                    weight: 217//283
++//                    text: "Next"
++//                    uppercased: false
++                }
++                FillerKey {
++                    weight: 50
+                 }
++//                EnterKey {
++//                    weight: 283
++//                }
+             }
+             KeyboardRow {
+-                keyWeight: 156
++                keyWeight: 160
+                 ShiftKey {}
+                 Key {
+                     text: "\u314B"
+@@ -275,31 +287,35 @@ KeyboardLayoutLoader {
+                     text: "."
+                 }
+                 ShiftKey {
+-                    weight: 204
++                    weight: 264
+                 }
+             }
+             KeyboardRow {
+-                keyWeight: 154
++                keyWeight: 120
+                 SymbolModeKey {
+-                    weight: 217
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
++                    weight: 180
+                 }
++        //        TODO: Remove after verification
++//                ChangeLanguageKey {
++//                    weight: 180
++//                }
+                 SpaceKey {
+-                    weight: 864
++                    weight:  1000
+                 }
++        //        TODO: uncomment after verification
++        //        SpaceKey {
++        //            weight:  1250
++        //        }
+                 Key {
+-                    key: Qt.Key_Apostrophe
+-                    text: "'"
++                    key: Qt.Key_hyphen
++                    text: "-"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
++
+                 }
+                 HideKeyboardKey {
+-                    weight: 204
+                 }
+             }
+         }
+diff --git a/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml b/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml
+index 201810e..7f65acc 100644
+--- a/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml
+@@ -1,44 +1,32 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+-    function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; HangulInputMethod {}', parent, "hangulInputMethod")
+-    }
+-    sharedLayouts: ['main']
+     property bool secondPage
+     onVisibleChanged: if (!visible) secondPage = false
+-    sourceComponent: secondPage ? page2 : page1
++    sourceComponent: page1
+     Component {
+         id: page1
+         KeyboardLayout {
+@@ -88,62 +76,61 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 FillerKey {
+-                    weight: 56
++                    weight: 50
+                 }
+                 Key {
+                     key: Qt.Key_At
+-                    text: "@"
++                    text: "!"
+                 }
+                 Key {
+                     key: Qt.Key_NumberSign
+-                    text: "#"
++                    text: "@"
+                 }
+                 Key {
+                     key:  Qt.Key_Percent
+-                    text: "%"
++                    text: "#"
+                 }
+                 Key {
+                     key: Qt.Key_Ampersand
+-                    text: "&"
++                    text: "$"
+                 }
+                 Key {
+                     key: Qt.Key_Asterisk
+-                    text: "*"
++                    text: "%"
+                 }
+                 Key {
+                     key: Qt.Key_Minus
+-                    text: "-"
++                    text: "^"
+                 }
+                 Key {
+                     key: Qt.Key_Plus
+-                    text: "+"
++                    text: "&"
+                 }
+                 Key {
+                     key: Qt.Key_ParenLeft
+-                    text: "("
++                    text: "*"
+                 }
+                 Key {
+                     key: Qt.Key_ParenRight
+-                    text: ")"
++                    text: "?"
+                 }
+                 EnterKey {
+-                    weight: 283
++                    weight: 217//283
++                }
++                FillerKey {
++                    weight: 50
+                 }
+             }
+             KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: "1/2"
+-                    functionKey: true
+-                    onClicked: secondPage = !secondPage
+-                }
++                keyWeight: 160
++
+                 Key {
+-                    key: Qt.Key_Exclam
+-                    text: "!"
++                    key: Qt.Key_Colon
++                    text: ":"
+                 }
+                 Key {
+-                    key:  Qt.Key_QuoteDbl
+-                    text: '"'
++                    key:  Qt.Key_Semicolon
++                    text: ';'
+                 }
+                 Key {
+                     key: Qt.Key_Less
+@@ -155,221 +142,57 @@ KeyboardLayoutLoader {
+                 }
+                 Key {
+                     key: Qt.Key_Apostrophe
+-                    text: "'"
+-                }
+-                Key {
+-                    key: Qt.Key_Colon
+-                    text: ":"
++                    text: "{"
+                 }
+                 Key {
+-                    key: Qt.Key_Semicolon
+-                    text: ";"
++                    key: Qt.Key_Forward
++                    text: "}"
+                 }
+                 Key {
+-                    key: Qt.Key_Slash
++                    key: Qt.Key_Backslash
+                     text: "/"
+                 }
+                 Key {
+-                    key: Qt.Key_Question
+-                    text: "?"
++                    key: Qt.Key_Slash
++                    text: "\\"
+                 }
+                 Key {
+-                    weight: 204
+-                    displayText: "1/2"
+-                    functionKey: true
+-                    onClicked: secondPage = !secondPage
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "\uC54C\uD30C\uBCB3"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
++                    key: Qt.Key_Comma
++                    text: ","
+                 }
+                 Key {
+                     key: Qt.Key_Period
+                     text: "."
+-                    alternativeKeys: ".,"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page2
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Key {
+-                    key: Qt.Key_AsciiTilde
+-                    text: "~"
+                 }
+                 Key {
+-                    key: Qt.Key_Agrave
+-                    text: "`"
+-                }
+-                Key {
+-                    key: Qt.Key_Bar
++                    key: Qt.Key_Alt
+                     text: "|"
+                 }
+-                Key {
+-                    key: 0x7B
+-                    text: "·"
+-                }
+-                Key {
+-                    key: 0x221A
+-                    text: "√"
+-                }
+-                Key {
+-                    key: Qt.Key_division
+-                    text: "÷"
+-                }
+-                Key {
+-                    key: Qt.Key_multiply
+-                    text: "×"
+-                }
+-                Key {
+-                    key: Qt.Key_onehalf
+-                    text: "½"
+-                    alternativeKeys: "¼⅓½¾⅞"
+-                }
+-                Key {
+-                    key: Qt.Key_BraceLeft
+-                    text: "{"
+-                }
+-                Key {
+-                    key: Qt.Key_BraceRight
+-                    text: "}"
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Key {
+-                    key: Qt.Key_Dollar
+-                    text: "$"
+-                }
+-                Key {
+-                    key: 0x20AC
+-                    text: "€"
+-                }
+-                Key {
+-                    key: 0xC2
+-                    text: "£"
+-                }
+-                Key {
+-                    key: 0x20A9
+-                    text: "\u20A9"
+-                }
+-                Key {
+-                    key: 0xA5
+-                    text: "¥"
+-                }
+-                Key {
+-                    key: Qt.Key_Equal
+-                    text: "="
+-                }
+-                Key {
+-                    key: Qt.Key_section
+-                    text: "§"
+-                }
+-                Key {
+-                    key: Qt.Key_BracketLeft
+-                    text: "["
+-                }
+-                Key {
+-                    key: Qt.Key_BracketRight
+-                    text: "]"
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+             }
+             KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: "2/2"
+-                    functionKey: true
+-                    onClicked: secondPage = !secondPage
+-                }
+-                Key {
+-                    key: Qt.Key_Underscore
+-                    text: "_"
+-                }
+-                Key {
+-                    key: 0x2122
+-                    text: '™'
+-                }
+-                Key {
+-                    key: 0x00AE
+-                    text: '®'
+-                }
+-                Key {
+-                    key: Qt.Key_guillemotleft
+-                    text: '«'
+-                }
+-                Key {
+-                    key: Qt.Key_guillemotright
+-                    text: '»'
+-                }
+-                Key {
+-                    key: 0x201C
+-                    text: '“'
+-                }
+-                Key {
+-                    key: 0x201D
+-                    text: '”'
+-                }
+-                Key {
+-                    key: Qt.Key_Backslash
+-                    text: "\\"
+-                }
+-                Key {
+-                    key: Qt.Key_AsciiCircum
+-                    text: "^"
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: "2/2"
+-                    functionKey: true
+-                    onClicked: secondPage = !secondPage
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
++                keyWeight: 120
+                 SymbolModeKey {
+-                    weight: 217
++                    weight: 180
+                     displayText: "\uC54C\uD30C\uBCB3"
+                 }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x2026
+-                    text: "\u2026"
++                //        TODO: Remove after verification
++//                        ChangeLanguageKey {
++//                            weight: 180
++//                        }
++                        SpaceKey {
++                            weight:  1000
++                        }
++                //        TODO: uncomment after verification
++                //        SpaceKey {
++                //            weight:  1250
++                //        }
++                Key {
++                    key: Qt.Key_hyphen
++                    text: "-"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+diff --git a/src/virtualkeyboard/content/layouts/zh_CN/main.qml b/src/virtualkeyboard/content/layouts/zh_CN/main.qml
+index c8e21c8..cfebb17 100644
+--- a/src/virtualkeyboard/content/layouts/zh_CN/main.qml
++++ b/src/virtualkeyboard/content/layouts/zh_CN/main.qml
+@@ -1,39 +1,31 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayout {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; PinyinInputMethod {}', parent, "pinyinInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; PinyinInputMethod {}', parent, "pinyinInputMethod")
+     }
+     sharedLayouts: ['symbols']
+     keyWeight: 160
+@@ -82,7 +74,7 @@ KeyboardLayout {
+     }
+     KeyboardRow {
+         FillerKey {
+-            weight: 56
++            weight: 50
+         }
+         Key {
+             key: Qt.Key_A
+@@ -121,7 +113,12 @@ KeyboardLayout {
+             text: "l"
+         }
+         EnterKey {
+-            weight: 283
++            weight: 217//283
++            text: "Next"
++            uppercased: false
++        }
++        FillerKey {
++            weight: 50
+         }
+     }
+     KeyboardRow {
+@@ -161,38 +158,46 @@ KeyboardLayout {
+         }
+         Key {
+             key: Qt.Key_Comma
+-            text: "\uFF0C"
+-            alternativeKeys: "\uFF0C\uFF1B\u3001"
++            text: ","
+         }
+         Key {
+             key: Qt.Key_Period
+-            text: "\uFF0E"
+-            alternativeKeys: "\uFF0E\uFF1A\u3002"
+-        }
++            text: "."
++        }
++//        TODO: Remove after verification
++//        Key {
++//            key: Qt.Key_Comma
++//            text: "\uFF0C"
++//            alternativeKeys: "\uFF0C\uFF1B\u3001"
++//        }
++//        Key {
++//            key: Qt.Key_Period
++//            text: "\uFF0E"
++//            alternativeKeys: "\uFF0E\uFF1A\u3002"
++//        }
+         ShiftKey {
+-            weight: 204
++            weight: 264
+         }
+     }
+     KeyboardRow {
+-        keyWeight: 154
++        keyWeight: 120
+         SymbolModeKey {
+-            weight: 217
+-        }
+-        ChangeLanguageKey {
+-            weight: 154
++            weight: 180
+         }
++//        ChangeLanguageKey {
++//            weight: 180
++//        }
+         SpaceKey {
+-            weight: 864
++            weight: 1000
+         }
+         Key {
+             key: Qt.Key_Question
+             text: "？"
+-            alternativeKeys: "？！"
++//            alternativeKeys: "？！"
+         }
+         Key {
+             key: 0xE000
+-            text: ":-)"
+-            alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++            text: "_"
+         }
+         HideKeyboardKey {
+             weight: 204
+diff --git a/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml b/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml
+index 0133387..637ff06 100644
+--- a/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml
+@@ -1,65 +1,60 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; PinyinInputMethod {}', parent, "pinyinInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; PinyinInputMethod {}', parent, "pinyinInputMethod")
+     }
+-    sharedLayouts: ['main']
+-    property int page
+-    readonly property int numPages: 3
++//    sharedLayouts: ['main']
++//    property int page
++//    readonly property int numPages: 3
++    property bool secondPage
++    onVisibleChanged: if (!visible) secondPage = false
+     property var keysPage1: [
+         "1234567890",
+-        "@#$%^&*()",
+-        "“”、=：；！？～"
+-    ]
+-    property var keysPage2: [
+-        "-+/\\|[]{}·",
+-        "<>,.:;!?~",
+-        "／\"'_§￥€£¢"
+-    ]
+-    property var keysPage3: [
+-        "（）〔〕〈〉《》【】",
+-        "→←↑↓↔■□●○",
+-        "＼『』「」★☆◆◇"
++        "!@#$%^&*?",
++        ":;<>{}/\\,.|"
+     ]
+-    sourceComponent: {
+-        switch (page) {
+-        case 2: return page3
+-        case 1: return page2
+-        default: return page1
+-        }
+-    }
++//    property var keysPage2: [
++//        "-+/\\|[]{}·",
++//        "<>,.:;!?~",
++//        "／\"'_§￥€£¢"
++//    ]
++//    property var keysPage3: [
++//        "（）〔〕〈〉《》【】",
++//        "→←↑↓↔■□●○",
++//        "＼『』「」★☆◆◇"
++//    ]
++//    sourceComponent: {
++//        switch (page) {
++//        case 2: return page3
++//        case 1: return page2
++//        default: return page1
++//        }
++//    }
++    sourceComponent: page1
+     Component {
+         id: page1
+         KeyboardLayout {
+@@ -76,7 +71,7 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 FillerKey {
+-                    weight: 56
++                    weight: 50
+                 }
+                 Repeater {
+                     model: keysPage1[1].length
+@@ -86,16 +81,14 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                 EnterKey {
+-                    weight: 283
++                    weight: 217//283
++                }
++                FillerKey {
++                    weight: 50
+                 }
+             }
+             KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
++                keyWeight: 160
+                 Repeater {
+                     model: keysPage1[2].length
+                     Key {
+@@ -103,187 +96,52 @@ KeyboardLayoutLoader {
+                         text: keysPage1[2][index]
+                     }
+                 }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
++               }
++//                Key {
++//                    displayText: (page + 1) + "/" + numPages
++//                    functionKey: true
++//                    onClicked: page = (page + 1) % numPages
++//                }
++//                Repeater {
++//                    model: keysPage1[2].length
++//                    Key {
++//                        key: keysPage1[2][index].charCodeAt(0)
++//                        text: keysPage1[2][index]
++//                    }
++//                }
++//                Key {
++//                    weight: 204
++//                    displayText: (page + 1) + "/" + numPages
++//                    functionKey: true
++//                    onClicked: page = (page + 1) % numPages
++//                }
++//            }
+             KeyboardRow {
+-                keyWeight: 154
++                keyWeight: 120
+                 SymbolModeKey {
+-                    weight: 217
++                    weight: 180
+                     displayText: "ABC"
+                 }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
++                //        TODO: Remove after verification
++//                ChangeLanguageKey {
++//                    weight: 180
++//                }
+                 SpaceKey {
+-                    weight: 864
+-                }
++                    weight:  1000
++                }
++//                ChangeLanguageKey {
++//                    weight: 154
++//                }
++//                SpaceKey {
++//                    weight: 864
++//                }
+                 Key {
+                     key: 0x2014
+                     text: "—"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page2
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Repeater {
+-                    model: keysPage2[0].length
+-                    Key {
+-                        key: keysPage2[0][index].charCodeAt(0)
+-                        text: keysPage2[0][index]
+-                    }
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Repeater {
+-                    model: keysPage2[1].length
+-                    Key {
+-                        key: keysPage2[1][index].charCodeAt(0)
+-                        text: keysPage2[1][index]
+-                    }
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-                Repeater {
+-                    model: keysPage2[2].length
+-                    Key {
+-                        key: keysPage2[2][index].charCodeAt(0)
+-                        text: keysPage2[2][index]
+-                    }
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "ABC"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x3002
+-                    text: "。"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page3
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Repeater {
+-                    model: keysPage3[0].length
+-                    Key {
+-                        key: keysPage3[0][index].charCodeAt(0)
+-                        text: keysPage3[0][index]
+-                    }
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Repeater {
+-                    model: keysPage3[1].length
+-                    Key {
+-                        key: keysPage3[1][index].charCodeAt(0)
+-                        text: keysPage3[1][index]
+-                    }
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-                Repeater {
+-                    model: keysPage3[2].length
+-                    Key {
+-                        key: keysPage3[2][index].charCodeAt(0)
+-                        text: keysPage3[2][index]
+-                    }
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "ABC"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x2026
+-                    text: "…"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+diff --git a/src/virtualkeyboard/content/layouts/zh_TW/main.qml b/src/virtualkeyboard/content/layouts/zh_TW/main.qml
+index a71a27c..f03d4ee 100644
+--- a/src/virtualkeyboard/content/layouts/zh_TW/main.qml
++++ b/src/virtualkeyboard/content/layouts/zh_TW/main.qml
+@@ -1,39 +1,31 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; TCInputMethod {}', parent, "tcInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; TCInputMethod {}', parent, "tcInputMethod")
+     }
+     sharedLayouts: ['symbols']
+     sourceComponent: InputContext.inputEngine.inputMode === InputEngine.Cangjie ? pageCangjie : pageZhuyin
+@@ -194,9 +186,9 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
++//                ChangeLanguageKey {
++//                    weight: 154
++//                }
+                 ModeKey {
+                     visible: InputContext.inputEngine.inputModes.indexOf(InputEngine.Zhuyin) !== -1
+                     // Cangjie
+@@ -208,14 +200,16 @@ KeyboardLayoutLoader {
+                 }
+                 Key {
+                     key: Qt.Key_Question
+-                    text: "\uFF1F"
+-                    alternativeKeys: "\uFF1F\uFF01"
++                    text: "-"
++//                    text: "\uFF1F"
++//                    alternativeKeys: "\uFF1F\uFF01"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    smallTextVisible: false
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
++//                    text: ":-)"
++//                    smallTextVisible: false
++//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+@@ -420,9 +414,9 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
++//                ChangeLanguageKey {
++//                    weight: 154
++//                }
+                 ModeKey {
+                     visible: InputContext.inputEngine.inputModes.indexOf(InputEngine.Cangjie) !== -1
+                     // Zhuyin
+@@ -437,14 +431,15 @@ KeyboardLayoutLoader {
+                 }
+                 Key {
+                     key: Qt.Key_Question
+-                    text: "\uFF1F"
+-                    alternativeKeys: "\uFF1F\uFF01"
++                    text:"-"
++//                    text: "\uFF1F"
++//                    alternativeKeys: "\uFF1F\uFF01"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    smallTextVisible: false
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
++//                    smallTextVisible: false
++//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     id: hideKeyboardKey
+diff --git a/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml b/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml
+index 60d63e3..0b98854 100644
+--- a/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml
+@@ -1,65 +1,60 @@
+-/****************************************************************************
++/******************************************************************************
+ **
+-** Copyright (C) 2016 The Qt Company Ltd.
+-** Contact: https://www.qt.io/licensing/
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
++** This file is part of the Qt Virtual Keyboard module.
++**
++** $QT_BEGIN_LICENSE:COMM$
+ **
+-** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see https://www.qt.io/terms-conditions. For further
+-** information use the contact form at https://www.qt.io/contact-us.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3 or (at your option) any later version
+-** approved by the KDE Free Qt Foundation. The licenses are as published by
+-** the Free Software Foundation and appearing in the file LICENSE.GPL3
+-** included in the packaging of this file. Please review the following
+-** information to ensure the GNU General Public License requirements will
+-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
+ **
+ ** $QT_END_LICENSE$
+ **
+-****************************************************************************/
++******************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.VirtualKeyboard 2.1
++import QtQuick.Enterprise.VirtualKeyboard 2.0
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; TCInputMethod {}', parent, "tcInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; TCInputMethod {}', parent, "tcInputMethod")
+     }
+     sharedLayouts: ['main']
+-    property int page
+-    readonly property int numPages: 3
++//    property int page
++//    readonly property int numPages: 3
++    property bool secondPage
++    onVisibleChanged: if (!visible) secondPage = false
+     property var keysPage1: [
+         "1234567890",
+-        "@#$%^&*()",
+-        "“”、=：；！？～"
+-    ]
+-    property var keysPage2: [
+-        "-+/\\|[]{}·",
+-        "<>,.:;!?~",
+-        "／\"'_§￥€£¢"
+-    ]
+-    property var keysPage3: [
+-        "（）〔〕〈〉《》【】",
+-        "→←↑↓↔■□●○",
+-        "＼『』「」★☆◆◇"
++        "!@#$%^&*?",
++        ":;<>{}/\\,.|"
+     ]
+-    sourceComponent: {
+-        switch (page) {
+-        case 2: return page3
+-        case 1: return page2
+-        default: return page1
+-        }
+-    }
++//    property var keysPage2: [
++//        "-+/\\|[]{}·",
++//        "<>,.:;!?~",
++//        "／\"'_§￥€£¢"
++//    ]
++//    property var keysPage3: [
++//        "（）〔〕〈〉《》【】",
++//        "→←↑↓↔■□●○",
++//        "＼『』「」★☆◆◇"
++//    ]
++//    sourceComponent: {
++//        switch (page) {
++//        case 2: return page3
++//        case 1: return page2
++//        default: return page1
++//        }
++//    }
++    sourceComponent: page1
+     Component {
+         id: page1
+         KeyboardLayout {
+@@ -76,7 +71,7 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 FillerKey {
+-                    weight: 56
++                    weight: 50
+                 }
+                 Repeater {
+                     model: keysPage1[1].length
+@@ -86,16 +81,14 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                 EnterKey {
+-                    weight: 283
++                    weight: 217//283
++                }
++                FillerKey {
++                    weight: 50
+                 }
+             }
+             KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
++                keyWeight: 160
+                 Repeater {
+                     model: keysPage1[2].length
+                     Key {
+@@ -103,187 +96,52 @@ KeyboardLayoutLoader {
+                         text: keysPage1[2][index]
+                     }
+                 }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
++               }
++//                Key {
++//                    displayText: (page + 1) + "/" + numPages
++//                    functionKey: true
++//                    onClicked: page = (page + 1) % numPages
++//                }
++//                Repeater {
++//                    model: keysPage1[2].length
++//                    Key {
++//                        key: keysPage1[2][index].charCodeAt(0)
++//                        text: keysPage1[2][index]
++//                    }
++//                }
++//                Key {
++//                    weight: 204
++//                    displayText: (page + 1) + "/" + numPages
++//                    functionKey: true
++//                    onClicked: page = (page + 1) % numPages
++//                }
++//            }
+             KeyboardRow {
+-                keyWeight: 154
++                keyWeight: 120
+                 SymbolModeKey {
+-                    weight: 217
++                    weight: 180
+                     displayText: "ABC"
+                 }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
++                //        TODO: Remove after verification
++//                ChangeLanguageKey {
++//                    weight: 180
++//                }
+                 SpaceKey {
+-                    weight: 864
+-                }
++                    weight:  1000
++                }
++//                ChangeLanguageKey {
++//                    weight: 154
++//                }
++//                SpaceKey {
++//                    weight: 864
++//                }
+                 Key {
+                     key: 0x2014
+                     text: "—"
+                 }
+                 Key {
+                     key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page2
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Repeater {
+-                    model: keysPage2[0].length
+-                    Key {
+-                        key: keysPage2[0][index].charCodeAt(0)
+-                        text: keysPage2[0][index]
+-                    }
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Repeater {
+-                    model: keysPage2[1].length
+-                    Key {
+-                        key: keysPage2[1][index].charCodeAt(0)
+-                        text: keysPage2[1][index]
+-                    }
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-                Repeater {
+-                    model: keysPage2[2].length
+-                    Key {
+-                        key: keysPage2[2][index].charCodeAt(0)
+-                        text: keysPage2[2][index]
+-                    }
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "ABC"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x3002
+-                    text: "。"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+-                }
+-                HideKeyboardKey {
+-                    weight: 204
+-                }
+-            }
+-        }
+-    }
+-    Component {
+-        id: page3
+-        KeyboardLayout {
+-            keyWeight: 160
+-            KeyboardRow {
+-                Repeater {
+-                    model: keysPage3[0].length
+-                    Key {
+-                        key: keysPage3[0][index].charCodeAt(0)
+-                        text: keysPage3[0][index]
+-                    }
+-                }
+-                BackspaceKey {}
+-            }
+-            KeyboardRow {
+-                FillerKey {
+-                    weight: 56
+-                }
+-                Repeater {
+-                    model: keysPage3[1].length
+-                    Key {
+-                        key: keysPage3[1][index].charCodeAt(0)
+-                        text: keysPage3[1][index]
+-                    }
+-                }
+-                EnterKey {
+-                    weight: 283
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 156
+-                Key {
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-                Repeater {
+-                    model: keysPage3[2].length
+-                    Key {
+-                        key: keysPage3[2][index].charCodeAt(0)
+-                        text: keysPage3[2][index]
+-                    }
+-                }
+-                Key {
+-                    weight: 204
+-                    displayText: (page + 1) + "/" + numPages
+-                    functionKey: true
+-                    onClicked: page = (page + 1) % numPages
+-                }
+-            }
+-            KeyboardRow {
+-                keyWeight: 154
+-                SymbolModeKey {
+-                    weight: 217
+-                    displayText: "ABC"
+-                }
+-                ChangeLanguageKey {
+-                    weight: 154
+-                }
+-                SpaceKey {
+-                    weight: 864
+-                }
+-                Key {
+-                    key: 0x2026
+-                    text: "…"
+-                }
+-                Key {
+-                    key: 0xE000
+-                    text: ":-)"
+-                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
++                    text: "_"
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+diff --git a/src/virtualkeyboard/content/styles/default/style.qml b/src/virtualkeyboard/content/styles/default/style.qml
+index 471aa06..9736800 100644
+--- a/src/virtualkeyboard/content/styles/default/style.qml
++++ b/src/virtualkeyboard/content/styles/default/style.qml
+@@ -34,6 +34,7 @@ import QtQuick.VirtualKeyboard.Styles 2.1
+ KeyboardStyle {
+     id: currentStyle
+     readonly property bool compactSelectionList: [InputEngine.Pinyin, InputEngine.Cangjie, InputEngine.Zhuyin].indexOf(InputContext.inputEngine.inputMode) !== -1
++    readonly property bool compactSelectionListShow: [InputEngine.Pinyin, InputEngine.Cangjie, InputEngine.Zhuyin, InputEngine.Katakana, InputEngine.Hiragana].indexOf(InputContext.inputEngine.inputMode) !== -1
+     readonly property string fontFamily: "Roboto"
+     readonly property real keyBackgroundMargin: Math.round(13 * scaleHint)
+     readonly property real keyContentMargin: Math.round(45 * scaleHint)
+@@ -72,31 +73,13 @@ KeyboardStyle {
+             anchors.fill: parent
+             anchors.margins: keyBackgroundMargin
+             Text {
+-                id: keySmallText
+-                text: control.smallText
+-                visible: control.smallTextVisible
+-                color: "gray"
+-                anchors.right: parent.right
+-                anchors.top: parent.top
+-                anchors.margins: keyContentMargin / 3
+-                font {
+-                    family: fontFamily
+-                    weight: Font.Normal
+-                    pixelSize: 38 * scaleHint
+-                    capitalization: control.uppercased ? Font.AllUppercase : Font.MixedCase
+-                }
+-            }
+-            Text {
+                 id: keyText
+                 text: control.displayText
+                 color: "#2FA3EE"
+                 horizontalAlignment: Text.AlignHCenter
+                 verticalAlignment: Text.AlignVCenter
+                 anchors.fill: parent
+-                anchors.leftMargin: keyContentMargin
+-                anchors.topMargin: control.smallTextVisible ? keyContentMargin * 1.2 : keyContentMargin
+-                anchors.rightMargin: keyContentMargin
+-                anchors.bottomMargin: control.smallTextVisible ? keyContentMargin * 0.8 : keyContentMargin
++                anchors.margins: keyContentMargin
+                 font {
+                     family: fontFamily
+                     weight: Font.Normal
+@@ -218,10 +201,6 @@ KeyboardStyle {
+                     opacity: 0.80
+                 }
+                 PropertyChanges {
+-                    target: enterKeyIcon
+-                    opacity: 0.6
+-                }
+-                PropertyChanges {
+                     target: enterKeyText
+                     opacity: 0.6
+                 }
+@@ -234,10 +213,6 @@ KeyboardStyle {
+                     opacity: 0.8
+                 }
+                 PropertyChanges {
+-                    target: enterKeyIcon
+-                    opacity: 0.2
+-                }
+-                PropertyChanges {
+                     target: enterKeyText
+                     opacity: 0.05
+                 }
+@@ -511,11 +486,12 @@ KeyboardStyle {
+         width: Math.round(selectionListLabel.width + selectionListLabel.anchors.leftMargin * 2)
+         Text {
+             id: selectionListLabel
++            visible: compactSelectionListShow
+             anchors.left: parent.left
+             anchors.leftMargin: Math.round((compactSelectionList ? 50 : 140) * scaleHint)
+             anchors.verticalCenter: parent.verticalCenter
+             text: decorateText(display, wordCompletionLength)
+-            color: "#80c342"
++            color: "#2FA3EE"
+             font {
+                 family: fontFamily
+                 weight: Font.Normal
+@@ -530,10 +506,11 @@ KeyboardStyle {
+         }
+         Rectangle {
+             id: selectionListSeparator
++            visible: compactSelectionListShow
+             width: 4 * scaleHint
+             height: 36 * scaleHint
+             radius: 2
+-            color: "#35322f"
++            color: "#2FA3EE"
+             anchors.verticalCenter: parent.verticalCenter
+             anchors.right: parent.left
+         }
+@@ -542,10 +519,14 @@ KeyboardStyle {
+             when: selectionListItem.ListView.isCurrentItem
+             PropertyChanges {
+                 target: selectionListLabel
+-                color: "white"
++                color: "2FA3EE"
+             }
+         }
+     }
++    selectionListBackground: Rectangle {
++        visible: compactSelectionListShow
++        color: "#ECEEEE"
++    }
+     selectionListAdd: Transition {
+         NumberAnimation { property: "y"; from: wordCandidateView.height; duration: 200 }
+         NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200 }
+@@ -627,14 +608,9 @@ KeyboardStyle {
+             if (!available)
+                 return
+             var ctx = getContext("2d")
+-            if (parent.canvasType === "fullscreen") {
+-                ctx.lineWidth = 10
+-                ctx.strokeStyle = Qt.rgba(0, 0, 0)
+-            } else {
+-                ctx.lineWidth = 10 * scaleHint
+-                ctx.strokeStyle = Qt.rgba(0xFF, 0xFF, 0xFF)
+-            }
++            ctx.lineWidth = 10 * scaleHint
+             ctx.lineCap = "round"
++            ctx.strokeStyle = Qt.rgba(0xFF, 0xFF, 0xFF)
+             ctx.fillStyle = ctx.strokeStyle
+         }
+         autoDestroyDelay: 800
+-- 
+2.7.4
+

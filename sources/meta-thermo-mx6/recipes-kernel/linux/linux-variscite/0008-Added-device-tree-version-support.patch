@@ -1,0 +1,52 @@
+From 81c4e1155737f030f945e22872ae96eeec182de1 Mon Sep 17 00:00:00 2001
+From: vasu <vasu1188@gmail.com>
+Date: Fri, 27 Apr 2018 09:35:57 +0530
+Subject: [PATCH] Added device tree version support
+
+---
+ drivers/misc/version.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/misc/version.c b/drivers/misc/version.c
+index baba1d2..befcaa5 100644
+--- a/drivers/misc/version.c
++++ b/drivers/misc/version.c
+@@ -8,6 +8,7 @@
+  * comes with a helper C program that can be run in Linux user space to communicate with
+  * this the LKM.
+  * @see http://www.derekmolloy.ie/ for a full description and follow-up descriptions.
++ * @Modification:	Vasubabu
+  */
+ 
+ #include <linux/init.h>           // Macros used to mark up functions e.g. __init __exit
+@@ -30,7 +31,7 @@ MODULE_VERSION("0.1");            ///< A version number to inform users
+  * 1.2.0 : Disabled the ISL RTC Driver & Enabled MCP driver
+  * 1.1.0 : Kernel Base version
+  */
+-
++#define DTB_VERSION	"2.1.0"
+ #define VERSION "1.5.1"
+ #define MODEL "EWARUS01"
+ 
+@@ -48,6 +49,7 @@ static long my_ioctl(struct file *f, unsigned int cmd, unsigned long arg);
+ 
+ #define GET_MODEL _IOR('q', 1, char *)
+ #define GET_VERSION _IOR('q', 2, char *)
++#define GET_DTB_VERSION	_IOR('q', 3, char *)
+ 
+ /** @brief Devices are represented as file structure in the kernel. The file_operations structure from
+  *  /linux/fs.h lists the callback functions that you wish to associated with your file operations
+@@ -72,6 +74,10 @@ static long my_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
+                case GET_VERSION:
+                        copy_to_user((char *)arg, VERSION, strlen(VERSION));
+                        break;
++	
++		case GET_DTB_VERSION:
++			copy_to_user((char *)arg, DTB_VERSION, strlen(DTB_VERSION));
++			break;
+        }
+        return 0;
+ }
+-- 
+1.9.1
+

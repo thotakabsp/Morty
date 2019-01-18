@@ -1,0 +1,37 @@
+SUMMARY = "Add the Edimax 8192 Wi-Fi driver as an out-of-tree module"
+LICENSE = "CLOSED"
+SRC_URI = " \
+		file://rtl8192cufw.bin		\
+		file://rtl8192cufw_TMSC.bin  	\
+		file://hostapd.conf		\
+		file://hostapd-test.sh		\
+"
+#inherit module
+
+#do_compile(){
+#	cd ${WORKDIR}
+#	make KSRC=${STAGING_KERNEL_DIR} ARCH=arm CROSS_COMPILE=arm-fslc-linux-gnueabi-
+#}
+
+do_install() {
+    install -d ${D}/lib/firmware/
+    mkdir -p ${D}/lib/firmware/rtlwifi/
+    install -d $D}/lib/firmware/rtlwifi/
+    mkdir -p ${D}/home/root
+    install -d ${D}/home/root
+    install -d $D}/lib/firmware/rtlwifi/
+    install -m 0644 ${WORKDIR}/rtl8192cufw.bin ${D}/lib/firmware/rtlwifi/
+    install -m 0644 ${WORKDIR}/rtl8192cufw_TMSC.bin ${D}/lib/firmware/rtlwifi/
+    install -m 0644 ${WORKDIR}/hostapd.conf ${D}/home/root
+    install -m 0644 ${WORKDIR}/hostapd-test.sh ${D}/home/root
+    #cd ${WORKDIR}
+    #mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless/rtlwifi/8192cu/
+    #install -m 0644 ${WORKDIR}/8192cu.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless/rtlwifi/8192cu/
+}
+
+FILES_${PN} = "	\
+	/home			\	
+	/home/root		\	
+	/lib/firmware		\
+	/lib/firmware/rtlwifi	\
+	"

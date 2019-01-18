@@ -1,0 +1,24 @@
+From 259807ad1879862304a2433ded16a236493f9787 Mon Sep 17 00:00:00 2001
+From: techm <techm@techmahindra.com>
+Date: Fri, 13 Oct 2017 20:44:28 +0530
+Subject: [PATCH] fix for huawei modem
+
+---
+ plugins/udevng.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/plugins/udevng.c b/plugins/udevng.c
+index aa28bcb..b7140d6 100644
+--- a/plugins/udevng.c
++++ b/plugins/udevng.c
+@@ -314,6 +314,7 @@ static gboolean setup_huawei(struct modem_info *modem)
+ 		if (g_strcmp0(info->label, "modem") == 0 ||
+ 				g_strcmp0(info->interface, "255/1/1") == 0 ||
+ 				g_strcmp0(info->interface, "255/2/1") == 0 ||
++				g_strcmp0(info->interface, "255/2/16") == 0 ||
+ 				g_strcmp0(info->interface, "255/3/1") == 0 ||
+ 				g_strcmp0(info->interface, "255/1/49") == 0) {
+ 			mdm = info->devnode;
+-- 
+2.7.4
+

@@ -1,0 +1,981 @@
+From d7d602fc9191b7dd7dd5f5d3bc31f2bd264887cc Mon Sep 17 00:00:00 2001
+From: techm <techm@techmahindra.com>
+Date: Thu, 27 Jul 2017 11:54:43 +0530
+Subject: [PATCH 3/3] Fixed issue with enterprise keyword
+
+---
+ src/virtualkeyboard/content/layouts/ja_JP/main.qml | 40 +++++-----
+ .../content/layouts/ja_JP/symbols.qml              | 84 +++++++--------------
+ src/virtualkeyboard/content/layouts/ko_KR/main.qml | 68 +++++++----------
+ .../content/layouts/ko_KR/symbols.qml              | 50 +++++++------
+ src/virtualkeyboard/content/layouts/zh_CN/main.qml | 51 ++++++-------
+ .../content/layouts/zh_CN/symbols.qml              | 87 +++++++---------------
+ src/virtualkeyboard/content/layouts/zh_TW/main.qml | 45 +++++------
+ .../content/layouts/zh_TW/symbols.qml              | 84 ++++++---------------
+ 8 files changed, 184 insertions(+), 325 deletions(-)
+
+diff --git a/src/virtualkeyboard/content/layouts/ja_JP/main.qml b/src/virtualkeyboard/content/layouts/ja_JP/main.qml
+index 63381cf..381dba6 100644
+--- a/src/virtualkeyboard/content/layouts/ja_JP/main.qml
++++ b/src/virtualkeyboard/content/layouts/ja_JP/main.qml
+@@ -1,30 +1,38 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; JapaneseInputMethod {}', parent, "japaneseInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; JapaneseInputMethod {}', parent, "japaneseInputMethod")
+     }
+     sharedLayouts: ['symbols']
+     sourceComponent: InputContext.inputEngine.inputMode === InputEngine.FullwidthLatin ? page2 : page1
+@@ -201,9 +209,6 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 174
+-//                }
+                 Key {
+                     key: Qt.Key_Left
+                     displayText: "\u2190"
+@@ -240,8 +245,6 @@ KeyboardLayoutLoader {
+                 Key {
+                     key: 0xE000
+                     text: "_"
+-//                    text: ":-)"
+-//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+@@ -396,9 +399,6 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 174
+-//                }
+                 Key {
+                     key: Qt.Key_Left
+                     displayText: "\u2190"
+@@ -435,8 +435,6 @@ KeyboardLayoutLoader {
+                 Key {
+                     key: 0xE000
+                     text: "_"
+-//                    text: ":-)"
+-//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+diff --git a/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml b/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml
+index fd83286..f0c9b3a 100644
+--- a/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/ja_JP/symbols.qml
+@@ -1,35 +1,43 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-            return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; JapaneseInputMethod {}', parent, "japaneseInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; JapaneseInputMethod {}', parent, "japaneseInputMethod")
+     }
+-//    sharedLayouts: ['main']
+-//    property int page
+-//    readonly property int numPages: 3
++    sharedLayouts: ['main']
++    property int page
++    readonly property int numPages: 1
+     property bool secondPage
+     onVisibleChanged: if (!visible) secondPage = false
+     property var keysPage1: [
+@@ -37,23 +45,6 @@ KeyboardLayoutLoader {
+         "!@#$%^&*?",
+         ":;<>{}/\\,.|"
+     ]
+-//    property var keysPage2: [
+-//        "-+/\\|[]{}·",
+-//        "<>,.:;!?~",
+-//        "／\"'_§￥€£¢"
+-//    ]
+-//    property var keysPage3: [
+-//        "（）〔〕〈〉《》【】",
+-//        "→←↑↓↔■□●○",
+-//        "＼『』「」★☆◆◇"
+-//    ]
+-//    sourceComponent: {
+-//        switch (page) {
+-//        case 2: return page3
+-//        case 1: return page2
+-//        default: return page1
+-//        }
+-//    }
+     sourceComponent: page1
+     Component {
+         id: page1
+@@ -81,7 +72,7 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                 EnterKey {
+-                    weight: 217//283
++                    weight: 217
+                 }
+                 FillerKey {
+                     weight: 50
+@@ -97,41 +88,16 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                }
+-//                Key {
+-//                    displayText: (page + 1) + "/" + numPages
+-//                    functionKey: true
+-//                    onClicked: page = (page + 1) % numPages
+-//                }
+-//                Repeater {
+-//                    model: keysPage1[2].length
+-//                    Key {
+-//                        key: keysPage1[2][index].charCodeAt(0)
+-//                        text: keysPage1[2][index]
+-//                    }
+-//                }
+-//                Key {
+-//                    weight: 204
+-//                    displayText: (page + 1) + "/" + numPages
+-//                    functionKey: true
+-//                    onClicked: page = (page + 1) % numPages
+-//                }
+-//            }
++
+             KeyboardRow {
+                 keyWeight: 120
+                 SymbolModeKey {
+                     weight: 180
+                     displayText: "ABC"
+                 }
+-                //        TODO: Remove after verification
+                 SpaceKey {
+-                    weight:  1000
++                    weight: 1250
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 154
+-//                }
+-//                SpaceKey {
+-//                    weight: 864
+-//                }
+                 Key {
+                     key: 0x2014
+                     text: "—"
+diff --git a/src/virtualkeyboard/content/layouts/ko_KR/main.qml b/src/virtualkeyboard/content/layouts/ko_KR/main.qml
+index 76d25a7..157d8d6 100644
+--- a/src/virtualkeyboard/content/layouts/ko_KR/main.qml
++++ b/src/virtualkeyboard/content/layouts/ko_KR/main.qml
+@@ -1,30 +1,38 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; HangulInputMethod {}', parent, "hangulInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; HangulInputMethod {}', parent, "hangulInputMethod")
+     }
+     sourceComponent: InputContext.shift ? page2 : page1
+     sharedLayouts: ['symbols']
+@@ -97,16 +105,11 @@ KeyboardLayoutLoader {
+                     text: "\u3163"
+                 }
+                 EnterKey {
+-                    weight: 217//283
+-//                    text: "Next"
+-//                    uppercased: false
++                    weight: 217
+                 }
+                 FillerKey {
+                     weight: 50
+                 }
+-//                EnterKey {
+-//                    weight: 283
+-//                }
+             }
+             KeyboardRow {
+                 keyWeight: 160
+@@ -149,17 +152,9 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 180
+                 }
+-        //        TODO: Remove after verification
+-//                ChangeLanguageKey {
+-//                    weight: 180
+-//                }
+                 SpaceKey {
+-                    weight:  1000
++                    weight: 1250
+                 }
+-        //        TODO: uncomment after verification
+-        //        SpaceKey {
+-        //            weight:  1250
+-        //        }
+                 Key {
+                     key: Qt.Key_hyphen
+                     text: "-"
+@@ -167,7 +162,6 @@ KeyboardLayoutLoader {
+                 Key {
+                     key: 0xE000
+                     text: "_"
+-
+                 }
+                 HideKeyboardKey {
+                 }
+@@ -243,16 +237,11 @@ KeyboardLayoutLoader {
+                     text: "\u3163"
+                 }
+                 EnterKey {
+-                    weight: 217//283
+-//                    text: "Next"
+-//                    uppercased: false
++                    weight: 217
+                 }
+                 FillerKey {
+                     weight: 50
+                 }
+-//                EnterKey {
+-//                    weight: 283
+-//                }
+             }
+             KeyboardRow {
+                 keyWeight: 160
+@@ -295,17 +284,12 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 180
+                 }
+-        //        TODO: Remove after verification
+-//                ChangeLanguageKey {
+-//                    weight: 180
+-//                }
++                ChangeLanguageKey {
++                    weight: 154
++                }
+                 SpaceKey {
+-                    weight:  1000
++                    weight: 1250
+                 }
+-        //        TODO: uncomment after verification
+-        //        SpaceKey {
+-        //            weight:  1250
+-        //        }
+                 Key {
+                     key: Qt.Key_hyphen
+                     text: "-"
+diff --git a/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml b/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml
+index 7f65acc..8fbf4e6 100644
+--- a/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/ko_KR/symbols.qml
+@@ -1,29 +1,41 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
++    function createInputMethod() {
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; HangulInputMethod {}', parent, "hangulInputMethod")
++    }
++    sharedLayouts: ['main']
+     property bool secondPage
+     onVisibleChanged: if (!visible) secondPage = false
+     sourceComponent: page1
+@@ -115,7 +127,7 @@ KeyboardLayoutLoader {
+                     text: "?"
+                 }
+                 EnterKey {
+-                    weight: 217//283
++                    weight: 217
+                 }
+                 FillerKey {
+                     weight: 50
+@@ -123,7 +135,6 @@ KeyboardLayoutLoader {
+             }
+             KeyboardRow {
+                 keyWeight: 160
+-
+                 Key {
+                     key: Qt.Key_Colon
+                     text: ":"
+@@ -175,17 +186,9 @@ KeyboardLayoutLoader {
+                     weight: 180
+                     displayText: "\uC54C\uD30C\uBCB3"
+                 }
+-                //        TODO: Remove after verification
+-//                        ChangeLanguageKey {
+-//                            weight: 180
+-//                        }
+-                        SpaceKey {
+-                            weight:  1000
+-                        }
+-                //        TODO: uncomment after verification
+-                //        SpaceKey {
+-                //            weight:  1250
+-                //        }
++                SpaceKey {
++                    weight: 1250
++                }
+                 Key {
+                     key: Qt.Key_hyphen
+                     text: "-"
+@@ -195,7 +198,6 @@ KeyboardLayoutLoader {
+                     text: "_"
+                 }
+                 HideKeyboardKey {
+-                    weight: 204
+                 }
+             }
+         }
+diff --git a/src/virtualkeyboard/content/layouts/zh_CN/main.qml b/src/virtualkeyboard/content/layouts/zh_CN/main.qml
+index cfebb17..ff678ff 100644
+--- a/src/virtualkeyboard/content/layouts/zh_CN/main.qml
++++ b/src/virtualkeyboard/content/layouts/zh_CN/main.qml
+@@ -1,31 +1,39 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayout {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; PinyinInputMethod {}', parent, "pinyinInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; PinyinInputMethod {}', parent, "pinyinInputMethod")
+     }
+     sharedLayouts: ['symbols']
+     keyWeight: 160
+@@ -113,9 +121,7 @@ KeyboardLayout {
+             text: "l"
+         }
+         EnterKey {
+-            weight: 217//283
+-            text: "Next"
+-            uppercased: false
++            weight: 217
+         }
+         FillerKey {
+             weight: 50
+@@ -164,17 +170,6 @@ KeyboardLayout {
+             key: Qt.Key_Period
+             text: "."
+         }
+-//        TODO: Remove after verification
+-//        Key {
+-//            key: Qt.Key_Comma
+-//            text: "\uFF0C"
+-//            alternativeKeys: "\uFF0C\uFF1B\u3001"
+-//        }
+-//        Key {
+-//            key: Qt.Key_Period
+-//            text: "\uFF0E"
+-//            alternativeKeys: "\uFF0E\uFF1A\u3002"
+-//        }
+         ShiftKey {
+             weight: 264
+         }
+@@ -184,16 +179,12 @@ KeyboardLayout {
+         SymbolModeKey {
+             weight: 180
+         }
+-//        ChangeLanguageKey {
+-//            weight: 180
+-//        }
+         SpaceKey {
+-            weight: 1000
++            weight: 1250
+         }
+         Key {
+             key: Qt.Key_Question
+             text: "？"
+-//            alternativeKeys: "？！"
+         }
+         Key {
+             key: 0xE000
+diff --git a/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml b/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml
+index 637ff06..81d298f 100644
+--- a/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/zh_CN/symbols.qml
+@@ -1,35 +1,43 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; PinyinInputMethod {}', parent, "pinyinInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; PinyinInputMethod {}', parent, "pinyinInputMethod")
+     }
+-//    sharedLayouts: ['main']
+-//    property int page
+-//    readonly property int numPages: 3
++    sharedLayouts: ['main']
++    property int page
++    readonly property int numPages: 1
+     property bool secondPage
+     onVisibleChanged: if (!visible) secondPage = false
+     property var keysPage1: [
+@@ -37,23 +45,7 @@ KeyboardLayoutLoader {
+         "!@#$%^&*?",
+         ":;<>{}/\\,.|"
+     ]
+-//    property var keysPage2: [
+-//        "-+/\\|[]{}·",
+-//        "<>,.:;!?~",
+-//        "／\"'_§￥€£¢"
+-//    ]
+-//    property var keysPage3: [
+-//        "（）〔〕〈〉《》【】",
+-//        "→←↑↓↔■□●○",
+-//        "＼『』「」★☆◆◇"
+-//    ]
+-//    sourceComponent: {
+-//        switch (page) {
+-//        case 2: return page3
+-//        case 1: return page2
+-//        default: return page1
+-//        }
+-//    }
++
+     sourceComponent: page1
+     Component {
+         id: page1
+@@ -81,7 +73,7 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                 EnterKey {
+-                    weight: 217//283
++                    weight: 217
+                 }
+                 FillerKey {
+                     weight: 50
+@@ -97,44 +89,15 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                }
+-//                Key {
+-//                    displayText: (page + 1) + "/" + numPages
+-//                    functionKey: true
+-//                    onClicked: page = (page + 1) % numPages
+-//                }
+-//                Repeater {
+-//                    model: keysPage1[2].length
+-//                    Key {
+-//                        key: keysPage1[2][index].charCodeAt(0)
+-//                        text: keysPage1[2][index]
+-//                    }
+-//                }
+-//                Key {
+-//                    weight: 204
+-//                    displayText: (page + 1) + "/" + numPages
+-//                    functionKey: true
+-//                    onClicked: page = (page + 1) % numPages
+-//                }
+-//            }
+             KeyboardRow {
+                 keyWeight: 120
+                 SymbolModeKey {
+                     weight: 180
+                     displayText: "ABC"
+                 }
+-                //        TODO: Remove after verification
+-//                ChangeLanguageKey {
+-//                    weight: 180
+-//                }
+                 SpaceKey {
+-                    weight:  1000
++                    weight: 1250
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 154
+-//                }
+-//                SpaceKey {
+-//                    weight: 864
+-//                }
+                 Key {
+                     key: 0x2014
+                     text: "—"
+diff --git a/src/virtualkeyboard/content/layouts/zh_TW/main.qml b/src/virtualkeyboard/content/layouts/zh_TW/main.qml
+index f03d4ee..2e73d3c 100644
+--- a/src/virtualkeyboard/content/layouts/zh_TW/main.qml
++++ b/src/virtualkeyboard/content/layouts/zh_TW/main.qml
+@@ -1,31 +1,39 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; TCInputMethod {}', parent, "tcInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; TCInputMethod {}', parent, "tcInputMethod")
+     }
+     sharedLayouts: ['symbols']
+     sourceComponent: InputContext.inputEngine.inputMode === InputEngine.Cangjie ? pageCangjie : pageZhuyin
+@@ -186,9 +194,6 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 154
+-//                }
+                 ModeKey {
+                     visible: InputContext.inputEngine.inputModes.indexOf(InputEngine.Zhuyin) !== -1
+                     // Cangjie
+@@ -201,15 +206,10 @@ KeyboardLayoutLoader {
+                 Key {
+                     key: Qt.Key_Question
+                     text: "-"
+-//                    text: "\uFF1F"
+-//                    alternativeKeys: "\uFF1F\uFF01"
+                 }
+                 Key {
+                     key: 0xE000
+                     text: "_"
+-//                    text: ":-)"
+-//                    smallTextVisible: false
+-//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     weight: 204
+@@ -414,9 +414,6 @@ KeyboardLayoutLoader {
+                 SymbolModeKey {
+                     weight: 217
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 154
+-//                }
+                 ModeKey {
+                     visible: InputContext.inputEngine.inputModes.indexOf(InputEngine.Cangjie) !== -1
+                     // Zhuyin
+@@ -432,14 +429,10 @@ KeyboardLayoutLoader {
+                 Key {
+                     key: Qt.Key_Question
+                     text:"-"
+-//                    text: "\uFF1F"
+-//                    alternativeKeys: "\uFF1F\uFF01"
+                 }
+                 Key {
+                     key: 0xE000
+                     text: "_"
+-//                    smallTextVisible: false
+-//                    alternativeKeys: [ ";-)", ":-)", ":-D", ":-(", "<3" ]
+                 }
+                 HideKeyboardKey {
+                     id: hideKeyboardKey
+diff --git a/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml b/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml
+index 0b98854..a26f939 100644
+--- a/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml
++++ b/src/virtualkeyboard/content/layouts/zh_TW/symbols.qml
+@@ -1,35 +1,43 @@
+-/******************************************************************************
++/****************************************************************************
+ **
+-** Copyright (C) 2015 The Qt Company Ltd.
+-** Contact: http://www.qt.io/licensing/
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
+ **
+-** This file is part of the Qt Virtual Keyboard module.
+-**
+-** $QT_BEGIN_LICENSE:COMM$
++** This file is part of the Qt Virtual Keyboard module of the Qt Toolkit.
+ **
++** $QT_BEGIN_LICENSE:GPL$
+ ** Commercial License Usage
+ ** Licensees holding valid commercial Qt licenses may use this file in
+ ** accordance with the commercial license agreement provided with the
+ ** Software or, alternatively, in accordance with the terms contained in
+ ** a written agreement between you and The Qt Company. For licensing terms
+-** and conditions see http://www.qt.io/terms-conditions. For further
+-** information use the contact form at http://www.qt.io/contact-us.
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 or (at your option) any later version
++** approved by the KDE Free Qt Foundation. The licenses are as published by
++** the Free Software Foundation and appearing in the file LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+ **
+ ** $QT_END_LICENSE$
+ **
+-******************************************************************************/
++****************************************************************************/
+ 
+ import QtQuick 2.0
+ import QtQuick.Layouts 1.0
+-import QtQuick.Enterprise.VirtualKeyboard 2.0
++import QtQuick.VirtualKeyboard 2.1
+ 
+ KeyboardLayoutLoader {
+     function createInputMethod() {
+-        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.Enterprise.VirtualKeyboard 2.0; TCInputMethod {}', parent, "tcInputMethod")
++        return Qt.createQmlObject('import QtQuick 2.0; import QtQuick.VirtualKeyboard 2.1; TCInputMethod {}', parent, "tcInputMethod")
+     }
+     sharedLayouts: ['main']
+-//    property int page
+-//    readonly property int numPages: 3
++    property int page
++    readonly property int numPages: 1
+     property bool secondPage
+     onVisibleChanged: if (!visible) secondPage = false
+     property var keysPage1: [
+@@ -37,23 +45,6 @@ KeyboardLayoutLoader {
+         "!@#$%^&*?",
+         ":;<>{}/\\,.|"
+     ]
+-//    property var keysPage2: [
+-//        "-+/\\|[]{}·",
+-//        "<>,.:;!?~",
+-//        "／\"'_§￥€£¢"
+-//    ]
+-//    property var keysPage3: [
+-//        "（）〔〕〈〉《》【】",
+-//        "→←↑↓↔■□●○",
+-//        "＼『』「」★☆◆◇"
+-//    ]
+-//    sourceComponent: {
+-//        switch (page) {
+-//        case 2: return page3
+-//        case 1: return page2
+-//        default: return page1
+-//        }
+-//    }
+     sourceComponent: page1
+     Component {
+         id: page1
+@@ -81,7 +72,7 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                 EnterKey {
+-                    weight: 217//283
++                    weight: 217
+                 }
+                 FillerKey {
+                     weight: 50
+@@ -97,44 +88,15 @@ KeyboardLayoutLoader {
+                     }
+                 }
+                }
+-//                Key {
+-//                    displayText: (page + 1) + "/" + numPages
+-//                    functionKey: true
+-//                    onClicked: page = (page + 1) % numPages
+-//                }
+-//                Repeater {
+-//                    model: keysPage1[2].length
+-//                    Key {
+-//                        key: keysPage1[2][index].charCodeAt(0)
+-//                        text: keysPage1[2][index]
+-//                    }
+-//                }
+-//                Key {
+-//                    weight: 204
+-//                    displayText: (page + 1) + "/" + numPages
+-//                    functionKey: true
+-//                    onClicked: page = (page + 1) % numPages
+-//                }
+-//            }
+             KeyboardRow {
+                 keyWeight: 120
+                 SymbolModeKey {
+                     weight: 180
+                     displayText: "ABC"
+                 }
+-                //        TODO: Remove after verification
+-//                ChangeLanguageKey {
+-//                    weight: 180
+-//                }
+                 SpaceKey {
+-                    weight:  1000
++                    weight:  1250
+                 }
+-//                ChangeLanguageKey {
+-//                    weight: 154
+-//                }
+-//                SpaceKey {
+-//                    weight: 864
+-//                }
+                 Key {
+                     key: 0x2014
+                     text: "—"
+-- 
+2.7.4
+

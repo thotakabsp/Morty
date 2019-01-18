@@ -1,0 +1,36 @@
+From 4787b157498bb85010e7c0169316dcb3b2d8434d Mon Sep 17 00:00:00 2001
+From: TECHM <techm@techmahindra.com>
+Date: Tue, 24 Jan 2017 18:37:20 +0530
+Subject: [PATCH] fix makefile for openembedded
+
+---
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 2158d40..dda2f59 100644
+--- a/Makefile
++++ b/Makefile
+@@ -15,7 +15,7 @@ EXTRA_CFLAGS += -Wno-unused-label
+ EXTRA_CFLAGS += -Wno-unused-parameter
+ EXTRA_CFLAGS += -Wno-unused-function
+ EXTRA_CFLAGS += -Wno-unused
+-EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
++#EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+ 
+ ccflags-y += -D__CHECK_ENDIAN__
+ 
+@@ -256,8 +256,8 @@ EXTRA_CFLAGS += -DCONFIG_P2P_IPS
+ SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ | sed -e s/ppc/powerpc/ | sed -e s/armv.l/arm/)
+ ARCH ?= $(SUBARCH)
+ CROSS_COMPILE ?=
+-KVER  := $(shell uname -r)
+-KSRC := /lib/modules/$(KVER)/build
++KVER  := $(KERNEL_VERSION)
++KSRC := $(KERNEL_PATH)
+ MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
+ INSTALL_PREFIX :=
+ endif
+-- 
+2.1.4
+

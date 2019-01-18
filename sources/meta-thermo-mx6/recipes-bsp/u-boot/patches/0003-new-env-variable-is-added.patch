@@ -1,0 +1,24 @@
+From daaf0a03db182e460a30243b1aeac2435ed4444f Mon Sep 17 00:00:00 2001
+From: vasu <vasu1188@gmail.com>
+Date: Fri, 27 Apr 2018 09:03:29 +0530
+Subject: [PATCH] new env variable is added
+
+---
+ common/main.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/common/main.c b/common/main.c
+index 0139f39..ff67a58 100644
+--- a/common/main.c
++++ b/common/main.c
+@@ -73,6 +73,7 @@ void main_loop(void)
+ #ifdef CONFIG_VERSION_VARIABLE
+ 	setenv("ver", version_string);  /* set version variable */
+ 	setenv("tfsver", U_BOOT_CUSTOM_VERSION);
++	setenv ("ubootver", U_BOOT_CUSTOM_VERSION);
+ #ifdef CONFIG_ENV_IS_IN_NAND
+         saveenv();
+ #endif
+-- 
+1.9.1
+

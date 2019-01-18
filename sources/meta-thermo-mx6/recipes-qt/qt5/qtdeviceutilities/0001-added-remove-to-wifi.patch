@@ -1,0 +1,28 @@
+From e478c2005d3aee720c41b68e7f3393ed1c36c9be Mon Sep 17 00:00:00 2001
+From: techm <techm@techmahindra.com>
+Date: Thu, 17 Aug 2017 20:02:22 +0530
+Subject: [PATCH] added remove to wifi
+
+---
+ src/networksettings/connman/qnetworksettingsservice_p.cpp | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/networksettings/connman/qnetworksettingsservice_p.cpp b/src/networksettings/connman/qnetworksettingsservice_p.cpp
+index e8aabff..951ccf7 100644
+--- a/src/networksettings/connman/qnetworksettingsservice_p.cpp
++++ b/src/networksettings/connman/qnetworksettingsservice_p.cpp
+@@ -303,8 +303,10 @@ void QNetworkSettingsServicePrivate::connectService()
+ void QNetworkSettingsServicePrivate::disconnectService()
+ {
+     if (m_service)
++	{
+         m_service->Disconnect();
+-
++	m_service->Remove();
++	}
+ }
+ 
+ void QNetworkSettingsServicePrivate::propertiesUpdated(QDBusPendingCallWatcher *call)
+-- 
+2.7.4
+

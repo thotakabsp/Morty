@@ -1,0 +1,9 @@
+[Unit]
+Description = checking all services 
+After = ThermoApp.service
+
+[Service]
+ExecStart = /home/root/Scripts/checkservice.sh
+
+[Install]
+WantedBy = multi-user.target
