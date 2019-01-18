@@ -1,0 +1,4 @@
+SANITY_VERSION 1
+TMPDIR /home/bspeng09/var-fslc-yocto/build_fb/tmp
+SSTATE_DIR /home/bspeng09/var-fslc-yocto/build_fb/sstate-cache
+NATIVELSBSTRING Ubuntu-16.04
