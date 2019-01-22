@@ -1,4 +1,4 @@
-SUMMARY = "Qt5 Thermofisher application"
+SUMMARY = "Qt5 Thermofisher application, Added script for checking services"
 DESCRIPTION = "Qt5.5.1 Thermofisher application with QML/Database."
 LICENSE = "CLOSED"
 
