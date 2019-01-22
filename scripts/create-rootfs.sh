@@ -1,5 +1,6 @@
 #!/bin/sh
 # This will clean rootfs and create the rootfs image  
+# added all 
 bitbake -c cleansstate linux-variscite 
 bitbake -c cleansstate edimax7822ulc 
 bitbake -c cleansstate rtl8192cu 
