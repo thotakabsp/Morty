@@ -1,59 +1,58 @@
-Variscite Yocto BSP
-===============================
 
-Supported boards
-----------------
 
-In order to know the supported boards, please, see the release notes at
+**********************************************************************************************************************************************
 
-   http://freescale.github.io/doc/release-notes/current/
+						THOTAKA MORTY BUILD
 
-Quick Start Guide
------------------
+**********************************************************************************************************************************************
 
-Once you have downloaded the source of all projects, you will have to
-call:
+Create localy folder var-som-mx6-morty
 
-$: . ./setup-environment <build directory>
+# cd var-som-mx6-morty 
 
-After this step, you will be with everything need for build an image.
+git clone https://github.com/thotakabsp/Morty.git
 
-Contributing
-------------
+# Once completely clone 
 
-To contribute to the development of this BSP and/or submit patches for
-new boards please send the patches against the respective project as
-informated bellow:
+# cd Morty
 
-The following layers are included on this release:
+# . setup-environment build_fb
 
- * poky: base build system and metadata
-   Path: sources/poky
-   GIT: git://git.yoctoproject.org/poky
-   Mailing list: https://lists.yoctoproject.org/listinfo/yocto
+# Above Command will point to build_fb folder, contains following build scripts
 
- * meta-openembedded: extra packages and features
-   Path: sources/meta-openembedded
-   GIT: git://git.openembedded.org/meta-openembedded
-   Mailing list: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-   Note: Use [meta-oe] in subject to easy the processing
+  a) create-rootfs.sh 
+  b) create-recovery.sh
+  c) create-qt-toolchain.sh
 
- * meta-freescale: support for Freescale's processors and board
-   Path: sources/meta-freescale
-   Project: https://github.com/Freescale/meta-freescale
-   GIT: git://github.com/Freescale/meta-freescale.git
-   Mailing list: https://lists.yoctoproject.org/listinfo/meta-freescale
+First we will create the rootfs from the cloned build
 
- * meta-freescale-3rdparty: support for boards using Freescale's processors
-   Path: sources/meta-freescale-3rdparty
-   Project: https://github.com/Freescale/meta-freescale-3rdparty
-   GIT: git://github.com/Freescale/meta-freescale-3rdparty.git
-   Mailing list: https://lists.yoctoproject.org/listinfo/meta-freescale
-   Note: Use [3rdparty] in subject to easy the processing
+# sh create-rootfs.sh   - -   This command will take hours to compile the complete build.	
 
- * meta-freescale-distro: distribution images and recipes
-   Path: sources/meta-freescale-distro
-   Project: https://github.com/Freescale/meta-freescale-distro
-   GIT: git://github.com/Freescale/meta-freescale-distro.git
-   Mailing list: https://lists.yoctoproject.org/listinfo/meta-freescale
-   Note: Use [distro] in subject to easy the processing
+Once rootfs is created successfully . We can build recovery image 
+
+# sh create-recovery.sh - -   This command will take some time to compile the build.
+
+Now we will create the qt-toolchain, For this we need to patch the compiler manually using below command
+
+# sh ../doc/compile-patch.sh 
+# sh create-qt-toolchain.sh
+# tmp/deploy/sdk/fslc-x11-glibc-x86_64-meta-toolchain-qt5-armv7at2hf-neon-toolchain-2.2.1.sh
+(This will ask the path for installing the toolchain) /opt/fslc-framebuffer/2.2.1
+(Setup toolchain with Qt creator .docx is in doc/ folder )
+
+# Now create the create-rootfs.sh and create-recovery.sh again to update the firmware.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
