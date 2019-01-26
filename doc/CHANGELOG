@@ -1,8 +1,45 @@
 
 1) Support for Memory reclaiming.
+
+ADDED SUPPORT IN ThermoApp Script 
+
+#echo 32768 > /proc/sys/vm/min_free_kbytes
+#echo 1 > /proc/sys/vm/drop_caches
+
 2) Network issue.
+
+/home/bspeng09/Documents/sumo_build/sources/poky/meta/recipes-core/base-files/base-files/fstab
+
+ADDED sync support for sync filesystem
+
+/dev/root            /                    auto       defaults,sync         1  1
+
+sources/meta-thermo-mx6/recipes-qt/tfsapp/variscite_1.0.bb
+
+ADDED with check.service for checking all services are running fine.
+
 3) QT patch for alignment issue. ( Both QT SDK / firmware will be updated with same patch).
+
+build_fb/tmp/work/armv7at2hf-neon-fslc-linux-gnueabi/qtdeclarative/5.9.1+gitAUTOINC+525de4ff29-r0/git/src/qml/compiler/
+
+ADDED Patch for QT Compiler Aligment issue
+
+qt-compiler.patch added to qv4compiler.cpp
+
 4) Watchdog support for firmware flashing.
+
+sources/meta-thermo-mx6/recipes-tfs/images/tfs-image-minirfs.bb
+sources/meta-thermo-mx6/recipes-tfs/images/tfs-image-recovery.bb
+modify_minirfs() {
+        touch  ${IMAGE_ROOTFS}/etc/.minirfs
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "modify_minirfs;"
+
+
+
+
+
 5) Will retain connman version 1.35 .
 
 
