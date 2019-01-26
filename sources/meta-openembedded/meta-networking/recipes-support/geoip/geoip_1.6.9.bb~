@@ -1,0 +1,46 @@
+SUMMARY = "C library for country/city/organization to IP address or hostname mapping"
+DESCRIPTION = "GeoIP is a C library that enables the user to find the country that any IP \
+address or hostname originates from. It uses a file based database that is \
+accurate as of March 2003. This database simply contains IP blocks as keys, and \
+countries as values. This database should be more complete and accurate than \
+using reverse DNS lookups."
+
+HOMEPAGE = "http://dev.maxmind.com/geoip/"
+SECTION = "libdevel"
+
+SRC_URI = "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz"
+SRC_URI[md5sum] = "89f4cdfdab43f1d67364cd7c85bbe8ca"
+SRC_URI[sha256sum] = "075a0c2815cd099e9ec35c9569db716a3fefcdbb6a10dbfa1ce7c6cd48d4a635"
+
+S = "${WORKDIR}/git"
+
+inherit autotools
+
+EXTRA_OECONF = "--disable-static               \
+                --disable-dependency-tracking  "
+
+do_fetch_append() {
+    os.system("${FETCHCMD_wget} http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz");
+    os.system("gunzip -c ${DL_DIR}/GeoIP.dat.gz > ${WORKDIR}/GeoIP.dat");
+    os.system("${FETCHCMD_wget} http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz");
+    os.system("gunzip -c ${DL_DIR}/GeoIPv6.dat.gz > ${WORKDIR}/GeoIPv6.dat");
+    os.system("${FETCHCMD_wget} http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz");
+    os.system("gunzip -c ${DL_DIR}/GeoLiteCity.dat.gz > ${WORKDIR}/GeoLiteCity.dat");
+    os.system("${FETCHCMD_wget} http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6.dat.gz");
+    os.system("gunzip -c ${DL_DIR}/GeoLiteCityv6.dat.gz > ${WORKDIR}/GeoLiteCityv6.dat");
+}
+
+
+do_install() {
+    make DESTDIR=${D} install
+    install -d ${D}/${datadir}/GeoIP
+    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
+    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
+    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
+    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
+    ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
+}
+
+PACKAGES =+ "${PN}-database"
+FILES_${PN}-database = ""
+FILES_${PN}-database += "${datadir}/GeoIP/*"
