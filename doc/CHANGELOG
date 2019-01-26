@@ -1,0 +1,8 @@
+
+1) Support for Memory reclaiming.
+2) Network issue.
+3) QT patch for alignment issue. ( Both QT SDK / firmware will be updated with same patch).
+4) Watchdog support for firmware flashing.
+5) Will retain connman version 1.35 .
+
+

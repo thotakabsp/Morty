@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Create tool chain as SDK for QT Application.
+# Create tool chain as SDK for QT Application. After bitbake command run the below script manually to install toolchain.
 #
 
 bitbake meta-toolchain-qt5
