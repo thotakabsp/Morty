@@ -1,6 +1,9 @@
 #!/bin/sh
+DIR=$PWD
+echo "Current Directory - $DIR"
 ./update-recovery.sh
-cd /home/bspeng09/var-fslc-yocto/build_fb 
+cd $DIR 
+echo "Change Directory to $DIR"
 bitbake -c cleansstate linux-variscite 
 bitbake -c cleansstate rtl8192cu 
 bitbake -c cleansstate edimax7822ulc 
